@@ -1,12 +1,15 @@
 class_name GameOverScreen
 extends Control
 
+const TEACHER_ANALYSIS_PANEL_SCENE: PackedScene = preload("res://scenes/TeacherAnalysisPanel.tscn")
+
 signal play_again_pressed
 signal exit_pressed
 signal review_timeline_pressed
 
 @onready var title_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/TitleLabel
 @onready var summary_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/SummaryLabel
+@onready var root_vbox: VBoxContainer = $CenterContainer/PanelContainer/MarginContainer/RootVBox
 
 @onready var total_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox/TotalScoreValue
 @onready var coherence_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox/CoherenceValue
@@ -21,11 +24,14 @@ signal review_timeline_pressed
 @onready var bonus_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid/BonusScoreValue
 
 @onready var feedback_title_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/FeedbackTitleLabel
+@onready var feedback_scroll: ScrollContainer = $CenterContainer/PanelContainer/MarginContainer/RootVBox/ScrollContainer
 @onready var feedback_container: VBoxContainer = $CenterContainer/PanelContainer/MarginContainer/RootVBox/ScrollContainer/FeedbackContainer
 
 @onready var review_timeline_button: Button = $CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox/ReviewTimelineButton
 @onready var play_again_button: Button = $CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox/PlayAgainButton
 @onready var exit_button: Button = $CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox/ExitButton
+
+var teacher_analysis_panel: TeacherAnalysisPanel = null
 
 
 func _ready() -> void:
@@ -36,8 +42,14 @@ func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button_pressed)
 
 
-func show_result(result: ResultGame, did_win: bool = true, opponent_result: ResultGame = null) -> void:
+func show_result(
+	result: ResultGame,
+	did_win: bool = true,
+	opponent_result: ResultGame = null,
+	teacher_context: Dictionary = {}
+) -> void:
 	visible = true
+	feedback_scroll.custom_minimum_size = Vector2(0, 180)
 
 	# ---- Título dinâmico ----
 	var comparison: int = 1 if did_win else -1
@@ -76,6 +88,7 @@ func show_result(result: ResultGame, did_win: bool = true, opponent_result: Resu
 
 	# ---- Feedback (array) ----
 	_populate_feedback(result.feedback)
+	_populate_teacher_analysis(result, opponent_result, teacher_context)
 
 
 func _populate_feedback(feedback_array: Array) -> void:
@@ -118,6 +131,40 @@ func _populate_feedback(feedback_array: Array) -> void:
 		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
 		lbl.text = "Sua narrativa manteve coerência histórica nesta rodada. Excelente!"
 		feedback_container.add_child(lbl)
+
+
+func _populate_teacher_analysis(
+	player_result: ResultGame,
+	opponent_result: ResultGame,
+	context: Dictionary
+) -> void:
+	_clear_teacher_analysis_panel()
+	if not SettingsManager.teacher_mode_enabled:
+		return
+
+	teacher_analysis_panel = TEACHER_ANALYSIS_PANEL_SCENE.instantiate() as TeacherAnalysisPanel
+	if teacher_analysis_panel == null:
+		push_warning("GameOverScreen: TeacherAnalysisPanel nao pode ser instanciado.")
+		return
+
+	var button_index: int = root_vbox.get_children().find(review_timeline_button.get_parent())
+	if button_index == -1:
+		root_vbox.add_child(teacher_analysis_panel)
+	else:
+		root_vbox.add_child(teacher_analysis_panel)
+		root_vbox.move_child(teacher_analysis_panel, button_index)
+
+	teacher_analysis_panel.show_analysis(player_result, opponent_result, context)
+
+
+func _clear_teacher_analysis_panel() -> void:
+	if teacher_analysis_panel == null:
+		return
+
+	if teacher_analysis_panel.get_parent() != null:
+		teacher_analysis_panel.get_parent().remove_child(teacher_analysis_panel)
+	teacher_analysis_panel.queue_free()
+	teacher_analysis_panel = null
 
 
 func _update_opponent_score(opponent_result: ResultGame) -> void:

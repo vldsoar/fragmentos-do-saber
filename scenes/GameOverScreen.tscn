@@ -1,6 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://decx0hbmnavlt"]
+[gd_scene load_steps=6 format=3 uid="uid://decx0hbmnavlt"]
 
 [ext_resource type="Script" uid="uid://bsg0w4sbhdtmh" path="res://scripts/GameOverScreen.gd" id="1_wojlb"]
+[ext_resource type="Texture2D" uid="uid://hwjiekwwoe6x" path="res://assets/images/bg_game_over.png" id="2_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.13, 0.105, 0.075, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.66, 0.32, 0.82)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.22, 0.17, 0.095, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.82, 0.42, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.08, 0.07, 0.055, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72, 0.55, 0.22, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -11,13 +60,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wojlb")
 
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.58)
+color = Color(0, 0, 0, 0.46)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -215,7 +274,7 @@ theme_override_constants/separation = 6
 [node name="ButtonsBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ReviewTimelineButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
@@ -224,9 +283,19 @@ layout_mode = 2
 text = "Rever linha do tempo"
 
 [node name="PlayAgainButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
+custom_minimum_size = Vector2(190, 48)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.93, 0.82, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 text = "Jogar novamente"
 
 [node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
+custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.93, 0.82, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 text = "Sair"

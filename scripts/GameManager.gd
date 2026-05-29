@@ -12,6 +12,7 @@ extends Node2D
 @export var knowledge_clock_path: String = "../HUD/KnowledgeClock"
 @export var score_hud_path: String = "../HUD/ScoreBonus"
 @export var game_over_screen_path: String = "../HUD/GameOverScreen"
+@export var hud_path: String = "../HUD"
 @export var opponent_deck_path: String = "../OpponentDeck"
 @export var opponent_timeline_path: String = "../OpponentTimeline"
 @export var opponent_discard_slot_path: String = "../OpponentCardSlotDiscard"
@@ -29,6 +30,7 @@ extends Node2D
 @onready var knowledge_clock: KnowledgeClock = get_node(knowledge_clock_path) as KnowledgeClock
 @onready var score_hud: ScoreHUD = get_node(score_hud_path) as ScoreHUD
 @onready var game_over_screen: GameOverScreen = get_node(game_over_screen_path) as GameOverScreen
+@onready var hud: CanvasLayer = get_node(hud_path) as CanvasLayer
 
 @onready var fsm: StateMachine = StateMachine.new()
 @onready var _scoringEngine: CoherenceScoringEngine
@@ -47,6 +49,7 @@ extends Node2D
 @export var feedback_popup_scene: PackedScene
 
 const CENTER_POS = Vector2(960, 440)  # ajuste pro seu viewport
+const TURN_BANNER_TEXT: String = "Sua vez"
 
 enum GameState {
 	WAITING_INPUT,
@@ -61,6 +64,9 @@ var current_state : GameState:
 	get:
 		return fsm.current
 var current_turn: int = 1
+var max_turns: int = Globals.DEFAULT_TURNS
+var turn_banner: Control = null
+var turn_banner_tween: Tween = null
 		
 #const _STATES_FOR
 
@@ -86,6 +92,8 @@ func _ready():
 	_scoringEngine = CoherenceScoringEngine.new()
 	_cardEffectProcessor = CardEffectProcessor.new()
 	_cardActionController.configure(player_timeline, discard_slot, effect_slot)
+	max_turns = _turnController.calculate_max_turns(deck.cards.size())
+	Globals.debug_log("Max turns for this match: %d from %d deck cards" % [max_turns, deck.cards.size()])
 	SettingsManager.apply_audio_settings()
 	if background_music:
 		if SettingsManager.music_enabled:
@@ -115,8 +123,12 @@ func _configureState() -> void:
 
 func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
+	if old_state == GameState.END_ROUND_SCORING and new_state == GameState.WAITING_INPUT:
+		_show_turn_banner(TURN_BANNER_TEXT)
+		return
+
 	if new_state == GameState.RESOLVING_TURN:
-		current_turn = _turnController.advance_turn(current_turn, Globals.MAX_TURNS)
+		current_turn = _turnController.advance_turn(current_turn, max_turns)
 		# Iniciar turno do oponente
 		opponent_ai.play_turn()
 		return
@@ -125,7 +137,7 @@ func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 		knowledge_clock.flip()
 		_update_knowledge_clock(new_state)
 
-		if _turnController.is_final_turn(current_turn, Globals.MAX_TURNS):
+		if _turnController.is_final_turn(current_turn, max_turns):
 			fsm.transition_to(GameState.GAME_OVER)
 		else:
 			fsm.transition_to(GameState.WAITING_INPUT)
@@ -314,23 +326,33 @@ func _calculate_state_progress(state: int) -> float:
 
 func _handle_game_over() -> void:
 	var deck_data: Dictionary = deck.get_deck_data()
+	var player_timeline_ids: Array = player_timeline.get_card_names()
+	var opponent_timeline_ids: Array = opponent_timeline.get_card_names()
+	var player_effect_ids: Array = _cardEffectProcessor.get_applied_effect_ids()
+	var opponent_effect_ids: Array = opponent_ai.card_effect_processor.get_applied_effect_ids()
 	var result: ResultGame = _scoringEngine.evaluate_timeline(
 		deck_data,
-		player_timeline.get_card_names(),
-		 _cardEffectProcessor.get_applied_effect_ids()
+		player_timeline_ids,
+		player_effect_ids
 	)
 	
 	var result_opponent: ResultGame = _scoringEngine.evaluate_timeline(
 		deck_data,
-		opponent_timeline.get_card_names(),
-		opponent_ai.card_effect_processor.get_applied_effect_ids()
+		opponent_timeline_ids,
+		opponent_effect_ids
 	)
 	
 	var did_win: bool = result.compare_with(result_opponent) == 1
 	var result_winner: ResultGame = ResultGame.get_greater(result, result_opponent)
 
 	Globals.debug_log("Game over! Result winner: %s" % result_winner.total_score)
-	game_over_screen.show_result(result, did_win, result_opponent)
+	game_over_screen.show_result(result, did_win, result_opponent, {
+		"deck_data": deck_data,
+		"player_timeline_ids": player_timeline_ids,
+		"opponent_timeline_ids": opponent_timeline_ids,
+		"player_effect_ids": player_effect_ids,
+		"opponent_effect_ids": opponent_effect_ids,
+	})
 
 func _show_feedback(card: CardScn, callable: Callable) -> void:
 	if feedback_popup_scene == null:
@@ -350,6 +372,69 @@ func _show_feedback(card: CardScn, callable: Callable) -> void:
 	else:
 		# Modal: OK chama callable
 		popup.show_modal(card.data.effect_description, "OK", on_finished)
+
+func _show_turn_banner(text: String) -> void:
+	if hud == null:
+		return
+
+	if turn_banner_tween != null and turn_banner_tween.is_running():
+		turn_banner_tween.kill()
+
+	if turn_banner != null:
+		turn_banner.queue_free()
+		turn_banner = null
+
+	turn_banner = _create_turn_banner(text)
+	hud.add_child(turn_banner)
+
+	var label: Label = turn_banner.get_node("CenterContainer/TurnLabel") as Label
+	label.scale = Vector2(0.72, 0.72)
+	turn_banner.modulate = Color(1, 1, 1, 0)
+
+	turn_banner_tween = create_tween()
+	turn_banner_tween.set_parallel(true)
+	turn_banner_tween.tween_property(turn_banner, "modulate:a", 1.0, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	turn_banner_tween.tween_property(label, "scale", Vector2(1.08, 1.08), 0.22).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	turn_banner_tween.chain().tween_interval(0.75)
+	turn_banner_tween.chain().set_parallel(true)
+	turn_banner_tween.tween_property(turn_banner, "modulate:a", 0.0, 0.32).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	turn_banner_tween.tween_property(label, "scale", Vector2(1.22, 1.22), 0.32).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	turn_banner_tween.finished.connect(_on_turn_banner_finished)
+
+func _create_turn_banner(text: String) -> Control:
+	var root: Control = Control.new()
+	root.name = "TurnBanner"
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	var center: CenterContainer = CenterContainer.new()
+	center.name = "CenterContainer"
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.add_child(center)
+
+	var label: Label = Label.new()
+	label.name = "TurnLabel"
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.text = text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 92)
+	label.add_theme_constant_override("outline_size", 10)
+	label.add_theme_color_override("font_color", Color(1.0, 0.91, 0.48, 1.0))
+	label.add_theme_color_override("font_outline_color", Color(0.03, 0.018, 0.005, 1.0))
+	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	label.add_theme_constant_override("shadow_offset_x", 3)
+	label.add_theme_constant_override("shadow_offset_y", 5)
+	center.add_child(label)
+
+	return root
+
+func _on_turn_banner_finished() -> void:
+	if turn_banner != null:
+		turn_banner.queue_free()
+		turn_banner = null
+	turn_banner_tween = null
 
 func _on_play_again_pressed() -> void:
 	get_tree().reload_current_scene()

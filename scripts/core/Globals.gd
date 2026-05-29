@@ -10,7 +10,10 @@ const COLLISION_MASK_UI := 4
 const GAME_TITLE := "Fragmentos do Saber"
 const CARD_WIDTH := 180
 const CARD_HEIGHT := 256
-const MAX_TURNS := 10
+const MIN_TURNS := 8
+const DEFAULT_TURNS := 10
+const LONG_TURNS := 12
+const MIN_DECK_CARDS := MIN_TURNS * 2
 const DEBUG_LOGS := false
 
 
