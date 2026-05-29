@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc1btkpiamcbs"]
+
+[ext_resource type="Script" uid="uid://ge13g157d1sr" path="res://scripts/Deck.gd" id="1_1efqa"]
+[ext_resource type="Texture2D" uid="uid://cuqdbwldiwnvr" path="res://card_back_3.png" id="2_1efqa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c01mt"]
+size = Vector2(218.289, 327.434)
+
+[node name="Deck" type="Node2D"]
+z_index = -2
+script = ExtResource("1_1efqa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.49012e-07, 1.49999)
+scale = Vector2(0.162, 0.168792)
+texture = ExtResource("2_1efqa")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.90735e-06, 1.90735e-06)
+scale = Vector2(0.678, 0.678)
+shape = SubResource("RectangleShape2D_c01mt")
+
+[node name="CountDeck" type="RichTextLabel" parent="."]
+modulate = Color(0.776471, 0.858824, 0.0196078, 1)
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = 38.0
+offset_right = 12.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

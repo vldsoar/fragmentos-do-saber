@@ -1,0 +1,17 @@
+[
+	{
+		"area": "História",
+		"theme": "Revolução Francesa",
+		"path": "res://data/deck_rf.json"
+	},
+	{
+		"area": "Tecnologia",
+		"theme": "Programação Orientada a Objetos",
+		"path": "res://data/deck_poo.json"
+	},
+	{
+		"area": "Biologia",
+		"theme": "Teoria da Evolução",
+		"path": "res://data/deck_te.json"
+	}
+]

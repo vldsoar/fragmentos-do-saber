@@ -1,0 +1,40 @@
+<svg
+    width="96"
+    height="96"
+    viewBox="0 0 64 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Aba esquerda -->
+    <rect x="18" y="22" width="8" height="20" rx="2.5"
+          fill="#1B314F" stroke="#F4E3C3" stroke-width="1"/>
+
+    <!-- Aba direita -->
+    <rect x="38" y="22" width="8" height="20" rx="2.5"
+          fill="#1B314F" stroke="#F4E3C3" stroke-width="1"/>
+
+    <!-- Card central -->
+    <rect x="24" y="20" width="16" height="24" rx="3"
+          fill="#F4E3C3" stroke="#F5B700" stroke-width="1.5"/>
+
+    <!-- Título -->
+    <rect x="27" y="23" width="10" height="3" rx="1.5"
+          fill="#C59D6F" opacity="0.9"/>
+
+    <!-- Linhas internas -->
+    <rect x="27" y="28" width="10" height="2" rx="1"
+          fill="#C59D6F" opacity="0.7"/>
+    <rect x="27" y="32" width="10" height="2" rx="1"
+          fill="#C59D6F" opacity="0.7"/>
+    <rect x="27" y="36" width="8" height="2" rx="1"
+          fill="#C59D6F" opacity="0.7"/>
+
+    <!-- Brilhos -->
+    <circle cx="22" cy="18" r="1.5" fill="#F5B700"/>
+    <circle cx="42" cy="18" r="1.2" fill="#F5B700"/>
+    <circle cx="32" cy="46" r="1.2" fill="#F5B700"/>
+
+    <!-- Estrela -->
+    <path d="M32 16 L33 18 L35 18.2 L33.7 19.5 L34 21.5 L32 20.6 L30 21.5 L30.3 19.5 L29 18.2 L31 18 Z"
+          fill="#F5B700"/>
+</svg>

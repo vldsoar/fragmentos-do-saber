@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://dmjwsrfoxet8l"]
+
+[ext_resource type="Script" uid="uid://bhjgqusyupxee" path="res://MenuGame.gd" id="1_mjkhe"]
+[ext_resource type="Texture2D" uid="uid://sype2arihurv" path="res://assets/images/bg_main_Menu.png" id="1_x26sx"]
+[ext_resource type="Texture2D" uid="uid://1lu28ka5wueb" path="res://assets/images/book.png" id="2_1enuy"]
+[ext_resource type="FontFile" uid="uid://c2rsurmhe0djh" path="res://assets/fonts/CinzelDecorative-Bold.ttf" id="3_8a5e2"]
+[ext_resource type="FontFile" uid="uid://b8oxer4h01id5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="4_r1yn4"]
+[ext_resource type="StyleBox" uid="uid://dtp616hoj1yvx" path="res://styles/MenuGameBtn.tres" id="5_csh7c"]
+[ext_resource type="StyleBox" uid="uid://dgu1dhvi1jd8n" path="res://styles/MenuGameBtnHv.tres" id="6_myj3e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1enuy"]
+texture = ExtResource("1_x26sx")
+
+[sub_resource type="LabelSettings" id="LabelSettings_r1yn4"]
+font = ExtResource("3_8a5e2")
+font_size = 104
+font_color = Color(0.963836, 0.910132, 0.705479, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.643137)
+shadow_offset = Vector2(1, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_csh7c"]
+font = ExtResource("3_8a5e2")
+font_size = 72
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.643137)
+shadow_offset = Vector2(1, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_myj3e"]
+font = ExtResource("3_8a5e2")
+font_size = 104
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.643137)
+shadow_offset = Vector2(1, 3)
+
+[sub_resource type="FontVariation" id="FontVariation_csh7c"]
+base_font = ExtResource("4_r1yn4")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_myj3e"]
+
+[node name="MenuGame" type="Control" unique_id=1446536069]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mjkhe")
+
+[node name="Panel" type="Panel" parent="." unique_id=621429433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1enuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=361079474]
+position = Vector2(960, 400)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_1enuy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=44637471]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -388.5
+offset_top = 80.0
+offset_right = 388.5
+offset_bottom = 322.0
+grow_horizontal = 2
+theme_override_constants/separation = -40
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1548707611]
+layout_mode = 2
+text = "Fragmentos"
+label_settings = SubResource("LabelSettings_r1yn4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1092680681]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1568251382]
+layout_mode = 2
+text = "do"
+label_settings = SubResource("LabelSettings_csh7c")
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=472596748]
+layout_mode = 2
+text = "Saber"
+label_settings = SubResource("LabelSettings_myj3e")
+
+[node name="MenuButtonsContainer" type="VBoxContainer" parent="." unique_id=1825496821]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -460.0
+offset_right = 230.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="StartGame" type="Button" parent="MenuButtonsContainer" unique_id=1262262557 groups=["button"]]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0196078, 0.129412, 0.152941, 1)
+theme_override_colors/font_focus_color = Color(0.0196078, 0.12549, 0.152941, 1)
+theme_override_colors/font_pressed_color = Color(0.0117647, 0.12549, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0235294, 0.133333, 0.164706, 1)
+theme_override_fonts/font = SubResource("FontVariation_csh7c")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = ExtResource("5_csh7c")
+theme_override_styles/pressed = ExtResource("6_myj3e")
+theme_override_styles/hover = ExtResource("6_myj3e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_myj3e")
+text = "Iniciar jogo"
+
+[node name="Settings" type="Button" parent="MenuButtonsContainer" unique_id=1278004652 groups=["button"]]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0196078, 0.129412, 0.152941, 1)
+theme_override_colors/font_focus_color = Color(0.0196078, 0.12549, 0.152941, 1)
+theme_override_colors/font_pressed_color = Color(0.0117647, 0.12549, 0.160784, 1)
+theme_override_colors/font_hover_color = Color(0.0235294, 0.133333, 0.164706, 1)
+theme_override_fonts/font = SubResource("FontVariation_csh7c")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = ExtResource("5_csh7c")
+theme_override_styles/pressed = ExtResource("6_myj3e")
+theme_override_styles/hover = ExtResource("6_myj3e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_myj3e")
+text = "Configurações"

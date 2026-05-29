@@ -1,0 +1,105 @@
+{
+  "theme": "Revolução Francesa",
+  "cards": [
+	{
+	  "id": "FR001",
+	  "title": "Crise Financeira do Estado",
+	  "description": "O acúmulo de dívidas e os gastos excessivos da monarquia mergulharam a França em colapso econômico.",
+	  "category": "CAUSE",
+	  "truth_value": 1.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["economia", "Antigo Regime", "déficit"]
+	},
+	{
+	  "id": "FR002",
+	  "title": "Desigualdade entre os Três Estados",
+	  "description": "O clero e a nobreza gozavam de privilégios fiscais, enquanto o Terceiro Estado arcava com quase todos os impostos.",
+	  "category": "CAUSE",
+	  "truth_value": 1.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["sociedade", "impostos", "injustiça"]
+	},
+	{
+	  "id": "FR003",
+	  "title": "O Rei propôs espontaneamente uma Constituição liberal",
+	  "description": "Diz-se que Luís XVI teria criado uma Constituição democrática por vontade própria.",
+	  "category": "PROCESS",
+	  "truth_value": 0.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["monarquia", "constituição", "falsa"]
+	},
+	{
+	  "id": "FR004",
+	  "title": "Juramento do Jogo da Péla",
+	  "description": "Deputados do Terceiro Estado juraram não se dispersar até criar uma nova Constituição para a França.",
+	  "category": "PROCESS",
+	  "truth_value": 1.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["Assembleia Nacional", "juramento", "1789"]
+	},
+	{
+	  "id": "FR005",
+	  "title": "Queda da Bastilha",
+	  "description": "Em 14 de julho de 1789, o povo tomou a Bastilha, símbolo do absolutismo real.",
+	  "category": "PROCESS",
+	  "truth_value": 1.0,
+	  "rarity": "SPECIAL",
+	  "effect": "",
+	  "tags": ["revolta", "prisão", "símbolo"]
+	},
+	{
+	  "id": "FR006",
+	  "title": "A Declaração dos Direitos do Homem garantiu igualdade imediata para todos",
+	  "description": "Afirma que todos os franceses passaram a ter direitos iguais instantaneamente após 1789.",
+	  "category": "CONSEQUENCE",
+	  "truth_value": 0.5,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["direitos", "liberdade", "constituição"]
+	},
+	{
+	  "id": "FR007",
+	  "title": "Execução de Luís XVI",
+	  "description": "O rei foi julgado e executado na guilhotina em 1793, encerrando definitivamente o absolutismo.",
+	  "category": "PROCESS",
+	  "truth_value": 1.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["realeza", "guillotine", "1793"]
+	},
+	{
+	  "id": "FR008",
+	  "title": "Reino do Terror",
+	  "description": "Período em que opositores da Revolução foram perseguidos e executados em massa.",
+	  "category": "PROCESS",
+	  "truth_value": 1.0,
+	  "rarity": "SPECIAL",
+	  "effect": "",
+	  "tags": ["Robespierre", "comitê", "violência"]
+	},
+	{
+	  "id": "FR009",
+	  "title": "A Revolução restaurou o poder absoluto do rei",
+	  "description": "Afirma que, após os conflitos, o rei voltou ao trono com poderes reforçados.",
+	  "type": "CONSEQUENCE",
+	  "truth_value": 0.0,
+	  "rarity": "COMMON",
+	  "effect": "",
+	  "tags": ["monarquia", "restauração", "erro histórico"]
+	},
+	{
+	  "id": "FR010",
+	  "title": "Revolução Propagandística",
+	  "description": "Roube uma carta aleatória do oponente ou force-o a descartar uma carta com truth_value < 0.5.",
+	  "type": "SPECIAL",
+	  "truth_value": 0.0,
+	  "rarity": "SPECIAL",
+	  "effect": "Permite manipular a narrativa do oponente usando distorções históricas.",
+	  "tags": ["ação", "estratégia", "propaganda"]
+	}
+  ]
+}

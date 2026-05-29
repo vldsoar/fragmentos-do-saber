@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://nl3kd3iegdof"]
+
+[ext_resource type="Script" uid="uid://bkx7gnkajs2on" path="res://scripts/Card.gd" id="1_hael8"]
+[ext_resource type="Shader" uid="uid://cl7ow44vgxdas" path="res://Card.gdshader" id="2_4dx8l"]
+[ext_resource type="Texture2D" uid="uid://c8acpqnyhkmfy" path="res://card_common_3_4.png" id="3_40ytf"]
+[ext_resource type="FontFile" uid="uid://b8oxer4h01id5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="4_qf083"]
+[ext_resource type="FontFile" uid="uid://du0ivutwsnwcd" path="res://assets/fonts/EBGaramond-SemiBold.ttf" id="5_40ytf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40ytf"]
+shader = ExtResource("2_4dx8l")
+shader_parameter/corner = 24.0
+shader_parameter/border = 2.0
+shader_parameter/border_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/background_color = Color(0.505, 0.231, 0, 0)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5273u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qf083"]
+shader = ExtResource("2_4dx8l")
+shader_parameter/corner = 64.0
+shader_parameter/border = 8.0
+shader_parameter/border_color = Color(0.329222, 0.180255, 0.00147716, 1)
+shader_parameter/background_color = Color(0.490196, 0.223529, 0.00392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf083"]
+bg_color = Color(0.869113, 0.375662, 0.813954, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hael8"]
+size = Vector2(148, 222)
+
+[sub_resource type="FontVariation" id="FontVariation_40ytf"]
+base_font = ExtResource("4_qf083")
+spacing_space = -2
+spacing_bottom = -6
+
+[sub_resource type="FontVariation" id="FontVariation_5273u"]
+base_font = ExtResource("5_40ytf")
+spacing_space = -1
+spacing_bottom = -6
+
+[node name="Card" type="Node2D"]
+position = Vector2(100, 950)
+script = ExtResource("1_hael8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.796078, 0, 0, 0.0784314)
+self_modulate = Color(0, 1, 1, 1)
+material = SubResource("ShaderMaterial_40ytf")
+position = Vector2(-3.8147e-06, 7.56979e-06)
+scale = Vector2(150, 224)
+texture = SubResource("CanvasTexture_5273u")
+
+[node name="CardImage" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qf083")
+position = Vector2(3.57628e-07, 2.64049e-05)
+scale = Vector2(0.148, 0.154167)
+texture = ExtResource("3_40ytf")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -59.0
+offset_top = 9.0
+offset_right = 59.0
+offset_bottom = 71.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qf083")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_hael8")
+
+[node name="Title" type="RichTextLabel" parent="."]
+modulate = Color(0.0235294, 0.294118, 0.172549, 1)
+offset_left = -56.0
+offset_top = -64.0
+offset_right = 58.0
+offset_bottom = -10.0
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_40ytf")
+theme_override_fonts/bold_font = SubResource("FontVariation_5273u")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b] Título da carta [/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+modulate = Color(0.000903378, 0.0338662, 0.0121402, 1)
+offset_left = -58.0
+offset_top = -1.0
+offset_right = 178.0
+offset_bottom = 114.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Descrição"
+scroll_active = false
+scroll_following = true
+
+[node name="Category" type="RichTextLabel" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = -60.0
+offset_top = 56.0
+offset_right = 60.0
+offset_bottom = 78.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "Processo"
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered2"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="ready" from="Area2D" to="." method="_on_area_2d_ready"]

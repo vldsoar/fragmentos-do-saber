@@ -1,0 +1,654 @@
+{
+	"theme": "Revolução Francesa",
+	"max_score_hint": 100.0,
+	"cards": [
+		{
+			"id": "FR001",
+			"title": "Crise Financeira do Estado",
+			"description": "A França enfrentava grave déficit devido a guerras e gastos da monarquia.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"economia",
+				"déficit"
+			],
+			"feedback": {
+				"why_true": "A crise fiscal é reconhecida como gatilho essencial.",
+				"tip": "Conecte com tensões sociais e decisões políticas."
+			}
+		},
+		{
+			"id": "FR002",
+			"title": "Desigualdade dos Três Estados",
+			"description": "O clero e a nobreza tinham privilégios enquanto o Terceiro Estado pagava impostos pesados.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"sociedade",
+				"privilégios"
+			],
+			"feedback": {
+				"why_true": "A desigualdade social era estrutural no Antigo Regime.",
+				"tip": "Em geral conecta com revolta política."
+			}
+		},
+		{
+			"id": "FR003",
+			"title": "Crise Agrícola e Fome",
+			"description": "Más colheitas elevaram o preço do pão, aumentando tensões.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"agricultura",
+				"fome"
+			],
+			"feedback": {
+				"why_true": "A fome agravou a instabilidade social.",
+				"tip": "Use antes de eventos de mobilização urbana."
+			}
+		},
+		{
+			"id": "FR004",
+			"title": "Influência do Iluminismo",
+			"description": "Ideias de liberdade e razão se espalharam pela França.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"Iluminismo"
+			],
+			"feedback": {
+				"why_true": "As ideias iluministas inspiraram questionamentos ao absolutismo.",
+				"tip": "Conecta bem a eventos políticos iniciais."
+			}
+		},
+		{
+			"id": "FR005",
+			"title": "Dívida Gerada pela Guerra de Independência Americana",
+			"description": "O apoio francês à independência dos EUA agravou a crise.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"EUA",
+				"guerra"
+			],
+			"feedback": {
+				"why_true": "A participação francesa aumentou gastos e endividamento.",
+				"tip": "Aparece antes da crise fiscal."
+			}
+		},
+		{
+			"id": "FR006",
+			"title": "Reforma Tributária Proposta pelo Rei",
+			"description": "Rei tentou impor impostos ao clero e nobreza.",
+			"category": "CAUSE",
+			"truth_value": 0.5,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"impostos"
+			],
+			"feedback": {
+				"why_partial": "Houve tentativas, mas sem eficácia devido à resistência privilegiada.",
+				"tip": "Use quando explorar tensões políticas."
+			}
+		},
+		{
+			"id": "FR007",
+			"title": "Assembleia dos Notáveis",
+			"description": "Rei convoca elite para discutir reformas fiscais.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"política"
+			],
+			"feedback": {
+				"why_true": "A recusa dos notáveis desencadeou novas pressões.",
+				"tip": "Combine com crise fiscal."
+			}
+		},
+		{
+			"id": "FR008",
+			"title": "Convocação dos Estados Gerais",
+			"description": "Rei convoca os três estados para deliberar sobre a crise.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"assembleia"
+			],
+			"feedback": {
+				"why_true": "Momento decisivo rumo à ruptura institucional.",
+				"tip": "Frequentemente segue causas econômicas."
+			}
+		},
+		{
+			"id": "FR009",
+			"title": "Juramento do Jogo da Péla",
+			"description": "Deputados juram não se dispersar até elaborar uma constituição.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"constituição"
+			],
+			"feedback": {
+				"why_true": "Marco do surgimento da Assembleia Nacional.",
+				"tip": "Conecta com eventos de radicalização."
+			}
+		},
+		{
+			"id": "FR010",
+			"title": "Queda da Bastilha",
+			"description": "Povo toma a Bastilha, símbolo da opressão real.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"revolta"
+			],
+			"feedback": {
+				"why_true": "A Bastilha simboliza o fim do absolutismo moral.",
+				"tip": "Geralmente segue ações políticas."
+			}
+		},
+		{
+			"id": "FR011",
+			"title": "Grande Medo",
+			"description": "Revoltas camponesas se espalham pelo interior da França.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"camponeses"
+			],
+			"feedback": {
+				"why_true": "Expressa instabilidade nacional.",
+				"tip": "Conecta com reformas legislativas."
+			}
+		},
+		{
+			"id": "FR012",
+			"title": "Abolição dos Privilégios",
+			"description": "Assembleia põe fim a isenções e direitos feudais.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"reformas"
+			],
+			"feedback": {
+				"why_true": "Transição decisiva para a igualdade civil.",
+				"tip": "Faz par com a Declaração de Direitos."
+			}
+		},
+		{
+			"id": "FR013",
+			"title": "Declaração dos Direitos do Homem e do Cidadão",
+			"description": "Documento que estabelece princípios universais.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"direitos"
+			],
+			"feedback": {
+				"why_true": "Base das democracias modernas.",
+				"tip": "Use como centro de arcos narrativos."
+			}
+		},
+		{
+			"id": "FR014",
+			"title": "Marcha das Mulheres a Versalhes",
+			"description": "Multidão exige pão e mudanças políticas.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"mulheres"
+			],
+			"feedback": {
+				"why_true": "Pressão popular que força a família real a Paris.",
+				"tip": "Conecta com queda de prestígio da monarquia."
+			}
+		},
+		{
+			"id": "FR015",
+			"title": "Fuga de Varennes",
+			"description": "Tentativa fracassada da família real de fugir.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"monarquia"
+			],
+			"feedback": {
+				"why_true": "Aumenta descrédito do rei.",
+				"tip": "Geralmente antecede a República."
+			}
+		},
+		{
+			"id": "FR016",
+			"title": "Constituição de 1791",
+			"description": "Transforma a França em monarquia constitucional.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"constituição"
+			],
+			"feedback": {
+				"why_true": "Primeira grande reestruturação política formal.",
+				"tip": "Conecta com debate sobre cidadania."
+			}
+		},
+		{
+			"id": "FR017",
+			"title": "Rei Criou Voluntariamente um Governo Democrático",
+			"description": "Alegação de que o rei desejava abrir mão do poder absoluto espontaneamente.",
+			"category": "PROCESS",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"falso"
+			],
+			"feedback": {
+				"why_false": "O rei resistiu às mudanças e tentou recuperar poder.",
+				"tip": "Carta útil como armadilha narrativa."
+			}
+		},
+		{
+			"id": "FR018",
+			"title": "Proclamação da República",
+			"description": "A França se torna oficialmente uma república.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"república"
+			],
+			"feedback": {
+				"why_true": "Resultado direto da perda de confiança no rei.",
+				"tip": "Usada após processos de radicalização."
+			}
+		},
+		{
+			"id": "FR019",
+			"title": "Execução de Luís XVI",
+			"description": "Rei é executado após julgamento.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"guillotine"
+			],
+			"feedback": {
+				"why_true": "Simboliza fim do absolutismo.",
+				"tip": "Conecta com processos radicais."
+			}
+		},
+		{
+			"id": "FR020",
+			"title": "Reino do Terror",
+			"description": "Período de repressão e execuções coordenado pelo Comitê de Salvação Pública.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"terror"
+			],
+			"feedback": {
+				"why_true": "Marca fase mais radical da revolução.",
+				"tip": "Associa-se à execução do rei."
+			}
+		},
+		{
+			"id": "FR021",
+			"title": "Consolidação da Burguesia",
+			"description": "Políticas fortalecem elite burguesa.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"burguesia"
+			],
+			"feedback": {
+				"why_true": "A burguesia ascende após queda do absolutismo.",
+				"tip": "Conecta a movimentos políticos moderados."
+			}
+		},
+		{
+			"id": "FR022",
+			"title": "Declaração Gerou Igualdade Imediata para Todos",
+			"description": "Afirmação de que a igualdade foi implementada na prática imediatamente.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"falso"
+			],
+			"feedback": {
+				"why_false": "Na prática, grupos como mulheres e escravizados continuaram excluídos.",
+				"tip": "Útil para mostrar limites das políticas."
+			}
+		},
+		{
+			"id": "FR023",
+			"title": "Estabilidade Política Imediata",
+			"description": "Afirma que a Revolução rapidamente trouxe estabilidade plena.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"falso"
+			],
+			"feedback": {
+				"why_false": "A revolução gerou instabilidade prolongada.",
+				"tip": "Boa carta para testar coerência."
+			}
+		},
+		{
+			"id": "FR024",
+			"title": "Influência Global da Revolução",
+			"description": "Outras nações incorporam ideias revolucionárias.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"tags": [
+				"influência"
+			],
+			"feedback": {
+				"why_true": "A revolução marca transformações globais.",
+				"tip": "Excelente carta final de arco temático."
+			}
+		},
+		{
+			"id": "FR025",
+			"title": "Impulso de Propaganda Revolucionária",
+			"description": "Uma onda de informações distorcidas desestabiliza a estratégia adversária.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "OPPONENT_DISCARD_RANDOM",
+			"effect_description": "O oponente descarta automaticamente uma carta aleatória da mão.",
+			"tags": [
+				"propaganda",
+				"manipulação"
+			],
+			"bonus_score": 0.0,
+			"feedback": {
+				"why_false": "Carta especial representa um recurso estratégico, não um evento histórico real.",
+				"tip": "Use quando o oponente tiver muitas cartas na mão, aumentando as chances de causar prejuízo real."
+			}
+		},
+		{
+			"id": "FR026",
+			"title": "Mobilização Patriótica",
+			"description": "O fervor popular reforça a força de sua narrativa.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "FLAT_SCORE_BONUS",
+			"effect_description": "Garante um bônus direto de pontuação ao ser jogada.",
+			"tags": [
+				"ação",
+				"patriotismo"
+			],
+			"bonus_score": 5.0,
+			"feedback": {
+				"why_false": "O efeito é puramente mecânico e não representa um fato histórico literal.",
+				"tip": "Use para garantir uma vantagem extra em momentos decisivos da partida."
+			}
+		},
+		{
+			"id": "FR027",
+			"title": "Mobilização Patriótica",
+			"description": "O fervor popular reforça a força de sua narrativa.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "FLAT_SCORE_BONUS",
+			"effect_description": "Garante um bônus direto de pontuação ao ser jogada.",
+			"tags": [
+				"ação",
+				"patriotismo"
+			],
+			"bonus_score": 5.0,
+			"feedback": {
+				"why_false": "O efeito é puramente mecânico e não representa um fato histórico literal.",
+				"tip": "Use para garantir uma vantagem extra em momentos decisivos da partida."
+			}
+		},
+		{
+			"id": "FR028",
+			"title": "Impulso de Propaganda Revolucionária",
+			"description": "Uma onda de informações distorcidas desestabiliza a estratégia adversária.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "OPPONENT_DISCARD_RANDOM",
+			"effect_description": "O oponente descarta automaticamente uma carta aleatória da mão.",
+			"tags": [
+				"propaganda",
+				"manipulação"
+			],
+			"bonus_score": 0.0,
+			"feedback": {
+				"why_false": "Carta especial representa um recurso estratégico, não um evento histórico real.",
+				"tip": "Use quando o oponente tiver muitas cartas na mão, aumentando as chances de causar prejuízo real."
+			}
+		}
+	],
+	"edges": [
+		{
+			"from": "FR001",
+			"to": "FR007",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR002",
+			"to": "FR008",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR003",
+			"to": "FR008",
+			"compatibility": 0.9
+		},
+		{
+			"from": "FR004",
+			"to": "FR009",
+			"compatibility": 0.7
+		},
+		{
+			"from": "FR005",
+			"to": "FR007",
+			"compatibility": 0.8
+		},
+		{
+			"from": "FR007",
+			"to": "FR008",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR008",
+			"to": "FR009",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR009",
+			"to": "FR010",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR010",
+			"to": "FR011",
+			"compatibility": 0.8
+		},
+		{
+			"from": "FR011",
+			"to": "FR012",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR012",
+			"to": "FR013",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR013",
+			"to": "FR014",
+			"compatibility": 0.7
+		},
+		{
+			"from": "FR014",
+			"to": "FR015",
+			"compatibility": 0.8
+		},
+		{
+			"from": "FR015",
+			"to": "FR016",
+			"compatibility": 0.9
+		},
+		{
+			"from": "FR016",
+			"to": "FR018",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR018",
+			"to": "FR019",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR019",
+			"to": "FR020",
+			"compatibility": 1.0
+		},
+		{
+			"from": "FR020",
+			"to": "FR021",
+			"compatibility": 0.8
+		},
+		{
+			"from": "FR021",
+			"to": "FR024",
+			"compatibility": 0.9
+		},
+		{
+			"from": "FR017",
+			"to": "FR010",
+			"compatibility": 0.0
+		},
+		{
+			"from": "FR022",
+			"to": "FR018",
+			"compatibility": 0.1
+		},
+		{
+			"from": "FR023",
+			"to": "FR020",
+			"compatibility": 0.0
+		}
+	],
+	"constraints": [
+		{
+			"id": "C_ORDER_BASTILLE_EXECUTION",
+			"type": "ORDER",
+			"required_before": [
+				"FR010"
+			],
+			"required_after": [
+				"FR019"
+			],
+			"penalty": 15.0,
+			"feedback_if_violate": "A execução do rei ocorre após a radicalização simbolizada pela Bastilha."
+		},
+		{
+			"id": "C_CONTRADICTION_ABSOLUTISM",
+			"type": "MUTUAL_EXCLUSION",
+			"nodes_a": [
+				"FR021",
+				"FR013"
+			],
+			"nodes_b": [
+				"FR017",
+				"FR022"
+			],
+			"penalty": 20.0,
+			"feedback_if_violate": "Não é coerente restaurar absolutismo ou igualdade plena imediata ao mesmo tempo que se consolida cidadania e burguesia."
+		},
+		{
+			"id": "C_COVERAGE_BASIC",
+			"type": "COVERAGE",
+			"nodes_a": [
+				"CAUSE"
+			],
+			"nodes_b": [
+				"PROCESS",
+				"CONSEQUENCE"
+			],
+			"penalty": 10.0,
+			"feedback_if_violate": "Uma narrativa coerente inclui causa, processo e consequência."
+		}
+	],
+	"motifs": [
+		{
+			"id": "M_CORE_ARC",
+			"nodes": [
+				"FR001",
+				"FR007",
+				"FR010"
+			],
+			"score": 1.0,
+			"feedback": "Você captou o arco central: crise → assembleias → Bastilha."
+		},
+		{
+			"id": "M_RIGHTS_ARC",
+			"nodes": [
+				"FR012",
+				"FR013"
+			],
+			"score": 0.8,
+			"feedback": "Bom uso do arco liberal: fim de privilégios → declaração de direitos."
+		},
+		{
+			"id": "M_RADICALIZATION",
+			"nodes": [
+				"FR010",
+				"FR019",
+				"FR020"
+			],
+			"score": 1.0,
+			"feedback": "Sequência clássica de radicalização revolucionária."
+		}
+	]
+}
