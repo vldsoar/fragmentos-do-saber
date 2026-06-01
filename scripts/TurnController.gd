@@ -1,6 +1,8 @@
 class_name TurnController
 extends RefCounted
 
+#// SAFE_TURN_BUDGET_PERCENTAGE := 0.6
+
 
 ## Define a duracao da partida a partir do tamanho do deck.
 ## Cada jogador usa uma copia propria do deck e compra uma carta por turno.
@@ -16,7 +18,7 @@ func calculate_max_turns(deck_card_count: int) -> int:
 		push_warning("Deck com %d cartas; o minimo recomendado e %d para preservar metade do deck." % [deck_card_count, Globals.MIN_DECK_CARDS])
 		return Globals.MIN_TURNS
 
-	var safe_turn_budget: int = floori(float(deck_card_count) * 0.5)
+	var safe_turn_budget: int = floori(float(deck_card_count) * 0.6)
 	if safe_turn_budget >= Globals.LONG_TURNS:
 		return Globals.LONG_TURNS
 	if safe_turn_budget >= Globals.DEFAULT_TURNS:

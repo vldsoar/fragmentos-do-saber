@@ -34,10 +34,10 @@ extends Node2D
 @onready var hud: CanvasLayer = get_node(hud_path) as CanvasLayer
 
 @onready var fsm: StateMachine = StateMachine.new()
-@onready var _scoringEngine: CoherenceScoringEngine
 @onready var _cardEffectProcessor: CardEffectProcessor
 @onready var _cardActionController: CardActionController = CardActionController.new()
 @onready var _turnController: TurnController = TurnController.new()
+@onready var _matchResultController: MatchResultController = MatchResultController.new()
 
 # Opponent components
 @onready var opponent_deck: Deck = get_node(opponent_deck_path) as Deck
@@ -92,7 +92,6 @@ func _ready():
 	game_over_screen.exit_pressed.connect(_on_exit_pressed)
 	
 	# Engines
-	_scoringEngine = CoherenceScoringEngine.new()
 	_cardEffectProcessor = CardEffectProcessor.new()
 	_cardActionController.configure(player_timeline, discard_slot, effect_slot)
 	max_turns = _turnController.calculate_max_turns(deck.cards.size())
@@ -192,6 +191,38 @@ func request_play_special(card: CardScn) -> bool:
 	
 	return true
 	# (por enquanto, sem estado extra)
+
+
+func has_useful_target_for_opponent_effect(effect: CardResource.SpecialEffect) -> bool:
+	match effect:
+		CardResource.SpecialEffect.OPPONENT_DISCARD_RANDOM:
+			return _player_has_true_common_card()
+		_:
+			return false
+
+
+func apply_opponent_effect_to_player(card: CardScn, effect_processor: CardEffectProcessor) -> void:
+	if card == null or effect_processor == null:
+		return
+
+	effect_processor.apply_effect(card, {
+		"opponent_timeline": player_timeline,
+		"discard_slot": discard_slot,
+	})
+
+
+func _player_has_true_common_card() -> bool:
+	for candidate: CardScn in player_timeline.get_cards():
+		if candidate == null:
+			continue
+		var data: CardResource = candidate.data
+		if data == null:
+			continue
+		if data.rarity == CardResource.Rarity.COMMON and data.truth_value >= 0.99:
+			return true
+	return false
+
+
 func _can_play_special(card: CardScn) -> bool:
 	var allowed_states: Array[int] = [GameState.RESOLVE_ACTIONS, GameState.MUST_DRAW]
 	return allowed_states.has(current_state) and card.is_special()
@@ -337,29 +368,24 @@ func _handle_game_over() -> void:
 	var opponent_timeline_ids: Array = opponent_timeline.get_card_names()
 	var player_effect_ids: Array = _cardEffectProcessor.get_applied_effect_ids()
 	var opponent_effect_ids: Array = opponent_ai.card_effect_processor.get_applied_effect_ids()
-	var result: ResultGame = _scoringEngine.evaluate_timeline(
+	var match_result: Dictionary = _matchResultController.build_match_result(
 		deck_data,
 		player_timeline_ids,
-		player_effect_ids
-	)
-	
-	var result_opponent: ResultGame = _scoringEngine.evaluate_timeline(
-		deck_data,
 		opponent_timeline_ids,
+		player_effect_ids,
 		opponent_effect_ids
 	)
-	
-	var did_win: bool = result.compare_with(result_opponent) == 1
+	var result: ResultGame = match_result["player_result"] as ResultGame
+	var result_opponent: ResultGame = match_result["opponent_result"] as ResultGame
+	var teacher_context: Dictionary = {}
+	var teacher_context_value: Variant = match_result.get("teacher_context", {})
+	if teacher_context_value is Dictionary:
+		teacher_context = teacher_context_value
+	var did_win: bool = bool(match_result["did_win"])
 	var result_winner: ResultGame = ResultGame.get_greater(result, result_opponent)
 
 	Globals.debug_log("Game over! Result winner: %s" % result_winner.total_score)
-	game_over_screen.show_result(result, did_win, result_opponent, {
-		"deck_data": deck_data,
-		"player_timeline_ids": player_timeline_ids,
-		"opponent_timeline_ids": opponent_timeline_ids,
-		"player_effect_ids": player_effect_ids,
-		"opponent_effect_ids": opponent_effect_ids,
-	})
+	game_over_screen.show_result(result, did_win, result_opponent, teacher_context)
 
 func _show_feedback(card: CardScn, callable: Callable) -> void:
 	if feedback_popup_scene == null:

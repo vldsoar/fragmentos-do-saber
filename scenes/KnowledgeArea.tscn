@@ -91,7 +91,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="DeckListWrapper" type="VBoxContainer" parent="ContentVBox/DeckScroll"]
+[node name="DeckListWrapper" type="VBoxContainer" parent="ContentVBox/DeckScroll" unique_id=1413452460]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

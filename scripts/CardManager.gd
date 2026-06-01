@@ -59,42 +59,13 @@ func finish_drag() -> void:
 	
 	var selected_card_slot: CardSlotScn = get_card_slot_under_mouse()
 	Globals.debug_log("Card slot detected: %s" % selected_card_slot)
-	
-	var ctx: DropContext = DropContext.new()
 
-	ctx.card = card_being_dragged
-	ctx.slot = selected_card_slot
-	ctx.target_card = get_card_under_mouse()
-	ctx.card_was_in_timeline = player_timeline_ref.has(card_being_dragged)
-	
-	if ctx.card_was_in_timeline:
-		ctx.timeline_target_index = player_timeline_ref.get_target_position_for_reorder()
-
-	
-	# Case A: drop in valid slot
-	if ctx.slot and ctx.slot.can_accept_card(card_being_dragged):
-		Globals.debug_log("Card dropped in card slot")
-		ctx.type = DropContext.DropType.ON_EMPTY_SLOT
-	else:
-		# Check if card is being dropped on another card in the timeline
-		#var target_card = get_card_under_mouse()
-		
-		Globals.debug_log("Target card: %s" % ctx.target_card)
-		Globals.debug_log("Card was in timeline: %s" % ctx.card_was_in_timeline)
-		Globals.debug_log("card target index: %s" % ctx.timeline_target_index)
-		
-		# Case B: Interact with timeline
-		if ctx.target_card \
-			and ctx.target_card != card_being_dragged \
-			and player_timeline_ref.has(ctx.target_card):
-			ctx.type = DropContext.DropType.ON_TIMELINE_CARD
-		elif ctx.card_was_in_timeline \
-			and ctx.target_card == null \
-			and ctx.timeline_target_index >= 0:
-			ctx.type = DropContext.DropType.INVALID
-		else:
-			Globals.debug_log("Adding card to timeline")
-			ctx.type = DropContext.DropType.INVALID
+	var ctx: DropContext = DropResolver.resolve(
+		card_being_dragged,
+		selected_card_slot,
+		get_card_under_mouse(),
+		player_timeline_ref
+	)
 	
 	# Delega a regra de jogo para o GameManager
 	game_manager.handle_card_drop(ctx)

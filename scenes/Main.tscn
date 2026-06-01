@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c6sm1awgd4elv"]
+[gd_scene load_steps=31 format=3 uid="uid://c6sm1awgd4elv"]
 
 [ext_resource type="Script" uid="uid://dgvcwopmm1110" path="res://scripts/CardManager.gd" id="1_0bbpv"]
 [ext_resource type="Texture2D" uid="uid://bhx6c8mjxp2qi" path="res://bg3.png" id="1_q8u5g"]
@@ -10,8 +10,6 @@
 [ext_resource type="Script" uid="uid://dshpoltj6ukuf" path="res://scripts/GameManager.gd" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://byw1nvu34venr" path="res://scenes/FeedbackEffect.tscn" id="8_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://cjnknkhbcmlmu" path="res://assets/audio/msc_bg.wav" id="9_q8u5g"]
-[ext_resource type="Texture2D" uid="uid://ct1ycubual7fe" path="res://themes/default/images/card_back.png" id="10_1iba3"]
-[ext_resource type="Script" uid="uid://ge13g157d1sr" path="res://scripts/Deck.gd" id="10_ebg2g"]
 [ext_resource type="StyleBox" uid="uid://dgu1dhvi1jd8n" path="res://styles/MenuGameBtnHv.tres" id="10_wp0k4"]
 [ext_resource type="StyleBox" uid="uid://dtp616hoj1yvx" path="res://styles/MenuGameBtn.tres" id="11_bjd11"]
 [ext_resource type="Script" uid="uid://bhxa2vg6p7wb2" path="res://scripts/OpponentTimeline.gd" id="11_yxlcp"]
@@ -126,35 +124,10 @@ feedback_popup_scene = ExtResource("8_ft6cd")
 stream = ExtResource("9_q8u5g")
 attenuation = 1.62451
 
-[node name="OpponentDeck" type="Node2D" parent="."]
+[node name="OpponentDeck" parent="." instance=ExtResource("4_rarhs")]
 position = Vector2(1820, 130)
-script = ExtResource("10_ebg2g")
 silent_mode = true
 is_opponent = true
-
-[node name="Sprite2D" type="Sprite2D" parent="OpponentDeck"]
-position = Vector2(0, 1.49998)
-scale = Vector2(0.162, 0.168792)
-texture = ExtResource("10_1iba3")
-
-[node name="CountDeck" type="RichTextLabel" parent="OpponentDeck"]
-modulate = Color(0.776471, 0.858824, 0.0196078, 1)
-z_index = 2
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = 38.0
-offset_right = 12.0
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(1.5, 1.5)
-text = "0"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="OpponentTimeline" type="Node2D" parent="."]
 script = ExtResource("11_yxlcp")

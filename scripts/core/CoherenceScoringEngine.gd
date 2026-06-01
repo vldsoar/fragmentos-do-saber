@@ -11,6 +11,12 @@ extends Object
 ## deck_data: Dictionary carregado a partir do JSON do deck.
 ## timeline_ids: Array de IDs de cartas na ordem escolhida pelo jogador.
 
+func evaluate_context(context: ScoringContext) -> ResultGame:
+	if context == null:
+		return ResultGame.new()
+	return evaluate_timeline(context.deck_data, context.timeline_ids, context.effect_card_ids)
+
+
 func evaluate_timeline(deck_data: Dictionary, timeline_ids: Array, effect_card_ids: Array = []) -> ResultGame:
 	var card_by_id := _build_card_index(deck_data)
 	var edge_map := _build_edge_index(deck_data)

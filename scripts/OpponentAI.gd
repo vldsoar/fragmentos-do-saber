@@ -9,17 +9,13 @@ signal turn_completed
 @export var opponent_timeline_path: String = "../OpponentTimeline"
 @export var opponent_discard_slot_path: String = "../OpponentCardSlotDiscard"
 @export var opponent_effect_slot_path: String = "../OpponentCardSlotEffect"
-@export var player_timeline_path: String = "../PlayerTimeline"
-@export var player_discard_slot_path: String = "../CardSlotDiscard"
-@export var card_manager_path: String = "../CardManager"
+@export var game_manager_path: String = "../GameManager"
 
 @onready var opponent_deck: Deck = get_node(opponent_deck_path) as Deck
 @onready var opponent_timeline: OpponentTimeline = get_node(opponent_timeline_path) as OpponentTimeline
 @onready var opponent_discard_slot: CardSlotScn = get_node(opponent_discard_slot_path) as CardSlotScn
 @onready var opponent_effect_slot: CardSlotScn = get_node(opponent_effect_slot_path) as CardSlotScn
-@onready var player_timeline: PlayerTimeline = get_node(player_timeline_path) as PlayerTimeline
-@onready var player_discard_slot: CardSlotScn = get_node(player_discard_slot_path) as CardSlotScn
-@onready var card_manager: CardManager = get_node(card_manager_path) as CardManager
+@onready var game_manager: GameManager = get_node(game_manager_path) as GameManager
 var card_effect_processor: CardEffectProcessor = CardEffectProcessor.new()
 var decision_engine: OpponentDecisionEngine = OpponentDecisionEngine.new()
 var _deck_data: Dictionary = {}
@@ -110,22 +106,9 @@ func _is_special_effect_useful(card: CardScn) -> bool:
 		CardResource.SpecialEffect.FLAT_SCORE_BONUS:
 			return card.data.bonus_score > 0.0
 		CardResource.SpecialEffect.OPPONENT_DISCARD_RANDOM:
-			return _player_has_discard_target()
+			return game_manager.has_useful_target_for_opponent_effect(card.effect)
 		_:
 			return false
-
-func _player_has_discard_target() -> bool:
-	for candidate in player_timeline.get_cards():
-		if candidate == null:
-			continue
-		if not (candidate is CardScn):
-			continue
-		var data: CardResource = candidate.data
-		if data == null:
-			continue
-		if data.rarity == CardResource.Rarity.COMMON and data.truth_value >= 0.99:
-			return true
-	return false
 
 func _discard_card(card: CardScn) -> void:
 	# Move para discard slot
@@ -140,11 +123,7 @@ func _discard_card(card: CardScn) -> void:
 func _apply_effect_card(card: CardScn) -> void:
 	# Aplica efeito e move para effect slot
 	# Cartas de efeito aparecem normalmente (face visível) - não precisa virar
-	var ctx = {
-		"opponent_timeline": player_timeline,
-		"discard_slot": player_discard_slot,
-	}
-	card_effect_processor.apply_effect(card, ctx)
+	game_manager.apply_opponent_effect_to_player(card, card_effect_processor)
 	
 	# Se a carta estava virada, virar para frente ao aplicar efeito
 	if card.is_flipped():
