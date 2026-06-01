@@ -72,6 +72,8 @@ func draw_card() -> CardScn:
 	card_scn.flip_to_back()
 	var card_manager: CardManager = get_node(card_manager_path) as CardManager
 	card_manager.add_child(card_scn)
+	if not is_opponent:
+		card_manager.connect_card_signals(card_scn)
 	card_scn.name = card_scn.data.id
 	if not silent_mode:
 		UISoundManager.play_take_card()

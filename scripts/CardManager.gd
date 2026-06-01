@@ -92,8 +92,12 @@ func _cleanup_after_drop() -> void:
 ## Connects a card's hover signals to their corresponding callback methods
 ## Allows the CardManager to respond to card hover events
 func connect_card_signals(card: CardScn) -> void:
-	card.connect("hovered", _on_card_hovered_card)
-	card.connect("hovered_off", _on_card_hovered_off_card)
+	if card == null:
+		return
+	if not card.hovered.is_connected(_on_card_hovered_card):
+		card.hovered.connect(_on_card_hovered_card)
+	if not card.hovered_off.is_connected(_on_card_hovered_off_card):
+		card.hovered_off.connect(_on_card_hovered_off_card)
 	
 func _on_left_mouse_button_released() -> void:
 	if card_being_dragged:
