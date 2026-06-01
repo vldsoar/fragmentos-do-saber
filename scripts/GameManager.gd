@@ -52,6 +52,7 @@ extends Node2D
 
 const CENTER_POS = Vector2(960, 440)  # ajuste pro seu viewport
 const TURN_BANNER_TEXT: String = "Sua vez"
+const FINAL_TURN_BANNER_TEXT: String = "Ultima rodada"
 
 enum GameState {
 	WAITING_INPUT,
@@ -130,11 +131,11 @@ func _configureState() -> void:
 func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
 	if old_state == GameState.END_ROUND_SCORING and new_state == GameState.WAITING_INPUT:
-		_show_turn_banner(TURN_BANNER_TEXT)
+		_update_knowledge_clock(new_state)
+		_show_player_turn_banners()
 		return
 
 	if new_state == GameState.RESOLVING_TURN:
-		current_turn = _turnController.advance_turn(current_turn, max_turns)
 		# Iniciar turno do oponente
 		opponent_ai.play_turn()
 		return
@@ -146,6 +147,7 @@ func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 		if _turnController.is_final_turn(current_turn, max_turns):
 			fsm.transition_to(GameState.GAME_OVER)
 		else:
+			current_turn = _turnController.advance_turn(current_turn, max_turns)
 			fsm.transition_to(GameState.WAITING_INPUT)
 
 		return
@@ -406,6 +408,12 @@ func _show_feedback(card: CardScn, callable: Callable) -> void:
 		# Modal: OK chama callable
 		popup.show_modal(card.data.effect_description, "OK", on_finished)
 
+func _show_player_turn_banners() -> void:
+	await _show_turn_banner(TURN_BANNER_TEXT)
+	if _turnController.is_final_turn(current_turn, max_turns):
+		await _show_turn_banner(FINAL_TURN_BANNER_TEXT)
+
+
 func _show_turn_banner(text: String) -> void:
 	if hud == null:
 		return
@@ -432,7 +440,8 @@ func _show_turn_banner(text: String) -> void:
 	turn_banner_tween.chain().set_parallel(true)
 	turn_banner_tween.tween_property(turn_banner, "modulate:a", 0.0, 0.32).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	turn_banner_tween.tween_property(label, "scale", Vector2(1.22, 1.22), 0.32).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	turn_banner_tween.finished.connect(_on_turn_banner_finished)
+	await turn_banner_tween.finished
+	_on_turn_banner_finished()
 
 func _create_turn_banner(text: String) -> Control:
 	var root: Control = Control.new()
