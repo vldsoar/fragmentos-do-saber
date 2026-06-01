@@ -106,6 +106,7 @@ func _ready():
 	
 	# Obter OpponentAI se existir na cena
 	opponent_ai.turn_completed.connect(_on_opponent_turn_completed)
+	deck.start_draw_attention()
 	#_update_knowledge_clock(current_state)
 
 
@@ -132,8 +133,12 @@ func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
 	if old_state == GameState.END_ROUND_SCORING and new_state == GameState.WAITING_INPUT:
 		_update_knowledge_clock(new_state)
-		_show_player_turn_banners()
+		await _show_player_turn_banners()
+		deck.start_draw_attention()
 		return
+
+	if new_state != GameState.WAITING_INPUT:
+		deck.stop_draw_attention()
 
 	if new_state == GameState.RESOLVING_TURN:
 		# Iniciar turno do oponente
@@ -325,6 +330,7 @@ func _on_deck_clicked() -> void:
 		# Ignora clique no deck fora da fase certa
 		return
 
+	deck.stop_draw_attention()
 	# Transiciona pra fase de carta comprada
 	#current_state = GameState.MUST_DRAW
 	fsm.transition_to(GameState.MUST_DRAW)

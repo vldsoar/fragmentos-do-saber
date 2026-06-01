@@ -290,6 +290,7 @@ func _load_builtin_fallback() -> void:
 				"game_over_background": "res://themes/default/images/bg_game_over.png",
 				"card_front": "res://themes/default/images/card_front.png",
 				"card_back": "res://themes/default/images/card_back.png",
+				"card_back_hover": "res://themes/default/images/card_back.png",
 				"card_slot": "res://themes/default/images/card_slot.png",
 				"menu_book": "res://themes/default/images/menu_book.png",
 				"area_icon": "res://themes/default/images/area_icon.svg"

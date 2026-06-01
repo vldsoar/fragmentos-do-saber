@@ -8,6 +8,7 @@
         "game_over_background": "res://themes/default/images/bg_game_over.png",
         "card_front": "res://themes/default/images/card_front.png",
         "card_back": "res://themes/default/images/card_back.png",
+        "card_back_hover": "res://themes/default/images/card_back.png",
         "card_slot": "res://themes/default/images/card_slot.png",
         "menu_book": "res://themes/default/images/menu_book.png",
         "area_icon": "res://themes/default/images/area_icon.svg"
@@ -58,6 +59,7 @@
         "card_front_CONSEQUENCE": "res://themes/new_theme/images/card_conseq.png",
         "card_front_SPECIAL": "res://themes/new_theme/images/card_special.png",
         "card_back": "res://themes/new_theme/images/card_back.png",
+        "card_back_hover": "res://themes/new_theme/images/card_back_hover.png",
         "deck_button_bg": "res://themes/new_theme/images/ka_button.png",
         "deck_button_bg_hover": "res://themes/new_theme/images/ka_button_hover.png"
       },
@@ -91,7 +93,8 @@
         "card_front_PROCESS": "res://themes/new_theme/images/card_process.png",
         "card_front_CONSEQUENCE": "res://themes/new_theme/images/card_conseq.png",
         "card_front_SPECIAL": "res://themes/new_theme/images/card_special.png",
-        "card_back": "res://themes/new_theme/images/card_back.png"
+        "card_back": "res://themes/new_theme/images/card_back.png",
+        "card_back_hover": "res://themes/new_theme/images/card_back_hover.png"
       },
       "colors": {
         "button_bg": "#211B13F0",
