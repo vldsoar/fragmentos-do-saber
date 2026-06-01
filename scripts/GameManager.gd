@@ -18,6 +18,7 @@ extends Node2D
 @export var opponent_discard_slot_path: String = "../OpponentCardSlotDiscard"
 @export var opponent_effect_slot_path: String = "../OpponentCardSlotEffect"
 @export var opponent_ai_path: String = "../OpponentAI"
+@export var board_background_path: String = "../Panel"
 
 @onready var card_reveal_panel: CardRevealPanel = get_node(card_reveal_panel_path) as CardRevealPanel
 @onready var player_timeline: PlayerTimeline = get_node(player_timeline_path) as PlayerTimeline
@@ -45,6 +46,7 @@ extends Node2D
 @onready var opponent_effect_slot: CardSlotScn = get_node(opponent_effect_slot_path) as CardSlotScn
 @onready var opponent_ai: OpponentAI = get_node(opponent_ai_path) as OpponentAI
 @onready var background_music: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
+@onready var board_background_panel: Panel = get_node(board_background_path) as Panel
 
 @export var feedback_popup_scene: PackedScene
 
@@ -71,6 +73,7 @@ var turn_banner_tween: Tween = null
 #const _STATES_FOR
 
 func _ready():
+	_apply_theme()
 	# configure states
 	_configureState()
 
@@ -104,6 +107,10 @@ func _ready():
 	# Obter OpponentAI se existir na cena
 	opponent_ai.turn_completed.connect(_on_opponent_turn_completed)
 	#_update_knowledge_clock(current_state)
+
+
+func _apply_theme() -> void:
+	ThemeManager.apply_background_panel(board_background_panel, "board_background")
 	
 	
 func _configureState() -> void:

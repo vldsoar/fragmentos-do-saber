@@ -1,0 +1,117 @@
+{
+  "active_theme": "clean",
+  "themes": {
+    "default": {
+      "textures": {
+        "menu_background": "res://themes/default/images/bg_main_menu.png",
+        "board_background": "res://themes/default/images/bg_board.png",
+        "game_over_background": "res://themes/default/images/bg_game_over.png",
+        "card_front": "res://themes/default/images/card_front.png",
+        "card_back": "res://themes/default/images/card_back.png",
+        "card_slot": "res://themes/default/images/card_slot.png",
+        "menu_book": "res://themes/default/images/menu_book.png",
+        "area_icon": "res://themes/default/images/area_icon.svg"
+      },
+      "fonts": {
+        "title": "res://themes/default/fonts/CinzelDecorative-Bold.ttf",
+        "body": "res://themes/default/fonts/EBGaramond-VariableFont_wght.ttf",
+        "body_bold": "res://themes/default/fonts/EBGaramond-Bold.ttf",
+        "card_bold": "res://themes/default/fonts/EBGaramond-SemiBold.ttf"
+      },
+      "colors": {
+        "title": "#F5E8B5",
+        "body": "#EEE6CC",
+        "button_bg": "#F6E8B4",
+        "button_bg_hover": "#E9CE6F",
+        "button_bg_pressed": "#DCC05A",
+        "button_text": "#052129",
+        "panel_bg": "#0B0D0BEA",
+        "panel_border": "#BDA35CB8",
+        "overlay": "#00000075",
+        "score_primary": "#FFE36D",
+        "score_secondary": "#B3E6FF",
+        "score_opponent": "#FFB88C",
+        "teacher_header": "#FFDB6B",
+        "card_title": "#064B2C",
+        "card_body": "#010903",
+        "card_category": "#333333",
+        "card_shader_border_color": "#1A1A1A00",
+        "card_shader_background_color": "#7D3901FF",
+        "deck_count": "#C6DB05"
+      },
+      "values": {
+        "card_shader_border_width": 8.0,
+        "button_font_size": 20,
+        "menu_button_font_size": 50,
+        "game_over_body_font_size": 22,
+        "game_over_feedback_font_size": 20
+      }
+    },
+    "new_theme": {
+      "textures": {
+        "menu_background": "res://themes/new_theme/images/bg_ka.png",
+        "board_background": "res://themes/new_theme/images/bg_board2.png",
+        "game_over_background": "res://themes/new_theme/images/bg_ka.png",
+        "card_slot": "res://themes/new_theme/images/card_slot.png",
+        "card_front_CAUSE": "res://themes/new_theme/images/card_cause.png",
+        "card_front_PROCESS": "res://themes/new_theme/images/card_process.png",
+        "card_front_CONSEQUENCE": "res://themes/new_theme/images/card_conseq.png",
+        "card_front_SPECIAL": "res://themes/new_theme/images/card_special.png",
+        "card_back": "res://themes/new_theme/images/card_back.png",
+        "deck_button_bg": "res://themes/new_theme/images/ka_button.png",
+        "deck_button_bg_hover": "res://themes/new_theme/images/ka_button_hover.png"
+      },
+      "colors": {
+        "button_bg": "#211B13F0",
+        "button_bg_hover": "#382B18FA",
+        "button_bg_pressed": "#14110DFF",
+        "button_text": "#FAEED1",
+        "panel_bg": "#0B0D0BEA",
+        "panel_border": "#BDA35CB8",
+        "overlay": "#00000075",
+        "teacher_header": "#FFDB6B",
+        "card_shader_border_color": "#00000000",
+        "card_shader_background_color": "#f3f3f3"
+      },
+      "values": {
+        "card_shader_border_width": 0.0,
+        "button_font_size": 20,
+        "menu_button_font_size": 50,
+        "game_over_body_font_size": 22,
+        "game_over_feedback_font_size": 20
+      }
+    },
+    "clean": {
+      "textures": {
+        "menu_background": "res://themes/new_theme/images/bg_ka.png",
+        "board_background": "res://themes/new_theme/images/bg_board.png",
+        "game_over_background": "res://themes/new_theme/images/bg_ka.png",
+        "card_slot": "res://themes/new_theme/images/card_slot.png",
+        "card_front_CAUSE": "res://themes/new_theme/images/card_cause.png",
+        "card_front_PROCESS": "res://themes/new_theme/images/card_process.png",
+        "card_front_CONSEQUENCE": "res://themes/new_theme/images/card_conseq.png",
+        "card_front_SPECIAL": "res://themes/new_theme/images/card_special.png",
+        "card_back": "res://themes/new_theme/images/card_back.png"
+      },
+      "colors": {
+        "button_bg": "#211B13F0",
+        "button_bg_hover": "#382B18FA",
+        "button_bg_pressed": "#14110DFF",
+        "button_text": "#FAEED1",
+        "panel_bg": "#0B0D0BEA",
+        "panel_border": "#BDA35CB8",
+        "overlay": "#00000075",
+        "teacher_header": "#FFDB6B",
+        "card_shader_border_color": "#00000000",
+        "card_shader_background_color": "#f3f3f3"
+      },
+      "values": {
+        "card_shader_border_width": 0.0,
+        "button_font_size": 20,
+        "menu_button_font_size": 50,
+        "game_over_body_font_size": 22,
+        "game_over_feedback_font_size": 20
+      }
+    }
+  }
+}

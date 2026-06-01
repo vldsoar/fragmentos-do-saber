@@ -29,7 +29,7 @@ var effect: CardResource.SpecialEffect:
 
 func _ready() -> void:
 	# All cards are children of CardManager, so we can get the parent and connect the signals
-	get_parent().connect_card_signals(self)
+	#get_parent().connect_card_signals(self)
 	Globals.debug_log("Card collision mask: %s" % $Area2D.collision_mask)
 
 #func _on_area_2d_ready() -> void:
@@ -38,6 +38,7 @@ func _ready() -> void:
 
 func setup(card_data: CardResource, is_opponent: bool = false) -> void:
 	_data = card_data
+	_apply_theme()
 	
 	if self.has_node("Title"):
 		self.get_node("Title").text = "[b] %s [/b]" % [_data.title]
@@ -52,6 +53,60 @@ func setup(card_data: CardResource, is_opponent: bool = false) -> void:
 	
 	if is_opponent:
 		self.position = Vector2(1820, 130)
+
+
+func _apply_theme() -> void:
+	if has_node("CardImage"):
+		var card_image: Sprite2D = $CardImage
+		var card_front: Texture2D = _get_card_front_texture()
+		if card_front != null:
+			card_image.texture = card_front
+		CardVisualMetrics.apply_sprite_size(card_image)
+		_apply_card_shader_theme(card_image)
+
+	var body_font: Font = ThemeManager.get_font("body")
+	var bold_font: Font = ThemeManager.get_font("card_bold")
+	_apply_rich_text_theme("Title", "card_title", body_font, bold_font)
+	_apply_rich_text_theme("Description", "card_body", body_font, null)
+	_apply_rich_text_theme("Category", "card_category", body_font, null)
+
+
+func _apply_card_shader_theme(card_image: Sprite2D) -> void:
+	if card_image == null or card_image.material == null:
+		return
+
+	var shader_material: ShaderMaterial = card_image.material as ShaderMaterial
+	if shader_material == null:
+		return
+
+	var border_color: Color = ThemeManager.get_color("card_shader_border_color", Color(0.101960786, 0.101960786, 0.101960786, 0.0))
+	var background_color: Color = ThemeManager.get_color("card_shader_background_color", Color(0.490196, 0.223529, 0.00392157, 1.0))
+	var border_width: float = float(ThemeManager.get_value("card_shader_border_width", 8.0))
+	shader_material.set_shader_parameter("border_color", border_color)
+	shader_material.set_shader_parameter("background_color", background_color)
+	shader_material.set_shader_parameter("border", border_width)
+
+
+func _get_card_front_texture() -> Texture2D:
+	if _data != null:
+		var category_key: String = "card_front_%s" % _data.category.strip_edges().to_upper()
+		var category_texture: Texture2D = ThemeManager.get_texture(category_key)
+		if category_texture != null:
+			return category_texture
+
+	return ThemeManager.get_texture("card_front")
+
+
+func _apply_rich_text_theme(node_name: String, color_key: String, normal_font: Font, bold_font: Font) -> void:
+	var label: RichTextLabel = get_node_or_null(node_name) as RichTextLabel
+	if label == null:
+		return
+
+	label.modulate = ThemeManager.get_color(color_key, label.modulate)
+	if normal_font != null:
+		label.add_theme_font_override("normal_font", normal_font)
+	if bold_font != null:
+		label.add_theme_font_override("bold_font", bold_font)
 
 func _get_data() -> CardResource:
 	return _data
@@ -120,11 +175,13 @@ func flip_to_back() -> void:
 	
 	# Mostrar verso (criar se não existir)
 	if not has_node("CardBackSprite"):
-		var card_back_texture = preload("res://card_back_3.png")
+		var card_back_texture: Texture2D = ThemeManager.get_texture("card_back")
+		if card_back_texture == null:
+			card_back_texture = preload("res://themes/default/images/card_back.png")
 		var back = Sprite2D.new()
 		back.name = "CardBackSprite"
 		back.texture = card_back_texture
-		back.scale = Vector2(0.148, 0.154167)  # Mesmo scale do CardImage
+		CardVisualMetrics.apply_sprite_size(back)
 		back.z_index = 10  # Garantir que fique acima
 		add_child(back)
 	
@@ -147,11 +204,11 @@ func flip_to_front() -> void:
 	if has_node("CardBackSprite"):
 		$CardBackSprite.visible = false
 
-#func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area: Area2D) -> void:
 	#print("area: entered")
-	#pass # Replace with function body.
-#
-#
-#func _on_area_2d_mouse_entered2() -> void:
+	pass # Replace with function body.
+
+
+func _on_area_2d_mouse_entered2() -> void:
 	#print("mouse: entered 2")
-	#pass # Replace with function body.
+	pass # Replace with function body.

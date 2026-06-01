@@ -1,20 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://pqc6l1ojrove"]
+[gd_scene format=3 uid="uid://pqc6l1ojrove"]
 
 [ext_resource type="Texture2D" uid="uid://d0atli0p5hso6" path="res://assets/area_icon.svg" id="1_fkmh0"]
 [ext_resource type="Script" uid="uid://cukk4rny8nwqo" path="res://scripts/DeckButton.gd" id="2_358i8"]
 [ext_resource type="FontFile" uid="uid://b8oxer4h01id5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="3_font"]
-
-[sub_resource type="StyleBoxFlat" id="DeckButtonHover"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.06, 0.12, 0.16, 0.95)
-border_color = Color(1, 0.9, 0.6, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="DeckButtonNormal"]
 content_margin_left = 10.0
@@ -28,22 +16,35 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id="DeckButtonHover"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.06, 0.12, 0.16, 0.95)
+border_color = Color(1, 0.9, 0.6, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [sub_resource type="LabelSettings" id="LabelSettings"]
+line_spacing = 2.0
 font = ExtResource("3_font")
 font_size = 18
 font_color = Color(0.93, 0.9, 0.8, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="DeckButton" type="Button"]
+[node name="DeckButton" type="Button" unique_id=156139174]
 custom_minimum_size = Vector2(200, 200)
-offset_right = 200.0
-offset_bottom = 200.0
-theme_override_styles/hover = SubResource("DeckButtonHover")
+offset_right = 300.0
+offset_bottom = 300.0
 theme_override_styles/normal = SubResource("DeckButtonNormal")
+theme_override_styles/hover = SubResource("DeckButtonHover")
 script = ExtResource("2_358i8")
 
-[node name="ContentContainer" type="VBoxContainer" parent="."]
+[node name="ContentContainer" type="VBoxContainer" parent="." unique_id=1407575881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,15 +54,16 @@ grow_vertical = 2
 theme_override_constants/separation = -40
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="ContentContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("1_fkmh0")
-stretch_mode = 5
-
-[node name="TextLabel" type="Label" parent="ContentContainer"]
+[node name="Icon" type="TextureRect" parent="ContentContainer" unique_id=1474316565]
 clip_contents = true
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_fkmh0")
+stretch_mode = 3
+
+[node name="TextLabel" type="Label" parent="ContentContainer" unique_id=1401576871]
+custom_minimum_size = Vector2(50, 10)
 layout_mode = 2
 size_flags_vertical = 3
 text = "História

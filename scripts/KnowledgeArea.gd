@@ -6,11 +6,17 @@ const DECKS_FILE_PATH := "res://data/decks.json"
 @export var deck_button_scene: PackedScene    # arrasta DeckButton.tscn
 @export var deck_icon: Texture2D              # opcional: sobrescrever ícone
 
-@onready var deck_list: GridContainer = $ContentVBox/DeckScroll/DeckList
+@onready var background_panel: Panel = $Panel
+@onready var header_icon: TextureRect = $ContentVBox/HeaderIcon
+@onready var title_label: Label = $ContentVBox/TitleLabel
+@onready var subtitle_label: Label = $ContentVBox/SubtitleLabel
+@onready var deck_list: GridContainer = $ContentVBox/DeckScroll/DeckListWrapper/DeckList
 @onready var empty_state_label: Label = $ContentVBox/EmptyStateLabel
 
 
 func _ready() -> void:
+	_apply_theme()
+	_configure_deck_grid_alignment()
 	_update_grid_columns()
 	_load_decks_from_file()
 
@@ -20,9 +26,33 @@ func _notification(what: int) -> void:
 		_update_grid_columns()
 
 
+func _apply_theme() -> void:
+	ThemeManager.apply_background_panel(background_panel, "menu_background")
+
+	var book_texture: Texture2D = ThemeManager.get_texture("menu_book")
+	if book_texture != null:
+		header_icon.texture = book_texture
+
+	var area_texture: Texture2D = ThemeManager.get_texture("area_icon")
+	if area_texture != null:
+		deck_icon = area_texture
+
+	var title_font: Font = ThemeManager.get_font("title")
+	var body_font: Font = ThemeManager.get_font("body")
+	title_label.add_theme_color_override("font_color", ThemeManager.get_color("title", Color(0.96, 0.91, 0.71, 1.0)))
+	subtitle_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
+	empty_state_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
+	if title_font != null:
+		title_label.add_theme_font_override("font", title_font)
+	if body_font != null:
+		subtitle_label.add_theme_font_override("font", body_font)
+		empty_state_label.add_theme_font_override("font", body_font)
+
+
 func _load_decks_from_file() -> void:
 	_clear_deck_list()
 	_set_empty_state("")
+	_configure_deck_grid_alignment()
 
 	var file: FileAccess = FileAccess.open(DECKS_FILE_PATH, FileAccess.READ)
 	if file == null:
@@ -68,11 +98,31 @@ func _load_decks_from_file() -> void:
 		btn.deck_pressed.connect(_on_deck_selected)
 		
 		# Configura o botão após estar na árvore
-		btn.setup(deck, deck_icon)  # usa area/theme para texto
+		btn.setup(deck, _resolve_deck_icon(deck))  # usa area/theme para texto
 		decks_added += 1
 
 	if decks_added == 0:
 		_set_empty_state("Nenhum tema disponível.")
+	else:
+		_configure_deck_grid_alignment()
+
+
+func _configure_deck_grid_alignment() -> void:
+	if deck_list == null:
+		return
+
+	deck_list.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
+
+func _resolve_deck_icon(deck: Dictionary) -> Texture2D:
+	var icon_path: String = str(deck.get("icon", ""))
+	if not icon_path.is_empty():
+		var resource: Resource = load(icon_path)
+		if resource is Texture2D:
+			return resource
+		push_warning("KnowledgeArea: icone invalido para deck: %s" % icon_path)
+
+	return deck_icon
 
 
 func _on_deck_selected(deck: Dictionary) -> void:

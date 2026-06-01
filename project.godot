@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 GameSession="*res://scripts/GameSession.gd"
 SettingsManager="*res://scripts/SettingsManager.gd"
+ThemeManager="*res://scripts/ThemeManager.gd"
 UISoundManager="*res://scripts/UISoundManager.gd"
 
 [display]
@@ -33,7 +34,7 @@ window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=0
+window/per_pixel_transparency/allowed=true
 
 [rendering]
 

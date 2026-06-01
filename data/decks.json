@@ -2,7 +2,8 @@
 	{
 		"area": "História",
 		"theme": "Revolução Francesa",
-		"path": "res://data/deck_rf.json"
+		"path": "res://data/deck_rf.json",
+		"icon": "res://themes/new_theme/images/decks/rf_icon.png"
 	},
 	{
 		"area": "Tecnologia",

@@ -91,9 +91,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="DeckList" type="GridContainer" parent="ContentVBox/DeckScroll" unique_id=2105572471]
+[node name="DeckListWrapper" type="VBoxContainer" parent="ContentVBox/DeckScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DeckList" type="GridContainer" parent="ContentVBox/DeckScroll/DeckListWrapper" unique_id=2105572471]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20

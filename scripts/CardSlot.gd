@@ -13,7 +13,21 @@ var slot_mode: int = SlotMode.SINGLE
 var _cards: Array[CardScn] = []           # Used only when in STACK mode
 
 func _ready() -> void:
+	_apply_theme()
 	Globals.debug_log("CardSlot collision mask: %s" % $Area2D.collision_mask)
+
+
+func _apply_theme() -> void:
+	var slot_sprite: Sprite2D = get_node_or_null("CardSlotImage") as Sprite2D
+	if slot_sprite == null:
+		slot_sprite = get_node_or_null("Sprite2D") as Sprite2D
+	if slot_sprite == null:
+		return
+
+	var slot_texture: Texture2D = ThemeManager.get_texture("card_slot")
+	if slot_texture != null:
+		slot_sprite.texture = slot_texture
+	CardVisualMetrics.apply_sprite_size(slot_sprite)
 
 func occupy_with(card: CardScn, animate: bool = false, duration: float = 0.3) -> void:
 	# Check if this slot accepts the card type

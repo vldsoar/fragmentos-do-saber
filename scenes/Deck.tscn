@@ -1,30 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc1btkpiamcbs"]
+[gd_scene format=3 uid="uid://cc1btkpiamcbs"]
 
 [ext_resource type="Script" uid="uid://ge13g157d1sr" path="res://scripts/Deck.gd" id="1_1efqa"]
-[ext_resource type="Texture2D" uid="uid://cuqdbwldiwnvr" path="res://card_back_3.png" id="2_1efqa"]
+[ext_resource type="Texture2D" uid="uid://ct1ycubual7fe" path="res://themes/default/images/card_back.png" id="2_1efqa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c01mt"]
 size = Vector2(218.289, 327.434)
 
-[node name="Deck" type="Node2D"]
+[node name="Deck" type="Node2D" unique_id=1780291703]
 z_index = -2
 script = ExtResource("1_1efqa")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=928543278]
 position = Vector2(-1.49012e-07, 1.49999)
 scale = Vector2(0.162, 0.168792)
 texture = ExtResource("2_1efqa")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1975683028]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=434793135]
 position = Vector2(-1.90735e-06, 1.90735e-06)
 scale = Vector2(0.678, 0.678)
 shape = SubResource("RectangleShape2D_c01mt")
 
-[node name="CountDeck" type="RichTextLabel" parent="."]
+[node name="CountDeck" type="RichTextLabel" parent="." unique_id=1065911052]
 modulate = Color(0.776471, 0.858824, 0.0196078, 1)
 z_index = 2
 anchors_preset = 7

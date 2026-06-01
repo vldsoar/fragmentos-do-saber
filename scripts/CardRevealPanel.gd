@@ -14,12 +14,19 @@ var current_card: CardScn
 #$"../CardSlot2" -> is discard slot
 
 func _ready():
+	_apply_theme()
 	hide()
 	connect_button.connect("pressed", _on_connect_pressed)
 	discard_button.connect("pressed", _on_discard_pressed)
 	apply_effect_button.connect("pressed", _on_apply_effect_pressed)
 	apply_effect_button.hide()
 	connect_button.hide()
+
+
+func _apply_theme() -> void:
+	ThemeManager.apply_button(connect_button)
+	ThemeManager.apply_button(discard_button)
+	ThemeManager.apply_button(apply_effect_button)
 
 func show_for(card: CardScn) -> void:
 	current_card = card

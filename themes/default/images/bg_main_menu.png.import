@@ -2,22 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8acpqnyhkmfy"
-path="res://.godot/imported/card_common_3_4.png-e1e4eee92d4949bd161636098698ea09.ctex"
+uid="uid://bqurdwg380fcd"
+path="res://.godot/imported/bg_main_menu.png-c5bc2ea9bcc38efc98d4898ed9139cde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card_common_3_4.png"
-dest_files=["res://.godot/imported/card_common_3_4.png-e1e4eee92d4949bd161636098698ea09.ctex"]
+source_file="res://themes/default/images/bg_main_menu.png"
+dest_files=["res://.godot/imported/bg_main_menu.png-c5bc2ea9bcc38efc98d4898ed9139cde.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

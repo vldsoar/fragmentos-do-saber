@@ -5,6 +5,7 @@ signal end_turn_requested
 @onready var game_manager: GameManager = $"../../GameManager"
 
 func _ready() -> void:
+	ThemeManager.apply_button(self)
 	# React to game state changes and keep visibility in sync.
 	game_manager.fsm.state_changed.connect(_on_state_changed)
 	_update_visibility(game_manager.current_state)

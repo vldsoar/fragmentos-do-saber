@@ -10,6 +10,7 @@ var deck: Dictionary = {}  # dados do deck (area, theme, path, etc.)
 
 
 func _ready() -> void:
+	_apply_theme()
 	# Quando o botão for clicado, repassamos o deck via sinal
 	pressed.connect(_on_pressed)
 
@@ -17,8 +18,8 @@ func _ready() -> void:
 func setup(deck_data: Dictionary, icon_tex: Texture2D = null) -> void:
 	deck = deck_data
 
-	var area: String = deck_data.get("area", "Área")
-	var theme_text: String = deck_data.get("theme", "Tema")
+	var area: String = str(deck_data.get("area", "Área"))
+	var theme_text: String = str(deck_data.get("theme", "Tema"))
 
 	# Busca os nós diretamente (pode ser chamado antes de _ready)
 	# Usa as variáveis @onready se disponíveis, senão busca diretamente
@@ -35,6 +36,26 @@ func setup(deck_data: Dictionary, icon_tex: Texture2D = null) -> void:
 	# Se quiser sobrescrever o ícone padrão da cena
 	if icon_tex != null and icon_rect:
 		icon_rect.texture = icon_tex
+
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var has_texture_style: bool = ThemeManager.apply_textured_button(
+		self,
+		"deck_button_bg",
+		"deck_button_bg_hover",
+		"deck_button_bg_pressed",
+		18.0
+	)
+	if not has_texture_style:
+		ThemeManager.apply_button(self)
+
+	if text_label:
+		text_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
+		var body_font: Font = ThemeManager.get_font("body")
+		if body_font != null:
+			text_label.add_theme_font_override("font", body_font)
 
 
 func _on_pressed() -> void:

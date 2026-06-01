@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dshpoltj6ukuf" path="res://scripts/GameManager.gd" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://byw1nvu34venr" path="res://scenes/FeedbackEffect.tscn" id="8_ft6cd"]
 [ext_resource type="AudioStream" uid="uid://cjnknkhbcmlmu" path="res://assets/audio/msc_bg.wav" id="9_q8u5g"]
-[ext_resource type="Texture2D" uid="uid://cuqdbwldiwnvr" path="res://card_back_3.png" id="10_1iba3"]
+[ext_resource type="Texture2D" uid="uid://ct1ycubual7fe" path="res://themes/default/images/card_back.png" id="10_1iba3"]
 [ext_resource type="Script" uid="uid://ge13g157d1sr" path="res://scripts/Deck.gd" id="10_ebg2g"]
 [ext_resource type="StyleBox" uid="uid://dgu1dhvi1jd8n" path="res://styles/MenuGameBtnHv.tres" id="10_wp0k4"]
 [ext_resource type="StyleBox" uid="uid://dtp616hoj1yvx" path="res://styles/MenuGameBtn.tres" id="11_bjd11"]

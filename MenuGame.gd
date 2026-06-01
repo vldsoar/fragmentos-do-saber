@@ -1,10 +1,32 @@
 extends Control
 class_name MenuGame
 
+@onready var background_panel: Panel = $Panel
+@onready var book_sprite: Sprite2D = $Sprite2D
+@onready var title_fragmentos: Label = $VBoxContainer/Label
+@onready var title_do: Label = $VBoxContainer/HBoxContainer/Label
+@onready var title_saber: Label = $VBoxContainer/HBoxContainer/Label2
+
+
 func _ready() -> void:
+	_apply_theme()
 	for _button in get_tree().get_nodes_in_group("button"):
 		_button.pressed.connect(_on_button_pressed.bind(_button))
+		if _button is Button:
+			ThemeManager.apply_menu_button(_button)
 		Globals.debug_log("Menu button registered: %s" % _button.name)
+
+
+func _apply_theme() -> void:
+	ThemeManager.apply_background_panel(background_panel, "menu_background")
+
+	var book_texture: Texture2D = ThemeManager.get_texture("menu_book")
+	if book_texture != null:
+		book_sprite.texture = book_texture
+
+	for title_value: Variant in [title_fragmentos, title_do, title_saber]:
+		var title_label: Label = title_value as Label
+		ThemeManager.apply_label(title_label, "title", "title")
 
 func _on_button_pressed(btn: Button) -> void:
 	UISoundManager.play_button_click()

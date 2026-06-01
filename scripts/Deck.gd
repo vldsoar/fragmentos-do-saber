@@ -15,13 +15,23 @@ const CARD_SCN_PATH := "res://scenes/Card.tscn"
 var cards: Array[CardResource] = []
 @onready var card_reveal_panel_ref: CardRevealPanel = get_node(card_reveal_panel_path) as CardRevealPanel
 @onready var _count_deck_ref: RichTextLabel = $CountDeck
+@onready var _deck_sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
+	_apply_theme()
 	_load_deck_from_json()
 	shuffle()
-	var total_cards = cards.size()
+	var total_cards: int = cards.size()
 	Globals.debug_log("Deck loaded with %d cards from %s" % [total_cards, deck_path])
 	_count_deck_ref.text = str(total_cards)
+
+
+func _apply_theme() -> void:
+	var deck_texture: Texture2D = ThemeManager.get_texture("card_back")
+	if deck_texture != null:
+		_deck_sprite.texture = deck_texture
+	CardVisualMetrics.apply_sprite_size(_deck_sprite)
+	_count_deck_ref.modulate = ThemeManager.get_color("deck_count", _count_deck_ref.modulate)
 
 func get_deck_data() -> Dictionary:
 	var selected_deck: Dictionary = GameSession.selected_deck
@@ -31,7 +41,7 @@ func get_deck_data() -> Dictionary:
 		get_tree().change_scene_to_file("res://scenes/KnowledgeArea.tscn")
 		return {}
 
-	deck_path = selected_deck.get("path", "")
+	deck_path = str(selected_deck.get("path", ""))
 	assert(deck_path != "", "Path do deck selecionado não encontrado")
 
 	return DeckRepository.load_deck_data(deck_path)
@@ -85,7 +95,7 @@ func set_deck_path(path: String) -> void:
 	deck_path = path
 	_load_deck_from_json()
 	shuffle()
-	var total_cards = cards.size()
+	var total_cards: int = cards.size()
 	Globals.debug_log("Deck reloaded with %d cards from %s" % [total_cards, deck_path])
 	if _count_deck_ref:
 		_count_deck_ref.text = str(total_cards)

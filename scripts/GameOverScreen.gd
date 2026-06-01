@@ -9,6 +9,9 @@ signal review_timeline_pressed
 
 @onready var title_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/TitleLabel
 @onready var summary_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/SummaryLabel
+@onready var background_image: TextureRect = $BackgroundImage
+@onready var overlay_rect: ColorRect = $ColorRect
+@onready var panel_container: PanelContainer = $CenterContainer/PanelContainer
 @onready var root_vbox: VBoxContainer = $CenterContainer/PanelContainer/MarginContainer/RootVBox
 
 @onready var total_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox/TotalScoreValue
@@ -36,10 +39,49 @@ var teacher_analysis_panel: TeacherAnalysisPanel = null
 
 func _ready() -> void:
 	visible = false
+	_apply_theme()
 
 	#review_timeline_button.pressed.connect(_on_review_timeline_button_pressed)
 	play_again_button.pressed.connect(_on_play_again_button_pressed)
 	exit_button.pressed.connect(_on_exit_button_pressed)
+
+
+func _apply_theme() -> void:
+	var game_over_texture: Texture2D = ThemeManager.get_texture("game_over_background")
+	if game_over_texture != null:
+		background_image.texture = game_over_texture
+
+	overlay_rect.color = ThemeManager.get_color("overlay", Color(0, 0, 0, 0.46))
+	panel_container.add_theme_stylebox_override("panel", ThemeManager.make_panel_style("panel_bg", "panel_border", 6, 1, 0))
+
+	ThemeManager.apply_label(title_label, "title", "title")
+	ThemeManager.apply_label(summary_label, "body", "body")
+	ThemeManager.apply_label(feedback_title_label, "teacher_header", "body_bold")
+	ThemeManager.apply_label(total_score_value, "score_primary", "body_bold")
+	ThemeManager.apply_label(coherence_value, "score_secondary", "body_bold")
+	ThemeManager.apply_label(opponent_score_value, "score_opponent", "body_bold")
+	ThemeManager.apply_label(opponent_coherence_value, "score_opponent", "body")
+	for score_value: Variant in [
+		cards_score_value,
+		context_score_value,
+		global_score_value,
+		motifs_score_value,
+		bonus_score_value,
+	]:
+		ThemeManager.apply_label(score_value as Label, "score_primary", "body")
+
+	for button_value: Variant in [review_timeline_button, play_again_button, exit_button]:
+		ThemeManager.apply_button(button_value as Button)
+
+	_apply_font_size_overrides()
+
+
+func _apply_font_size_overrides() -> void:
+	var body_size: int = int(ThemeManager.get_value("game_over_body_font_size", 22))
+	var feedback_size: int = int(ThemeManager.get_value("game_over_feedback_font_size", 20))
+	summary_label.add_theme_font_size_override("font_size", body_size)
+	feedback_title_label.add_theme_font_size_override("font_size", body_size)
+	opponent_coherence_value.add_theme_font_size_override("font_size", feedback_size)
 
 
 func show_result(
@@ -119,6 +161,8 @@ func _populate_feedback(feedback_array: Array) -> void:
 			var lbl: Label = Label.new()
 			lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+			ThemeManager.apply_label(lbl, "body", "body")
+			lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value("game_over_feedback_font_size", 20)))
 			lbl.text = "- " + text
 			feedback_container.add_child(lbl)
 
@@ -129,6 +173,8 @@ func _populate_feedback(feedback_array: Array) -> void:
 		var lbl: Label = Label.new()
 		lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+		ThemeManager.apply_label(lbl, "body", "body")
+		lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value("game_over_feedback_font_size", 20)))
 		lbl.text = "Sua narrativa manteve coerência histórica nesta rodada. Excelente!"
 		feedback_container.add_child(lbl)
 
