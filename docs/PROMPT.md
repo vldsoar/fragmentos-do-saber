@@ -90,8 +90,8 @@ Use este formato para cartas comuns:
   "effect_description": "",
   "tags": ["conceito", "tema"],
   "feedback": {
-    "why_true": "Explique por que esta carta é verdadeira.",
-    "tip": "Dica útil de aprendizagem."
+	"why_true": "Explique por que esta carta é verdadeira.",
+	"tip": "Dica útil de aprendizagem."
   }
 }
 ```
@@ -135,8 +135,8 @@ Use este formato:
   "bonus_score": 0.0,
   "tags": ["especial", "revisao"],
   "feedback": {
-    "why_true": "Esta carta representa uma intervenção estratégica, não um conceito avaliado.",
-    "tip": "Use quando uma carta da mão melhorar a coerência do board."
+	"why_true": "Esta carta representa uma intervenção estratégica, não um conceito avaliado.",
+	"tip": "Use quando uma carta da mão melhorar a coerência do board."
   }
 }
 ```
