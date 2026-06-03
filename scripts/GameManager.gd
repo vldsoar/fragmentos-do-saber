@@ -87,6 +87,7 @@ var card_action_used_this_turn: bool = false
 var pending_replacement_card: CardScn = null
 var pending_replacement_effect_card: CardScn = null
 var selected_hand_card: CardScn = null
+var read_only_board_card: CardScn = null
 		
 #const _STATES_FOR
 
@@ -257,6 +258,30 @@ func try_handle_card_click(card: CardScn) -> bool:
 		return true
 
 	return false
+
+
+func request_board_card_read(card: CardScn) -> bool:
+	if card == null:
+		return false
+	if not player_timeline.has(card):
+		return false
+	if pending_replacement_card != null or pending_replacement_effect_card != null:
+		return false
+	if selected_hand_card != null or read_only_board_card != null:
+		return false
+
+	var states_for_read: Array[int] = [GameState.RESOLVE_ACTIONS, GameState.WAITING_INPUT]
+	if not states_for_read.has(current_state):
+		return false
+
+	read_only_board_card = card
+	card.set_as_revealed()
+	card.enable_collision()
+	card.z_index = REVEAL_CARD_Z_INDEX
+	card_manager.reset_hover_state()
+	card_manager.animate_to_center(card, CENTER_POS)
+	card_reveal_panel.show_read_only(card)
+	return true
 
 
 func _request_hand_card_action(card: CardScn) -> void:
@@ -463,6 +488,7 @@ func _on_apply_effect_selected(card: CardScn) -> void:
 
 
 func _on_keep_selected(_card: CardScn) -> void:
+	_return_read_only_board_card()
 	_cancel_pending_replacement_state()
 	_return_selected_hand_card()
 
@@ -559,6 +585,7 @@ func can_end_player_turn() -> bool:
 	return current_state == GameState.RESOLVE_ACTIONS \
 		and pending_replacement_card == null \
 		and pending_replacement_effect_card == null \
+		and read_only_board_card == null \
 		and not is_card_reveal_active() \
 		and not player_hand.is_over_limit()
 
@@ -692,6 +719,18 @@ func _return_selected_hand_card() -> void:
 		player_hand.update_positions()
 	selected_hand_card = null
 
+
+func _return_read_only_board_card() -> void:
+	if read_only_board_card == null:
+		return
+	if player_timeline.has(read_only_board_card):
+		read_only_board_card.disable_as_revealed()
+		read_only_board_card.z_index = 1
+		read_only_board_card.scale = player_timeline.card_scale
+		read_only_board_card.set_meta("base_scale", player_timeline.card_scale)
+		player_timeline.update_hand_position()
+	read_only_board_card = null
+
 func _show_feedback(card: CardScn, callable: Callable) -> void:
 	if feedback_popup_scene == null:
 		push_warning("feedback_popup_scene não configurado")
@@ -718,6 +757,7 @@ func _begin_player_turn() -> void:
 
 	card_action_used_this_turn = false
 	_cancel_pending_replacement_state()
+	_return_read_only_board_card()
 	_return_selected_hand_card()
 	_update_knowledge_clock(current_state)
 	await _show_player_turn_banners()

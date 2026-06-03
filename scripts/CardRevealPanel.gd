@@ -11,6 +11,7 @@ signal reveal_state_changed(active: bool)
 var current_card: CardScn
 const KEEP_BUTTON_TEXT := "Ficar na mão"
 const CANCEL_REPLACEMENT_TEXT := "Cancelar"
+const CLOSE_BUTTON_TEXT := "Fechar"
 const ACTION_BUTTON_MIN_SIZE := Vector2(246, 44)
 
 @onready var connect_button = $ButtonsContainer/ConnectButton
@@ -64,6 +65,16 @@ func show_replacement_mode(card: CardScn) -> void:
 	current_card = card
 	_hide_action_buttons()
 	keep_button.text = CANCEL_REPLACEMENT_TEXT
+	keep_button.show()
+	show()
+	reveal_state_changed.emit(true)
+
+
+func show_read_only(card: CardScn) -> void:
+	current_card = card
+	current_card.flip_to_front()
+	_hide_action_buttons()
+	keep_button.text = CLOSE_BUTTON_TEXT
 	keep_button.show()
 	show()
 	reveal_state_changed.emit(true)

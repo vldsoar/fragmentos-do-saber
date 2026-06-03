@@ -8,6 +8,8 @@ var is_hovering_card: bool = false
 var player_timeline_ref: PlayerTimeline
 var game_manager: GameManager
 var original_z_index: int
+var pending_click_card: CardScn = null
+var press_mouse_pos: Vector2 = Vector2.ZERO
 @export var player_timeline_path: String = "../PlayerTimeline"
 @export var game_manager_path: String = "../GameManager"
 @export var input_manager_path: String = "../InputManager"
@@ -15,6 +17,7 @@ var original_z_index: int
 const Z_INDEX_DEFAULT := 1
 const Z_INDEX_HOVER := 3
 const Z_INDEX_DRAG := 100
+const CLICK_DRAG_THRESHOLD := 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,7 +29,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	_update_pending_click_intent()
 	update_dragged_card_position()
+
+
+func _update_pending_click_intent() -> void:
+	if pending_click_card == null:
+		return
+	var mouse_distance: float = press_mouse_pos.distance_to(get_global_mouse_position())
+	if mouse_distance < CLICK_DRAG_THRESHOLD:
+		return
+
+	var card: CardScn = pending_click_card
+	_clear_pending_click_intent()
+	_begin_drag(card)
 
 ## Updates the position of the dragged card following the mouse cursor
 ## Position is clamped to screen boundaries to prevent cards from going off-screen
@@ -43,9 +59,20 @@ func update_dragged_card_position() -> void:
 func start_drag(card: CardScn) -> void:
 	if game_manager.try_handle_card_click(card):
 		return
+	if _should_delay_board_card_interaction(card):
+		pending_click_card = card
+		press_mouse_pos = get_global_mouse_position()
+		return
 	if not game_manager.can_drag_card(card):
 		return  # Não permite arrastar cartas reveladas
-	
+
+	_begin_drag(card)
+
+
+func _begin_drag(card: CardScn) -> void:
+	if not game_manager.can_drag_card(card):
+		return
+
 	Globals.debug_log("start_drag")
 	card_being_dragged = card
 	original_z_index = card.z_index
@@ -104,6 +131,24 @@ func connect_card_signals(card: CardScn) -> void:
 func _on_left_mouse_button_released() -> void:
 	if card_being_dragged:
 		finish_drag()
+		return
+	if pending_click_card != null:
+		var card: CardScn = pending_click_card
+		_clear_pending_click_intent()
+		game_manager.request_board_card_read(card)
+
+
+func _should_delay_board_card_interaction(card: CardScn) -> bool:
+	if card == null:
+		return false
+	if not player_timeline_ref.has(card):
+		return false
+	return game_manager.can_drag_card(card)
+
+
+func _clear_pending_click_intent() -> void:
+	pending_click_card = null
+	press_mouse_pos = Vector2.ZERO
 	
 
 ## Callback executed when a card enters hover state
