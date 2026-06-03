@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://byw1nvu34venr"]
+[gd_scene format=3 uid="uid://byw1nvu34venr"]
 
 [ext_resource type="Script" uid="uid://2mrkvf6cnant" path="res://scripts/FeedbackEffect.gd" id="1_rghbu"]
 
 [sub_resource type="FontVariation" id="FontVariation_u86ew"]
 
-[node name="FeedbackEffect" type="Control"]
+[node name="FeedbackEffect" type="Control" unique_id=1497447946]
 z_index = 3000
 z_as_relative = false
 layout_mode = 3
@@ -16,7 +16,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_rghbu")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=164309759]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
 anchors_preset = 8
@@ -31,7 +31,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1712448205]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,13 +40,13 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = -10.0
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=902922880]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_u86ew")
 text = "Análise"
 autowrap_mode = 2
 
-[node name="OkButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="OkButton" type="Button" parent="Panel/VBoxContainer" unique_id=831696920]
 layout_mode = 2
 text = "OK"

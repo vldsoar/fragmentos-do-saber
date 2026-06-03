@@ -11,6 +11,10 @@ extends Node2D
 @export var grid_origin: Vector2 = Vector2.ZERO
 @export var grid_spacing: Vector2 = Vector2(150.0, 175.0)
 
+const REPLACEMENT_TARGET_Z_INDEX := 6
+const REPLACEMENT_TARGET_MODULATE := Color(1.22, 1.16, 0.78, 1.0)
+const REPLACEMENT_TARGET_SCALE_MULTIPLIER := 1.06
+
 var player_timeline: Array[CardScn] = []
 var center_screen_x: int = 0
 var card_being_dragged: CardScn = null
@@ -146,6 +150,16 @@ func replace_card_at(index: int, card: CardScn) -> CardScn:
 	return replaced_card
 
 
+func set_replacement_targets_highlighted(highlighted: bool) -> void:
+	for card: CardScn in player_timeline:
+		if card == null:
+			continue
+		if highlighted:
+			_highlight_replacement_target(card)
+		else:
+			_clear_replacement_target_highlight(card)
+
+
 func clear_timeline() -> void:
 	player_timeline.clear()
 	card_being_dragged = null
@@ -236,3 +250,25 @@ func _set_card_base_scale(card: CardScn) -> void:
 		return
 	card.scale = card_scale
 	card.set_meta("base_scale", card_scale)
+
+
+func _highlight_replacement_target(card: CardScn) -> void:
+	if card.has_meta("hover_tween"):
+		var old: Tween = card.get_meta("hover_tween") as Tween
+		if old != null and old.is_valid():
+			old.kill()
+
+	card.set_meta("replacement_highlighted", true)
+	card.scale = card_scale * REPLACEMENT_TARGET_SCALE_MULTIPLIER
+	card.modulate = REPLACEMENT_TARGET_MODULATE
+	card.z_index = REPLACEMENT_TARGET_Z_INDEX
+
+
+func _clear_replacement_target_highlight(card: CardScn) -> void:
+	if not card.has_meta("replacement_highlighted"):
+		return
+
+	card.remove_meta("replacement_highlighted")
+	card.scale = card_scale
+	card.modulate = Color(1, 1, 1, 1)
+	card.z_index = 1

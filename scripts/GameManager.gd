@@ -55,7 +55,11 @@ extends Node2D
 const CENTER_POS := Vector2(960, 440)
 const TURN_BANNER_TEXT: String = "Sua vez"
 const FINAL_TURN_BANNER_TEXT: String = "Ultima rodada"
+const REPLACEMENT_BANNER_TEXT: String = "Escolha uma carta do board"
 const REVEAL_CARD_Z_INDEX := 1000
+const REPLACEMENT_PREVIEW_POS := Vector2(1510, 520)
+const REPLACEMENT_PREVIEW_SCALE := Vector2(1.15, 1.15)
+const REPLACEMENT_PREVIEW_Z_INDEX := 20
 
 enum GameState {
 	WAITING_INPUT,
@@ -198,7 +202,7 @@ func try_handle_card_click(card: CardScn) -> bool:
 			_replace_board_card(card)
 			return true
 		if player_hand.has(card):
-			pending_replacement_card = null
+			_cancel_board_replacement()
 			_return_selected_hand_card()
 			_request_hand_card_action(card)
 			return true
@@ -342,12 +346,13 @@ func _on_connect_selected(card: CardScn) -> void:
 	if not _can_use_hand_card(card):
 		return
 	if player_timeline.is_full():
-		pending_replacement_card = card
+		_start_board_replacement(card)
 		return
 
 	_cardActionController.connect_card_to_timeline(card)
 	selected_hand_card = null
 	card_action_used_this_turn = true
+	card_reveal_panel.clear_current_card()
 
 func _on_discard_selected(card: CardScn) -> void:
 	if not _can_use_hand_card(card):
@@ -375,7 +380,7 @@ func _on_apply_effect_selected(card: CardScn) -> void:
 
 
 func _on_keep_selected(_card: CardScn) -> void:
-	pending_replacement_card = null
+	_cancel_board_replacement()
 	_return_selected_hand_card()
 
 
@@ -405,7 +410,7 @@ func _on_button_end_turn_requested() -> void:
 		return
 	if not can_end_player_turn():
 		return
-	pending_replacement_card = null
+	_cancel_board_replacement()
 	_return_selected_hand_card()
 #	Opponent
 	fsm.transition_to(GameState.RESOLVING_TURN)
@@ -468,6 +473,7 @@ func _can_use_hand_card(card: CardScn) -> bool:
 
 func can_end_player_turn() -> bool:
 	return current_state == GameState.RESOLVE_ACTIONS \
+		and pending_replacement_card == null \
 		and not is_card_reveal_active() \
 		and not player_hand.is_over_limit()
 
@@ -487,14 +493,49 @@ func _replace_board_card(target_card: CardScn) -> void:
 	if target_index < 0:
 		return
 
+	player_timeline.set_replacement_targets_highlighted(false)
 	player_hand.remove_card(replacement_card)
+	replacement_card.disable_as_revealed()
+	replacement_card.z_index = 1
 	var replaced_card: CardScn = player_timeline.replace_card_at(target_index, replacement_card)
 	if replaced_card != null:
-		player_hand.add_card(replaced_card)
+		discard_slot.occupy_with(replaced_card, true, 0.3)
 
 	selected_hand_card = null
 	pending_replacement_card = null
 	card_action_used_this_turn = true
+	card_reveal_panel.clear_current_card()
+
+
+func _start_board_replacement(card: CardScn) -> void:
+	pending_replacement_card = card
+	selected_hand_card = card
+	card.set_as_revealed()
+	card.z_index = REPLACEMENT_PREVIEW_Z_INDEX
+	card_manager.reset_hover_state()
+	card_manager.animate_to_replacement_preview(card, REPLACEMENT_PREVIEW_POS, REPLACEMENT_PREVIEW_SCALE)
+	player_timeline.set_replacement_targets_highlighted(true)
+	card_reveal_panel.show_replacement_mode(card)
+	call_deferred("_show_replacement_banner")
+
+
+func _cancel_board_replacement() -> void:
+	if pending_replacement_card == null:
+		return
+
+	pending_replacement_card = null
+	card_manager.reset_hover_state()
+	player_timeline.set_replacement_targets_highlighted(false)
+
+
+func is_board_replacement_active() -> bool:
+	return pending_replacement_card != null
+
+
+func _show_replacement_banner() -> void:
+	if pending_replacement_card == null:
+		return
+	await _show_turn_banner(REPLACEMENT_BANNER_TEXT)
 
 
 func _return_selected_hand_card() -> void:
@@ -533,7 +574,7 @@ func _begin_player_turn() -> void:
 		return
 
 	card_action_used_this_turn = false
-	pending_replacement_card = null
+	_cancel_board_replacement()
 	_return_selected_hand_card()
 	_update_knowledge_clock(current_state)
 	await _show_player_turn_banners()

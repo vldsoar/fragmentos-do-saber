@@ -244,6 +244,16 @@ func animate_to_center(card: CardScn, center_pos: Vector2) -> void:
 	tween.tween_property(card, "scale", Vector2(2.5, 2.5), 0.3)
 
 
+func animate_to_replacement_preview(card: CardScn, preview_pos: Vector2, preview_scale: Vector2) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(card, "position", preview_pos, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(card, "scale", preview_scale, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func reset_hover_state() -> void:
+	is_hovering_card = false
+
+
 func _get_card_base_scale(card: CardScn) -> Vector2:
 	if card != null and card.has_meta("base_scale"):
 		var value: Variant = card.get_meta("base_scale")
@@ -253,4 +263,6 @@ func _get_card_base_scale(card: CardScn) -> Vector2:
 
 
 func _should_ignore_hover(card: CardScn) -> bool:
+	if game_manager != null and game_manager.is_board_replacement_active():
+		return true
 	return card == null or card.is_revealed or card_being_dragged != null
