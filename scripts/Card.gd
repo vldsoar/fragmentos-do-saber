@@ -44,7 +44,7 @@ func setup(card_data: CardResource, is_opponent: bool = false) -> void:
 		self.get_node("Title").text = "[b] %s [/b]" % [_data.title]
 		
 	if self.has_node("Description"):
-		self.get_node("Description").text = _data.description
+		self.get_node("Description").text = _get_visible_description()
 	
 	if self.has_node("Category"):
 		self.get_node("Category").text = _data.category
@@ -95,6 +95,14 @@ func _get_card_front_texture() -> Texture2D:
 			return category_texture
 
 	return ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_FRONT)
+
+
+func _get_visible_description() -> String:
+	if _data == null:
+		return ""
+	if is_special() and not _data.effect_description.is_empty():
+		return _data.effect_description
+	return _data.description
 
 
 func _apply_rich_text_theme(node_name: String, color_key: String, normal_font: Font, bold_font: Font) -> void:

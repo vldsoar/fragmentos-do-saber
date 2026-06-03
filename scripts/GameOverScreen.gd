@@ -18,7 +18,7 @@ signal review_timeline_pressed
 @onready var coherence_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox/CoherenceValue
 @onready var opponent_score_label: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox/OpponentScoreLabel
 @onready var opponent_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox/OpponentScoreValue
-@onready var opponent_coherence_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox/OpponentCoherenceValue
+@onready var opponent_coherence_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentCoherenceVBox/OpponentCoherenceValue
 
 @onready var cards_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid/CardsScoreValue
 @onready var context_score_value: Label = $CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid/ContextScoreValue
@@ -110,7 +110,7 @@ func show_result(
 
 	# ---- Scores principais ----
 	total_score_value.text = _format_score(result.total_score)
-	coherence_value.text = "%s / 100" % _format_score(result.coherence)
+	coherence_value.text = _format_percent(result.coherence)
 	_update_opponent_score(opponent_result)
 
 	# ---- Breakdown ----
@@ -215,18 +215,22 @@ func _clear_teacher_analysis_panel() -> void:
 
 func _update_opponent_score(opponent_result: ResultGame) -> void:
 	if opponent_result == null:
-		opponent_score_label.text = "Oponente"
+		opponent_score_label.text = "Pontuação oponente"
 		opponent_score_value.text = "-"
 		opponent_coherence_value.text = "-"
 		return
 
-	opponent_score_label.text = "Oponente"
+	opponent_score_label.text = "Pontuação oponente"
 	opponent_score_value.text = _format_score(opponent_result.total_score)
-	opponent_coherence_value.text = "Coerência %s / 100" % _format_score(opponent_result.coherence)
+	opponent_coherence_value.text = _format_percent(opponent_result.coherence)
 
 
 func _format_score(value: float) -> String:
 	return "%.1f" % value
+
+
+func _format_percent(value: float) -> String:
+	return "%.0f%%" % value
 
 
 # ---- Botões ----
