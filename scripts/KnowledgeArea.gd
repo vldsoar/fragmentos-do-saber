@@ -12,11 +12,13 @@ const DECKS_FILE_PATH := "res://data/decks.json"
 @onready var subtitle_label: Label = $ContentVBox/SubtitleLabel
 @onready var deck_list: GridContainer = $ContentVBox/DeckScroll/DeckListWrapper/DeckList
 @onready var empty_state_label: Label = $ContentVBox/EmptyStateLabel
+@onready var back_button: Button = $BackButton
 
 
 func _ready() -> void:
 	_apply_theme()
 	MusicManager.play_menu_music()
+	back_button.pressed.connect(_on_back_pressed)
 	_configure_deck_grid_alignment()
 	_update_grid_columns()
 	_load_decks_from_file()
@@ -48,6 +50,7 @@ func _apply_theme() -> void:
 	if body_font != null:
 		subtitle_label.add_theme_font_override("font", body_font)
 		empty_state_label.add_theme_font_override("font", body_font)
+	ThemeManager.apply_button(back_button)
 
 
 func _load_decks_from_file() -> void:
@@ -138,6 +141,11 @@ func _on_deck_selected(deck: Dictionary) -> void:
 	GameSession.selected_deck = deck
 
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+
+
+func _on_back_pressed() -> void:
+	UISoundManager.play_button_click()
+	get_tree().change_scene_to_file("res://scenes/MenuGame.tscn")
 
 
 func _update_grid_columns() -> void:
