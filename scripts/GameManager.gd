@@ -56,6 +56,7 @@ const CENTER_POS := Vector2(960, 440)
 const TURN_BANNER_TEXT: String = "Sua vez"
 const FINAL_TURN_BANNER_TEXT: String = "Ultima rodada"
 const REPLACEMENT_BANNER_TEXT: String = "Escolha uma carta do board"
+const REPLACE_EFFECT_HAND_BANNER_TEXT: String = "Escolha uma carta comum da mão"
 const REVEAL_CARD_Z_INDEX := 1000
 const REPLACEMENT_PREVIEW_POS := Vector2(1510, 520)
 const REPLACEMENT_PREVIEW_SCALE := Vector2(1.15, 1.15)
@@ -79,6 +80,7 @@ var turn_banner: Control = null
 var turn_banner_tween: Tween = null
 var card_action_used_this_turn: bool = false
 var pending_replacement_card: CardScn = null
+var pending_replacement_effect_card: CardScn = null
 var selected_hand_card: CardScn = null
 		
 #const _STATES_FOR
@@ -184,6 +186,8 @@ func can_drag_card(card: CardScn) -> bool:
 		return false
 	if player_hand.has(card):
 		return false
+	if pending_replacement_card != null or pending_replacement_effect_card != null:
+		return false
 	# só pode arrastar cartas da timeline na fase de ações depois do draw
 	var states_for_dragged: Array[int] = [GameState.RESOLVE_ACTIONS, GameState.WAITING_INPUT]
 	if not states_for_dragged.has(current_state):
@@ -202,9 +206,22 @@ func try_handle_card_click(card: CardScn) -> bool:
 			_replace_board_card(card)
 			return true
 		if player_hand.has(card):
-			_cancel_board_replacement()
+			_cancel_pending_replacement_state()
 			_return_selected_hand_card()
 			_request_hand_card_action(card)
+			return true
+		return false
+
+	if pending_replacement_effect_card != null:
+		if player_hand.has(card):
+			if card == pending_replacement_effect_card:
+				_cancel_pending_replacement_state()
+				_request_hand_card_action(card)
+				return true
+			if _is_valid_replace_effect_hand_card(card):
+				_start_board_replacement(card)
+			else:
+				_show_replace_effect_hand_banner()
 			return true
 		return false
 
@@ -237,10 +254,15 @@ func request_play_special(card: CardScn) -> bool:
 		push_warning("Can't apply special current_state: ", current_state)
 		return false
 
-	_cardEffectProcessor.apply_effect(card, {
+	if card.effect == CardResource.SpecialEffect.REPLACE_BOARD_CARD:
+		return _can_start_replace_board_effect(card)
+
+	var effect_applied: bool = _cardEffectProcessor.apply_effect(card, {
 		"opponent_timeline": opponent_timeline,
 		"discard_slot": opponent_discard_slot,
 	})
+	if not effect_applied:
+		return false
 
 	var accumulated_score: float = _cardEffectProcessor.get_accumulated_score()
 	if accumulated_score > 0:
@@ -258,11 +280,11 @@ func has_useful_target_for_opponent_effect(effect: CardResource.SpecialEffect) -
 			return false
 
 
-func apply_opponent_effect_to_player(card: CardScn, effect_processor: CardEffectProcessor) -> void:
+func apply_opponent_effect_to_player(card: CardScn, effect_processor: CardEffectProcessor) -> bool:
 	if card == null or effect_processor == null:
-		return
+		return false
 
-	effect_processor.apply_effect(card, {
+	return effect_processor.apply_effect(card, {
 		"opponent_timeline": player_timeline,
 		"discard_slot": discard_slot,
 	})
@@ -278,6 +300,33 @@ func _player_has_true_common_card() -> bool:
 		if data.rarity == CardResource.Rarity.COMMON and data.truth_value >= 0.99:
 			return true
 	return false
+
+
+func _can_start_replace_board_effect(card: CardScn) -> bool:
+	if card == null or card.effect != CardResource.SpecialEffect.REPLACE_BOARD_CARD:
+		return false
+	if player_timeline.get_cards().is_empty():
+		push_warning("REPLACE_BOARD_CARD sem alvo: board vazio.")
+		return false
+	for hand_card: CardScn in player_hand.get_cards():
+		if _is_valid_replace_effect_hand_card(hand_card):
+			return true
+
+	push_warning("REPLACE_BOARD_CARD sem carta comum valida na mao.")
+	return false
+
+
+func _is_valid_replace_effect_hand_card(card: CardScn) -> bool:
+	if card == null:
+		return false
+	if card == pending_replacement_effect_card:
+		return false
+	if not player_hand.has(card):
+		return false
+	var data: CardResource = card.data
+	if data == null:
+		return false
+	return data.rarity == CardResource.Rarity.COMMON
 
 
 func _can_play_special(card: CardScn) -> bool:
@@ -368,11 +417,18 @@ func _on_apply_effect_selected(card: CardScn) -> void:
 
 	Globals.debug_log("apply_effect_selected...")
 	if not request_play_special(card):
+		card_reveal_panel.clear_current_card()
+		_return_selected_hand_card()
+		return
+
+	if card.effect == CardResource.SpecialEffect.REPLACE_BOARD_CARD:
+		_start_replace_board_effect(card)
 		return
 	
 	Globals.debug_log("requested play applied")
 	_cardActionController.move_effect_card(card)
 	selected_hand_card = null
+	card_reveal_panel.clear_current_card()
 	
 	_show_feedback(card, func():
 		card_action_used_this_turn = true
@@ -380,7 +436,7 @@ func _on_apply_effect_selected(card: CardScn) -> void:
 
 
 func _on_keep_selected(_card: CardScn) -> void:
-	_cancel_board_replacement()
+	_cancel_pending_replacement_state()
 	_return_selected_hand_card()
 
 
@@ -410,7 +466,7 @@ func _on_button_end_turn_requested() -> void:
 		return
 	if not can_end_player_turn():
 		return
-	_cancel_board_replacement()
+	_cancel_pending_replacement_state()
 	_return_selected_hand_card()
 #	Opponent
 	fsm.transition_to(GameState.RESOLVING_TURN)
@@ -474,6 +530,7 @@ func _can_use_hand_card(card: CardScn) -> bool:
 func can_end_player_turn() -> bool:
 	return current_state == GameState.RESOLVE_ACTIONS \
 		and pending_replacement_card == null \
+		and pending_replacement_effect_card == null \
 		and not is_card_reveal_active() \
 		and not player_hand.is_over_limit()
 
@@ -486,6 +543,10 @@ func _replace_board_card(target_card: CardScn) -> void:
 	if pending_replacement_card == null:
 		return
 	if not player_timeline.has(target_card):
+		return
+
+	if pending_replacement_effect_card != null:
+		_confirm_replace_board_effect(target_card)
 		return
 
 	var replacement_card: CardScn = pending_replacement_card
@@ -538,6 +599,60 @@ func _show_replacement_banner() -> void:
 	await _show_turn_banner(REPLACEMENT_BANNER_TEXT)
 
 
+func _start_replace_board_effect(card: CardScn) -> void:
+	pending_replacement_effect_card = card
+	card_reveal_panel.clear_current_card()
+	_return_selected_hand_card()
+	_show_replace_effect_hand_banner()
+
+
+func _confirm_replace_board_effect(target_card: CardScn) -> void:
+	if pending_replacement_effect_card == null:
+		return
+
+	var effect_card: CardScn = pending_replacement_effect_card
+	var replacement_card: CardScn = pending_replacement_card
+	var effect_applied: bool = _cardEffectProcessor.apply_effect(effect_card, {
+		"player_timeline": player_timeline,
+		"player_hand": player_hand,
+		"replacement_card": replacement_card,
+		"target_card": target_card,
+		"discard_slot": discard_slot,
+	})
+	if not effect_applied:
+		push_warning("REPLACE_BOARD_CARD nao foi aplicado.")
+		_cancel_pending_replacement_state()
+		card_reveal_panel.clear_current_card()
+		_return_selected_hand_card()
+		return
+
+	_cardActionController.move_effect_card(effect_card)
+	selected_hand_card = null
+	pending_replacement_card = null
+	pending_replacement_effect_card = null
+	card_action_used_this_turn = true
+	player_timeline.set_replacement_targets_highlighted(false)
+	card_reveal_panel.clear_current_card()
+	_show_feedback(effect_card, func(): pass)
+
+
+func _cancel_pending_replacement_state() -> void:
+	_cancel_board_replacement()
+	pending_replacement_effect_card = null
+
+
+func _show_replace_effect_hand_banner() -> void:
+	if pending_replacement_effect_card == null:
+		return
+	call_deferred("_show_replace_effect_hand_banner_deferred")
+
+
+func _show_replace_effect_hand_banner_deferred() -> void:
+	if pending_replacement_effect_card == null:
+		return
+	await _show_turn_banner(REPLACE_EFFECT_HAND_BANNER_TEXT)
+
+
 func _return_selected_hand_card() -> void:
 	if selected_hand_card == null:
 		return
@@ -574,7 +689,7 @@ func _begin_player_turn() -> void:
 		return
 
 	card_action_used_this_turn = false
-	_cancel_board_replacement()
+	_cancel_pending_replacement_state()
 	_return_selected_hand_card()
 	_update_knowledge_clock(current_state)
 	await _show_player_turn_banners()

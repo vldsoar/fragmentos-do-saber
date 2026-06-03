@@ -70,6 +70,13 @@ func size() -> int:
 	return cards.size()
 
 
+func get_cards() -> Array[CardScn]:
+	var hand_cards: Array[CardScn] = []
+	for card: CardScn in cards:
+		hand_cards.append(card)
+	return hand_cards
+
+
 func update_positions() -> void:
 	for index: int in range(cards.size()):
 		var card: CardScn = cards[index]

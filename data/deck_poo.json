@@ -2,445 +2,546 @@
 	"theme": "Programação Orientada a Objetos",
 	"max_score_hint": 100,
 	"cards": [
-	  {
-		"id": "CAUSE_ENCAPSULAMENTO_ORIGEM",
-		"title": "Necessidade de Encapsulamento",
-		"description": "A busca por proteger dados internos e organizar responsabilidades impulsionou um dos pilares fundamentais da Programação Orientada a Objetos.",
-		"category": "CAUSE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["encapsulamento", "origem", "segurança", "responsabilidade"],
-		"feedback": {
-		  "why_true": "O encapsulamento foi de fato um dos motivadores conceituais fundamentais da POO.",
-		  "tip": "Observe como classes expõem apenas o necessário para uso externo."
+		{
+			"id": "POO001",
+			"title": "Necessidade de Encapsulamento",
+			"description": "A busca por proteger dados internos e organizar responsabilidades impulsionou um dos pilares fundamentais da Programação Orientada a Objetos.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"encapsulamento",
+				"origem",
+				"segurança",
+				"responsabilidade"
+			],
+			"feedback": {
+				"why_true": "O encapsulamento foi de fato um dos motivadores conceituais fundamentais da POO.",
+				"tip": "Observe como classes expõem apenas o necessário para uso externo."
+			}
+		},
+		{
+			"id": "POO002",
+			"title": "Complexidade Crescente de Software",
+			"description": "A necessidade de gerenciar grandes sistemas impulsionou o surgimento de modelos estruturados que facilitassem modularização e manutenção.",
+			"category": "CAUSE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"complexidade",
+				"modularização",
+				"história"
+			],
+			"feedback": {
+				"tip": "Quanto maior o sistema, mais relevante se torna a divisão em entidades bem definidas."
+			}
+		},
+		{
+			"id": "POO003",
+			"title": "Modelagem do Mundo Real",
+			"description": "A POO nasceu da necessidade de representar entidades reais como objetos com estado e comportamento.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"modelagem",
+				"entidades",
+				"simulação"
+			],
+			"feedback": {
+				"why_true": "A simulação e modelagem de entidades reais deram origem ao conceito de objeto em diversas linguagens.",
+				"tip": "Sempre pense no objeto como uma representação lógica de algo real ou conceitual."
+			}
+		},
+		{
+			"id": "POO004",
+			"title": "Herança Múltipla como Origem da POO",
+			"description": "Afirma-se que a principal motivação histórica da POO foi permitir herança múltipla em todas as linguagens.",
+			"category": "CAUSE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"herança múltipla",
+				"mito",
+				"origem"
+			],
+			"feedback": {
+				"why_false": "A herança múltipla não motivou o surgimento do paradigma; é uma característica controversa e não universal.",
+				"tip": "A herança múltipla existe em algumas linguagens, mas não define a POO."
+			}
+		},
+		{
+			"id": "POO005",
+			"title": "Objetos Criados para Melhorar Performance",
+			"description": "Alguns afirmam que a POO foi criada para tornar programas mais rápidos do que abordagens anteriores.",
+			"category": "CAUSE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"mito",
+				"desempenho"
+			],
+			"feedback": {
+				"why_false": "A POO não surgiu para melhorar performance; abstrações geralmente adicionam custo.",
+				"tip": "Use POO pela organização e modularização, não por promessas de performance."
+			}
+		},
+		{
+			"id": "POO006",
+			"title": "Definição de Classes",
+			"description": "Classes funcionam como modelos que agrupam atributos e comportamentos relacionados.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"classe",
+				"modelo",
+				"estrutura"
+			],
+			"feedback": {
+				"why_true": "Classes realmente agrupam estrutura e comportamento, sendo base para instâncias.",
+				"tip": "Lembre-se de que uma classe define a forma geral; o objeto representa o caso concreto."
+			}
+		},
+		{
+			"id": "POO007",
+			"title": "Criação de Objetos",
+			"description": "Objetos são instâncias de classes, possuindo estado próprio e comportamentos definidos.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"instância",
+				"objeto",
+				"estado"
+			],
+			"feedback": {
+				"why_true": "Objetos carregam estado próprio e utilizam comportamentos definidos pela classe.",
+				"tip": "Pense em cada objeto como um exemplo único da classe."
+			}
+		},
+		{
+			"id": "POO008",
+			"title": "Aplicação de Encapsulamento",
+			"description": "Encapsular significa proteger dados internos e controlar acessos por meio de interfaces.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"encapsulamento",
+				"visibilidade",
+				"interface"
+			],
+			"feedback": {
+				"why_true": "Encapsulamento reduz acoplamento e evita manipulações indevidas.",
+				"tip": "Utilize modificadores de acesso com propósito claro."
+			}
+		},
+		{
+			"id": "POO009",
+			"title": "Uso de Herança",
+			"description": "Herança permite criar novas classes baseadas em classes existentes, promovendo reutilização.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"herança",
+				"reutilização"
+			],
+			"feedback": {
+				"why_true": "Herança permite estender comportamentos existentes, reduzindo repetição.",
+				"tip": "Opte por herança apenas quando houver relação clara de especialização."
+			}
+		},
+		{
+			"id": "POO010",
+			"title": "Aplicação de Polimorfismo",
+			"description": "Polimorfismo permite que diferentes objetos respondam à mesma mensagem de formas distintas.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"polimorfismo",
+				"override",
+				"mensagem"
+			],
+			"feedback": {
+				"why_true": "O polimorfismo é fundamental para flexibilidade e substituição comportamental.",
+				"tip": "Estude dispatch dinâmico para entender como decisões são feitas em tempo de execução."
+			}
+		},
+		{
+			"id": "POO011",
+			"title": "Composição de Objetos",
+			"description": "Composição combina objetos para formar estruturas maiores, enfatizando 'tem-um' ao invés de 'é-um'.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"composição",
+				"design",
+				"relações"
+			],
+			"feedback": {
+				"why_true": "Composição reduz acoplamento e oferece alternativas mais flexíveis que herança.",
+				"tip": "Prefira composição quando possível: é mais fácil evoluir."
+			}
+		},
+		{
+			"id": "POO012",
+			"title": "Sobrecarga como Polimorfismo por Herança",
+			"description": "Afirma-se que a sobrecarga de métodos é um tipo de polimorfismo baseado exclusivamente em herança.",
+			"category": "PROCESS",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"sobrecarga",
+				"polimorfismo",
+				"mito"
+			],
+			"feedback": {
+				"why_false": "Sobrecarga não depende de herança e não é o mesmo polimorfismo usado em OOP clássico.",
+				"tip": "Diferencie sobrecarga (em tempo de compilação) de polimorfismo real."
+			}
+		},
+		{
+			"id": "POO013",
+			"title": "Criar Classes para Qualquer Detalhe",
+			"description": "Alguns sugerem que uma boa modelagem exige criar uma classe separada para cada conceito mínimo, mesmo sem utilidade real.",
+			"category": "PROCESS",
+			"truth_value": 0.5,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"granularidade",
+				"modelagem"
+			],
+			"feedback": {
+				"why_partial": "Modelos detalhados podem ser úteis, mas excesso de classes cria complexidade desnecessária.",
+				"tip": "Equilibre granularidade com clareza e simplicidade."
+			}
+		},
+		{
+			"id": "POO014",
+			"title": "Reutilização de Código",
+			"description": "A POO promove reuso por meio de herança, composição e abstrações bem definidas.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"reuso",
+				"design",
+				"boa prática"
+			],
+			"feedback": {
+				"why_true": "Reuso é uma das principais vantagens quando a POO é aplicada corretamente.",
+				"tip": "Busque projetar classes com responsabilização clara para facilitar o reuso."
+			}
+		},
+		{
+			"id": "POO015",
+			"title": "Flexibilidade de Evolução",
+			"description": "Sistemas orientados a objetos costumam evoluir mais facilmente quando há baixo acoplamento.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"flexibilidade",
+				"evolução",
+				"manutenção"
+			],
+			"feedback": {
+				"why_true": "Encapsulamento, abstrações e composição tornam evolução mais simples.",
+				"tip": "Avalie a coesão interna das classes para facilitar alterações futuras."
+			}
+		},
+		{
+			"id": "POO016",
+			"title": "Aumento Automático de Desempenho",
+			"description": "Alguns acreditam que um sistema orientado a objetos sempre terá performance superior a outros paradigmas.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"mito",
+				"desempenho"
+			],
+			"feedback": {
+				"why_false": "Objetos adicionam abstração, e abstrações geralmente introduzem overhead de performance.",
+				"tip": "Otimize performance com algoritmos, não com escolha de paradigma."
+			}
+		},
+		{
+			"id": "POO017",
+			"title": "Aumento de Acoplamento",
+			"description": "Uma modelagem equivocada em POO pode aumentar o acoplamento, dificultando manutenção.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"acoplamento",
+				"riscos",
+				"manutenção"
+			],
+			"feedback": {
+				"why_true": "POO mal aplicada pode gerar dependências excessivas, prejudicando evolução.",
+				"tip": "Use interfaces e composição para reduzir acoplamento."
+			}
+		},
+		{
+			"id": "POO018",
+			"title": "Complexidade Indevida",
+			"description": "Criar classes demais ou aplicar abstrações sem critério leva a códigos difíceis de entender.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"complexidade",
+				"más práticas"
+			],
+			"feedback": {
+				"why_true": "Exageros na modelagem tornam o sistema mais difícil de manter.",
+				"tip": "Busque sempre simplicidade orientada ao objetivo."
+			}
+		},
+		{
+			"id": "POO019",
+			"title": "Erros Difíceis de Rastrear",
+			"description": "O polimorfismo pode tornar a origem de erros menos óbvia devido à troca dinâmica de comportamentos.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.5,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"polimorfismo",
+				"debug"
+			],
+			"feedback": {
+				"why_partial": "Erros podem ser mais difíceis, mas boas práticas e ferramentas mitigam o problema.",
+				"tip": "Ferramentas de depuração ajudam a rastrear comportamento dinâmico."
+			}
+		},
+		{
+			"id": "POO020",
+			"title": "Refatoração Estruturada",
+			"description": "Uma refatoração permite revisar a estrutura da narrativa e trocar uma decisão já posicionada por uma alternativa melhor.",
+			"category": "SPECIAL",
+			"truth_value": 1.0,
+			"rarity": "SPECIAL",
+			"effect": "REPLACE_BOARD_CARD",
+			"effect_description": "Permite substituir uma carta do seu board por uma carta comum da mão. A carta removida vai para o descarte.",
+			"tags": [
+				"refatoração",
+				"design"
+			],
+			"feedback": {
+				"why_true": "Refatorar é essencial para manter código limpo.",
+				"tip": "Melhore sempre a estrutura sem alterar o comportamento."
+			},
+			"bonus_score": 0.0
+		},
+		{
+			"id": "POO021",
+			"title": "Depuração Aprimorada",
+			"description": "Permite olhar a mão do oponente e forçar a revelação de uma carta.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "FLAT_SCORE_BONUS",
+			"effect_description": "Adiciona +5 pontos ao resultado final, representando uma revisão que identifica falhas na narrativa.",
+			"bonus_score": 5.0,
+			"tags": [
+				"debug",
+				"vantagem"
+			],
+			"feedback": {
+				"why_true": "Depurar é parte natural do ciclo de desenvolvimento.",
+				"tip": "Um bom depurador economiza horas de trabalho."
+			}
+		},
+		{
+			"id": "POO022",
+			"title": "Reforço SOLID",
+			"description": "Permite duplicar o efeito de uma carta PROCESS já jogada.",
+			"category": "SPECIAL",
+			"truth_value": 0.0,
+			"rarity": "SPECIAL",
+			"effect": "FLAT_SCORE_BONUS",
+			"effect_description": "Adiciona +5 pontos ao resultado final, representando uma aplicação mais consistente dos princípios SOLID.",
+			"bonus_score": 5.0,
+			"tags": [
+				"solid",
+				"boas práticas"
+			],
+			"feedback": {
+				"why_true": "Os princípios SOLID ajudam a evitar erros estruturais.",
+				"tip": "Estude SRP e OCP para melhorar modelagens."
+			}
 		}
-	  },
-	  {
-		"id": "CAUSE_COMPLEXIDADE_CRESCENTE",
-		"title": "Complexidade Crescente de Software",
-		"description": "A necessidade de gerenciar grandes sistemas impulsionou o surgimento de modelos estruturados que facilitassem modularização e manutenção.",
-		"category": "CAUSE",
-		"truth_value": 0.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["complexidade", "modularização", "história"],
-		"feedback": {
-		  "tip": "Quanto maior o sistema, mais relevante se torna a divisão em entidades bem definidas."
-		}
-	  },
-	  {
-		"id": "CAUSE_SIMULAR_MUNDO_REAL",
-		"title": "Modelagem do Mundo Real",
-		"description": "A POO nasceu da necessidade de representar entidades reais como objetos com estado e comportamento.",
-		"category": "CAUSE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["modelagem", "entidades", "simulação"],
-		"feedback": {
-		  "why_true": "A simulação e modelagem de entidades reais deram origem ao conceito de objeto em diversas linguagens.",
-		  "tip": "Sempre pense no objeto como uma representação lógica de algo real ou conceitual."
-		}
-	  },
-	  {
-		"id": "CAUSE_HERANCA_MULTIPLA_MITO",
-		"title": "Herança Múltipla como Origem da POO",
-		"description": "Afirma-se que a principal motivação histórica da POO foi permitir herança múltipla em todas as linguagens.",
-		"category": "CAUSE",
-		"truth_value": 0.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["herança múltipla", "mito", "origem"],
-		"feedback": {
-		  "why_false": "A herança múltipla não motivou o surgimento do paradigma; é uma característica controversa e não universal.",
-		  "tip": "A herança múltipla existe em algumas linguagens, mas não define a POO."
-		}
-	  },
-	  {
-		"id": "CAUSE_OBJETOS_PERFORMATICOS",
-		"title": "Objetos Criados para Melhorar Performance",
-		"description": "Alguns afirmam que a POO foi criada para tornar programas mais rápidos do que abordagens anteriores.",
-		"category": "CAUSE",
-		"truth_value": 0.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["mito", "desempenho"],
-		"feedback": {
-		  "why_false": "A POO não surgiu para melhorar performance; abstrações geralmente adicionam custo.",
-		  "tip": "Use POO pela organização e modularização, não por promessas de performance."
-		}
-	  },
-	  {
-		"id": "PROCESS_DEFINICAO_CLASSES",
-		"title": "Definição de Classes",
-		"description": "Classes funcionam como modelos que agrupam atributos e comportamentos relacionados.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["classe", "modelo", "estrutura"],
-		"feedback": {
-		  "why_true": "Classes realmente agrupam estrutura e comportamento, sendo base para instâncias.",
-		  "tip": "Lembre-se de que uma classe define a forma geral; o objeto representa o caso concreto."
-		}
-	  },
-	  {
-		"id": "PROCESS_INSTANCIAR_OBJETOS",
-		"title": "Criação de Objetos",
-		"description": "Objetos são instâncias de classes, possuindo estado próprio e comportamentos definidos.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["instância", "objeto", "estado"],
-		"feedback": {
-		  "why_true": "Objetos carregam estado próprio e utilizam comportamentos definidos pela classe.",
-		  "tip": "Pense em cada objeto como um exemplo único da classe."
-		}
-	  },
-	  {
-		"id": "PROCESS_ENCAPSULAR",
-		"title": "Aplicação de Encapsulamento",
-		"description": "Encapsular significa proteger dados internos e controlar acessos por meio de interfaces.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["encapsulamento", "visibilidade", "interface"],
-		"feedback": {
-		  "why_true": "Encapsulamento reduz acoplamento e evita manipulações indevidas.",
-		  "tip": "Utilize modificadores de acesso com propósito claro."
-		}
-	  },
-	  {
-		"id": "PROCESS_HERANCA",
-		"title": "Uso de Herança",
-		"description": "Herança permite criar novas classes baseadas em classes existentes, promovendo reutilização.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["herança", "reutilização"],
-		"feedback": {
-		  "why_true": "Herança permite estender comportamentos existentes, reduzindo repetição.",
-		  "tip": "Opte por herança apenas quando houver relação clara de especialização."
-		}
-	  },
-	  {
-		"id": "PROCESS_POLIMORFISMO",
-		"title": "Aplicação de Polimorfismo",
-		"description": "Polimorfismo permite que diferentes objetos respondam à mesma mensagem de formas distintas.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["polimorfismo", "override", "mensagem"],
-		"feedback": {
-		  "why_true": "O polimorfismo é fundamental para flexibilidade e substituição comportamental.",
-		  "tip": "Estude dispatch dinâmico para entender como decisões são feitas em tempo de execução."
-		}
-	  },
-	  {
-		"id": "PROCESS_COMPOSICAO",
-		"title": "Composição de Objetos",
-		"description": "Composição combina objetos para formar estruturas maiores, enfatizando 'tem-um' ao invés de 'é-um'.",
-		"category": "PROCESS",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["composição", "design", "relações"],
-		"feedback": {
-		  "why_true": "Composição reduz acoplamento e oferece alternativas mais flexíveis que herança.",
-		  "tip": "Prefira composição quando possível: é mais fácil evoluir."
-		}
-	  },
-	  {
-		"id": "PROCESS_SOBRECARGA_ERRADA",
-		"title": "Sobrecarga como Polimorfismo por Herança",
-		"description": "Afirma-se que a sobrecarga de métodos é um tipo de polimorfismo baseado exclusivamente em herança.",
-		"category": "PROCESS",
-		"truth_value": 0.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["sobrecarga", "polimorfismo", "mito"],
-		"feedback": {
-		  "why_false": "Sobrecarga não depende de herança e não é o mesmo polimorfismo usado em OOP clássico.",
-		  "tip": "Diferencie sobrecarga (em tempo de compilação) de polimorfismo real."
-		}
-	  },
-	  {
-		"id": "PROCESS_CLASSES_MINIMAS",
-		"title": "Criar Classes para Qualquer Detalhe",
-		"description": "Alguns sugerem que uma boa modelagem exige criar uma classe separada para cada conceito mínimo, mesmo sem utilidade real.",
-		"category": "PROCESS",
-		"truth_value": 0.5,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["granularidade", "modelagem"],
-		"feedback": {
-		  "why_partial": "Modelos detalhados podem ser úteis, mas excesso de classes cria complexidade desnecessária.",
-		  "tip": "Equilibre granularidade com clareza e simplicidade."
-		}
-	  },
-	  {
-		"id": "CONSEQ_REUTILIZACAO",
-		"title": "Reutilização de Código",
-		"description": "A POO promove reuso por meio de herança, composição e abstrações bem definidas.",
-		"category": "CONSEQUENCE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["reuso", "design", "boa prática"],
-		"feedback": {
-		  "why_true": "Reuso é uma das principais vantagens quando a POO é aplicada corretamente.",
-		  "tip": "Busque projetar classes com responsabilização clara para facilitar o reuso."
-		}
-	  },
-	  {
-		"id": "CONSEQ_FLEXIBILIDADE",
-		"title": "Flexibilidade de Evolução",
-		"description": "Sistemas orientados a objetos costumam evoluir mais facilmente quando há baixo acoplamento.",
-		"category": "CONSEQUENCE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["flexibilidade", "evolução", "manutenção"],
-		"feedback": {
-		  "why_true": "Encapsulamento, abstrações e composição tornam evolução mais simples.",
-		  "tip": "Avalie a coesão interna das classes para facilitar alterações futuras."
-		}
-	  },
-	  {
-		"id": "CONSEQ_SUPERDESEMPENHO",
-		"title": "Aumento Automático de Desempenho",
-		"description": "Alguns acreditam que um sistema orientado a objetos sempre terá performance superior a outros paradigmas.",
-		"category": "CONSEQUENCE",
-		"truth_value": 0.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["mito", "desempenho"],
-		"feedback": {
-		  "why_false": "Objetos adicionam abstração, e abstrações geralmente introduzem overhead de performance.",
-		  "tip": "Otimize performance com algoritmos, não com escolha de paradigma."
-		}
-	  },
-	  {
-		"id": "CONSEQ_ACOPLAMENTO_INDEVIDO",
-		"title": "Aumento de Acoplamento",
-		"description": "Uma modelagem equivocada em POO pode aumentar o acoplamento, dificultando manutenção.",
-		"category": "CONSEQUENCE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["acoplamento", "riscos", "manutenção"],
-		"feedback": {
-		  "why_true": "POO mal aplicada pode gerar dependências excessivas, prejudicando evolução.",
-		  "tip": "Use interfaces e composição para reduzir acoplamento."
-		}
-	  },
-	  {
-		"id": "CONSEQ_CONFUSAO",
-		"title": "Complexidade Indevida",
-		"description": "Criar classes demais ou aplicar abstrações sem critério leva a códigos difíceis de entender.",
-		"category": "CONSEQUENCE",
-		"truth_value": 1.0,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["complexidade", "más práticas"],
-		"feedback": {
-		  "why_true": "Exageros na modelagem tornam o sistema mais difícil de manter.",
-		  "tip": "Busque sempre simplicidade orientada ao objetivo."
-		}
-	  },
-	  {
-		"id": "CONSEQ_ERROS_POLIMORFISMO",
-		"title": "Erros Difíceis de Rastrear",
-		"description": "O polimorfismo pode tornar a origem de erros menos óbvia devido à troca dinâmica de comportamentos.",
-		"category": "CONSEQUENCE",
-		"truth_value": 0.5,
-		"rarity": "COMMON",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["polimorfismo", "debug"],
-		"feedback": {
-		  "why_partial": "Erros podem ser mais difíceis, mas boas práticas e ferramentas mitigam o problema.",
-		  "tip": "Ferramentas de depuração ajudam a rastrear comportamento dinâmico."
-		}
-	  },
-	  {
-		"id": "SPECIAL_REFACTOR",
-		"title": "Refatoração Estruturada",
-		"description": "Permite substituir uma carta em jogo por outra de mesma categoria retirada do baralho.",
-		"category": "SPECIAL",
-		"truth_value": 1.0,
-		"rarity": "SPECIAL",
-		"effect": "",
-		"effect_description": "",
-		"tags": ["refatoração", "design"],
-		"feedback": {
-		  "why_true": "Refatorar é essencial para manter código limpo.",
-		  "tip": "Melhore sempre a estrutura sem alterar o comportamento."
-		}
-	  },
-	  {
-		"id": "SPECIAL_DEBUG_BOOST",
-		"title": "Depuração Aprimorada",
-		"description": "Permite olhar a mão do oponente e forçar a revelação de uma carta.",
-		"category": "SPECIAL",
-		"truth_value": 0.0,
-		"rarity": "SPECIAL",
-		"effect": "FLAT_SCORE_BONUS",
-		"effect_description": "Garante vantagem tátil no fluxo do jogo.",
-		"bonus_score": 5.0,
-		"tags": ["debug", "vantagem"],
-		"feedback": {
-		  "why_true": "Depurar é parte natural do ciclo de desenvolvimento.",
-		  "tip": "Um bom depurador economiza horas de trabalho."
-		}
-	  },
-	  {
-		"id": "SPECIAL_SOLIDIFY",
-		"title": "Reforço SOLID",
-		"description": "Permite duplicar o efeito de uma carta PROCESS já jogada.",
-		"category": "SPECIAL",
-		"truth_value": 0.0,
-		"rarity": "SPECIAL",
-		"effect": "FLAT_SCORE_BONUS",
-		"effect_description": "Amplifica impacto de decisões estruturais.",
-		"bonus_score": 5.0,
-		"tags": ["solid", "boas práticas"],
-		"feedback": {
-		  "why_true": "Os princípios SOLID ajudam a evitar erros estruturais.",
-		  "tip": "Estude SRP e OCP para melhorar modelagens."
-		}
-	  }
 	],
 	"edges": [
-	  {
-		"from": "CAUSE_ENCAPSULAMENTO_ORIGEM",
-		"to": "PROCESS_ENCAPSULAR",
-		"compatibility": 1.0,
-		"feedback": "O encapsulamento surgiu diretamente dessa necessidade."
-	  },
-	  {
-		"from": "CAUSE_COMPLEXIDADE_CRESCENTE",
-		"to": "PROCESS_DEFINICAO_CLASSES",
-		"compatibility": 0.9,
-		"feedback": "A modularização exigiu classes bem definidas."
-	  },
-	  {
-		"from": "CAUSE_SIMULAR_MUNDO_REAL",
-		"to": "PROCESS_INSTANCIAR_OBJETOS",
-		"compatibility": 1.0,
-		"feedback": "Objetos representam entidades do mundo real."
-	  },
-	  {
-		"from": "PROCESS_DEFINICAO_CLASSES",
-		"to": "PROCESS_INSTANCIAR_OBJETOS",
-		"compatibility": 1.0,
-		"feedback": "Classes fornecem o modelo para objetos."
-	  },
-	  {
-		"from": "PROCESS_ENCAPSULAR",
-		"to": "CONSEQ_FLEXIBILIDADE",
-		"compatibility": 0.8,
-		"feedback": "Encapsulamento melhora flexibilidade."
-	  },
-	  {
-		"from": "PROCESS_HERANCA",
-		"to": "CONSEQ_REUTILIZACAO",
-		"compatibility": 1.0,
-		"feedback": "Herança favorece reuso quando bem aplicada."
-	  },
-	  {
-		"from": "PROCESS_POLIMORFISMO",
-		"to": "CONSEQ_FLEXIBILIDADE",
-		"compatibility": 0.7,
-		"feedback": "Polimorfismo facilita extensões futuras."
-	  },
-	  {
-		"from": "PROCESS_COMPOSICAO",
-		"to": "CONSEQ_REUTILIZACAO",
-		"compatibility": 0.8,
-		"feedback": "Composição auxilia reuso e modularidade."
-	  },
-	  {
-		"from": "PROCESS_CLASSES_MINIMAS",
-		"to": "CONSEQ_CONFUSAO",
-		"compatibility": 0.7,
-		"feedback": "Excesso de classes gera confusão."
-	  },
-	  {
-		"from": "PROCESS_SOBRECARGA_ERRADA",
-		"to": "CONSEQ_SUPERDESEMPENHO",
-		"compatibility": 0.5,
-		"feedback": "Mitos conceituais criam falsas expectativas."
-	  },
-	  {
-		"from": "CONSEQ_SUPERDESEMPENHO",
-		"to": "CONSEQ_REUTILIZACAO",
-		"compatibility": 0.0,
-		"feedback": "Reuso não implica aumento automático de desempenho."
-	  }
+		{
+			"from": "POO001",
+			"to": "POO008",
+			"compatibility": 1.0,
+			"feedback": "O encapsulamento surgiu diretamente dessa necessidade."
+		},
+		{
+			"from": "POO002",
+			"to": "POO006",
+			"compatibility": 0.9,
+			"feedback": "A modularização exigiu classes bem definidas."
+		},
+		{
+			"from": "POO003",
+			"to": "POO007",
+			"compatibility": 1.0,
+			"feedback": "Objetos representam entidades do mundo real."
+		},
+		{
+			"from": "POO006",
+			"to": "POO007",
+			"compatibility": 1.0,
+			"feedback": "Classes fornecem o modelo para objetos."
+		},
+		{
+			"from": "POO008",
+			"to": "POO015",
+			"compatibility": 0.8,
+			"feedback": "Encapsulamento melhora flexibilidade."
+		},
+		{
+			"from": "POO009",
+			"to": "POO014",
+			"compatibility": 1.0,
+			"feedback": "Herança favorece reuso quando bem aplicada."
+		},
+		{
+			"from": "POO010",
+			"to": "POO015",
+			"compatibility": 0.7,
+			"feedback": "Polimorfismo facilita extensões futuras."
+		},
+		{
+			"from": "POO011",
+			"to": "POO014",
+			"compatibility": 0.8,
+			"feedback": "Composição auxilia reuso e modularidade."
+		},
+		{
+			"from": "POO013",
+			"to": "POO018",
+			"compatibility": 0.7,
+			"feedback": "Excesso de classes gera confusão."
+		},
+		{
+			"from": "POO012",
+			"to": "POO016",
+			"compatibility": 0.5,
+			"feedback": "Mitos conceituais criam falsas expectativas."
+		},
+		{
+			"from": "POO016",
+			"to": "POO014",
+			"compatibility": 0.0,
+			"feedback": "Reuso não implica aumento automático de desempenho."
+		}
 	],
 	"constraints": [
-	  {
-		"id": "ORDER_CLASSES_OBJETOS",
-		"type": "ORDER",
-		"nodes_a": ["PROCESS_DEFINICAO_CLASSES"],
-		"nodes_b": ["PROCESS_INSTANCIAR_OBJETOS"],
-		"penalty": 15,
-		"feedback_if_violate": "Não é possível criar objetos antes de definir suas classes."
-	  },
-	  {
-		"id": "MUTEX_DESEMPENHO",
-		"type": "MUTUAL_EXCLUSION",
-		"nodes_a": ["CONSEQ_SUPERDESEMPENHO"],
-		"nodes_b": ["CONSEQ_REUTILIZACAO", "CONSEQ_FLEXIBILIDADE"],
-		"penalty": 20,
-		"feedback_if_violate": "Não faz sentido afirmar ganho automático de performance junto a benefícios estruturais reais."
-	  },
-	  {
-		"id": "COVERAGE_PILARES",
-		"type": "COVERAGE",
-		"nodes_a": ["PROCESS_ENCAPSULAR", "PROCESS_POLIMORFISMO", "PROCESS_HERANCA"],
-		"nodes_b": [],
-		"penalty": 10,
-		"feedback_if_violate": "Uma narrativa de POO deve incluir seus pilares fundamentais."
-	  }
+		{
+			"id": "ORDER_CLASSES_OBJETOS",
+			"type": "ORDER",
+			"nodes_a": [
+				"POO006"
+			],
+			"nodes_b": [
+				"POO007"
+			],
+			"penalty": 15,
+			"feedback_if_violate": "Não é possível criar objetos antes de definir suas classes."
+		},
+		{
+			"id": "MUTEX_DESEMPENHO",
+			"type": "MUTUAL_EXCLUSION",
+			"nodes_a": [
+				"POO016"
+			],
+			"nodes_b": [
+				"POO014",
+				"POO015"
+			],
+			"penalty": 20,
+			"feedback_if_violate": "Não faz sentido afirmar ganho automático de performance junto a benefícios estruturais reais."
+		},
+		{
+			"id": "COVERAGE_PILARES",
+			"type": "COVERAGE",
+			"nodes_a": [
+				"POO008",
+				"POO010",
+				"POO009"
+			],
+			"nodes_b": [],
+			"penalty": 10,
+			"feedback_if_violate": "Uma narrativa de POO deve incluir seus pilares fundamentais."
+		}
 	],
 	"motifs": [
-	  {
-		"id": "M_MODELAGEM_COMPLETA",
-		"nodes": ["CAUSE_SIMULAR_MUNDO_REAL", "PROCESS_DEFINICAO_CLASSES", "PROCESS_INSTANCIAR_OBJETOS"],
-		"score": 1.0,
-		"feedback": "Você conectou corretamente modelagem, classes e objetos."
-	  },
-	  {
-		"id": "M_PILAR_ENCAPSULAMENTO",
-		"nodes": ["CAUSE_ENCAPSULAMENTO_ORIGEM", "PROCESS_ENCAPSULAR", "CONSEQ_FLEXIBILIDADE"],
-		"score": 1.0,
-		"feedback": "Ótima narrativa: encapsulamento leva a maior flexibilidade."
-	  }
+		{
+			"id": "M_MODELAGEM_COMPLETA",
+			"nodes": [
+				"POO003",
+				"POO006",
+				"POO007"
+			],
+			"score": 1.0,
+			"feedback": "Você conectou corretamente modelagem, classes e objetos."
+		},
+		{
+			"id": "M_PILAR_ENCAPSULAMENTO",
+			"nodes": [
+				"POO001",
+				"POO008",
+				"POO015"
+			],
+			"score": 1.0,
+			"feedback": "Ótima narrativa: encapsulamento leva a maior flexibilidade."
+		}
 	]
-  }
-  
+}

@@ -398,7 +398,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "OPPONENT_DISCARD_RANDOM",
-			"effect_description": "O oponente descarta automaticamente uma carta verdadeira da timeline.",
+			"effect_description": "Remove uma carta verdadeira aleatória do board adversário, se houver.",
 			"tags": [
 				"propaganda",
 				"manipulação"
@@ -417,7 +417,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "FLAT_SCORE_BONUS",
-			"effect_description": "Garante um bônus direto de pontuação ao ser jogada.",
+			"effect_description": "Adiciona +5 pontos ao resultado final.",
 			"tags": [
 				"ação",
 				"patriotismo"
@@ -436,7 +436,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "FLAT_SCORE_BONUS",
-			"effect_description": "Garante um bônus direto de pontuação ao ser jogada.",
+			"effect_description": "Adiciona +5 pontos ao resultado final.",
 			"tags": [
 				"ação",
 				"patriotismo"
@@ -455,7 +455,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "OPPONENT_DISCARD_RANDOM",
-			"effect_description": "O oponente descarta automaticamente uma carta verdadeira da timeline.",
+			"effect_description": "Remove uma carta verdadeira aleatória do board adversário, se houver.",
 			"tags": [
 				"propaganda",
 				"manipulação"

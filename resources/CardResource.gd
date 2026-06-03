@@ -5,7 +5,8 @@ extends Resource
 enum SpecialEffect {
 	NONE,
 	FLAT_SCORE_BONUS,
-	OPPONENT_DISCARD_RANDOM
+	OPPONENT_DISCARD_RANDOM,
+	REPLACE_BOARD_CARD
 }
 
 enum Rarity {
@@ -65,6 +66,8 @@ static func _effect_from_string(effect_str: String) -> SpecialEffect:
 			return SpecialEffect.FLAT_SCORE_BONUS
 		"OPPONENT_DISCARD_RANDOM":
 			return SpecialEffect.OPPONENT_DISCARD_RANDOM
+		"REPLACE_BOARD_CARD":
+			return SpecialEffect.REPLACE_BOARD_CARD
 		_:
 			return SpecialEffect.NONE
 

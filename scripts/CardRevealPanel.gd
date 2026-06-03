@@ -83,7 +83,6 @@ func _on_discard_pressed() -> void:
 func _on_apply_effect_pressed() -> void:
 	UISoundManager.play_button_click()
 	emit_signal("apply_effect_selected", current_card)
-	_clear_current_card()
 
 
 func _on_keep_pressed() -> void:

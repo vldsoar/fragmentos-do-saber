@@ -136,7 +136,10 @@ func _discard_card(card: CardScn) -> void:
 func _apply_effect_card(card: CardScn) -> void:
 	# Aplica efeito e move para effect slot
 	# Cartas de efeito aparecem normalmente (face visível) - não precisa virar
-	game_manager.apply_opponent_effect_to_player(card, card_effect_processor)
+	var effect_applied: bool = game_manager.apply_opponent_effect_to_player(card, card_effect_processor)
+	if not effect_applied:
+		_discard_card(card)
+		return
 	
 	# Se a carta estava virada, virar para frente ao aplicar efeito
 	if card.is_flipped():

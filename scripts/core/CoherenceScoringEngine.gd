@@ -317,7 +317,6 @@ func _evaluate_special_bonus(card_by_id: Dictionary, effect_card_ids: Array, tim
 		else:
 			effect_matches = str(effect_value) == "FLAT_SCORE_BONUS"
 
-		# Support legacy decks that only flag category instead of effect type.
-		if effect_matches or str(card.get("category", "")) == "SPECIAL":
+		if effect_matches:
 			total += float(card.get("bonus_score", 0.0))
 	return total

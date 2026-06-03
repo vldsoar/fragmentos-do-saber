@@ -46,7 +46,7 @@ Cada carta deve ter:
   "category": "CAUSE | PROCESS | CONSEQUENCE | SPECIAL",
   "truth_value": 1.0 | 0.5 | 0.0,
   "rarity": "COMMON | SPECIAL",
-  "effect": "FLAT_SCORE_BONUS|OPPONENT_DISCARD_RANDOM",
+  "effect": "FLAT_SCORE_BONUS|OPPONENT_DISCARD_RANDOM|REPLACE_BOARD_CARD",
   "effect_description": "Simples texto explicando"
   "tags": ["lista", "de", "conceitos"],
   "feedback": {

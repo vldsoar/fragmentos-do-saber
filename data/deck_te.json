@@ -3,7 +3,7 @@
 	"max_score_hint": 100,
 	"cards": [
 		{
-			"id": "CAUSE_PRESSAO_AMBIENTAL",
+			"id": "TE001",
 			"title": "Pressão Ambiental e Sobrevivência",
 			"description": "Mudanças ambientais e competição por sobrevivência criam pressões que favorecem indivíduos com características mais vantajosas.",
 			"category": "CAUSE",
@@ -20,7 +20,7 @@
 			}
 		},
 		{
-			"id": "CAUSE_VARIACAO_GENETICA",
+			"id": "TE002",
 			"title": "Variação Genética na População",
 			"description": "A existência de variação genética entre indivíduos de uma população é condição essencial para a evolução por seleção natural.",
 			"category": "CAUSE",
@@ -37,7 +37,7 @@
 			}
 		},
 		{
-			"id": "CAUSE_RECURSOS_LIMITADOS",
+			"id": "TE003",
 			"title": "Recursos Naturais Limitados",
 			"description": "Alimentos, espaço e parceiros reprodutivos são limitados, o que aumenta a competição entre indivíduos.",
 			"category": "CAUSE",
@@ -54,7 +54,7 @@
 			}
 		},
 		{
-			"id": "CAUSE_IDEIAS_LAMARCK",
+			"id": "TE004",
 			"title": "Ideias Iniciais de Lamarck",
 			"description": "Lamarck propôs que organismos mudam ao longo da vida e transmitem essas mudanças à descendência, ajudando a introduzir a noção de transformação das espécies.",
 			"category": "CAUSE",
@@ -71,7 +71,7 @@
 			}
 		},
 		{
-			"id": "CAUSE_DESIGN_FIXO_PERFEITO",
+			"id": "TE005",
 			"title": "Espécies Fixas e Perfeitamente Projetadas",
 			"description": "Afirma-se que as espécies foram criadas em sua forma atual, perfeitas e imutáveis, não sofrendo transformações ao longo do tempo.",
 			"category": "CAUSE",
@@ -88,7 +88,7 @@
 			}
 		},
 		{
-			"id": "CAUSE_MUTACOES_SEMPRE_MAUS",
+			"id": "TE006",
 			"title": "Mutação Sempre Prejudicial",
 			"description": "Defende-se que todas as mutações são obrigatoriamente ruins para o organismo e nunca contribuem para a evolução.",
 			"category": "CAUSE",
@@ -105,7 +105,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_MUTACAO_RECOMBINACAO",
+			"id": "TE007",
 			"title": "Mutação e Recombinação",
 			"description": "Mutação altera o DNA de forma aleatória, enquanto recombinação genética embaralha alelos na formação de gametas, gerando novas combinações.",
 			"category": "PROCESS",
@@ -122,7 +122,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_SELECAO_NATURAL",
+			"id": "TE008",
 			"title": "Seleção Natural",
 			"description": "Indivíduos com características mais adequadas ao ambiente têm maior sucesso reprodutivo, tornando certas variantes mais comuns ao longo das gerações.",
 			"category": "PROCESS",
@@ -139,7 +139,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_DERIVA_GENETICA",
+			"id": "TE009",
 			"title": "Deriva Genética",
 			"description": "Mudanças aleatórias na frequência de alelos em populações pequenas podem levar à fixação ou perda de variantes independentemente de sua utilidade.",
 			"category": "PROCESS",
@@ -156,7 +156,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_FLUXO_GENICO",
+			"id": "TE010",
 			"title": "Fluxo Gênico",
 			"description": "A migração de indivíduos entre populações permite a entrada e saída de alelos, conectando geneticamente diferentes grupos.",
 			"category": "PROCESS",
@@ -173,7 +173,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_ESPECIACAO",
+			"id": "TE011",
 			"title": "Especiação",
 			"description": "A formação de novas espécies ocorre quando populações se tornam reprodutivamente isoladas e acumulam diferenças genéticas significativas.",
 			"category": "PROCESS",
@@ -190,7 +190,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_USO_DESUSO",
+			"id": "TE012",
 			"title": "Uso e Desuso de Órgãos",
 			"description": "Defende-se que órgãos muito usados se desenvolvem e pouco usados atrofiam, sendo essas mudanças herdadas integralmente pelos descendentes.",
 			"category": "PROCESS",
@@ -207,7 +207,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_EVOLUCAO_INDIVIDUO",
+			"id": "TE013",
 			"title": "Indivíduos Evoluem para se Adaptar",
 			"description": "Afirma-se que, dentro da própria vida, um indivíduo muda geneticamente para se adaptar ao ambiente hostil.",
 			"category": "PROCESS",
@@ -224,7 +224,7 @@
 			}
 		},
 		{
-			"id": "PROCESS_ADAPTACAO_FENOTIPICA",
+			"id": "TE014",
 			"title": "Adaptação Fenotípica Rápida",
 			"description": "Mudanças fisiológicas, como tolerância ao frio ou à altura, são frequentemente confundidas com evolução genética.",
 			"category": "PROCESS",
@@ -241,7 +241,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_ADAPTACOES",
+			"id": "TE015",
 			"title": "Adaptações às Condições Locais",
 			"description": "Com o tempo, populações acumulam características que aumentam o sucesso de sobrevivência e reprodução em ambientes específicos.",
 			"category": "CONSEQUENCE",
@@ -258,7 +258,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_BIODIVERSIDADE",
+			"id": "TE016",
 			"title": "Geração de Biodiversidade",
 			"description": "A ação combinada de mutação, seleção, deriva, fluxo gênico e especiação explica a enorme variedade de espécies na Terra.",
 			"category": "CONSEQUENCE",
@@ -275,7 +275,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_EXTINCOES",
+			"id": "TE017",
 			"title": "Extinções de Espécies",
 			"description": "Espécies que não conseguem se adaptar ou que sofrem eventos extremos podem desaparecer completamente.",
 			"category": "CONSEQUENCE",
@@ -292,7 +292,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_PROGRESSO_INEVITAVEL",
+			"id": "TE018",
 			"title": "Evolução Como Progresso Iminente",
 			"description": "A evolução é frequentemente descrita como um processo que leva inevitavelmente a organismos cada vez mais complexos e “superiores”.",
 			"category": "CONSEQUENCE",
@@ -309,7 +309,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_PERFEITA_ADAPTACAO",
+			"id": "TE019",
 			"title": "Adaptação Perfeita ao Ambiente",
 			"description": "Afirma-se que a evolução produz organismos perfeitamente ajustados e livres de limitações.",
 			"category": "CONSEQUENCE",
@@ -326,7 +326,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_SIMILARIDADE_GENETICA",
+			"id": "TE020",
 			"title": "Similaridade Genética entre Espécies",
 			"description": "Semelhanças no DNA de espécies diferentes indicam ancestrais comuns e histórias evolutivas compartilhadas.",
 			"category": "CONSEQUENCE",
@@ -343,7 +343,7 @@
 			}
 		},
 		{
-			"id": "CONSEQ_REGISTRO_FOSSIL_LINEAR",
+			"id": "TE021",
 			"title": "Registro Fóssil como Linha Contínua",
 			"description": "O registro fóssil é por vezes descrito como uma sequência contínua e completa, sem lacunas entre formas ancestrais e descendentes.",
 			"category": "CONSEQUENCE",
@@ -360,14 +360,14 @@
 			}
 		},
 		{
-			"id": "SPECIAL_IMPULSO_SELECAO",
+			"id": "TE022",
 			"title": "Impulso de Seleção",
 			"description": "Permite ao jogador escolher uma carta PROCESS disponível e jogá-la imediatamente, ignorando restrições temporais.",
 			"category": "SPECIAL",
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "FLAT_SCORE_BONUS",
-			"effect_description": "Concede um impulso estratégico no uso de processos evolutivos.",
+			"effect_description": "Adiciona +5 pontos ao resultado final, representando uma pressão seletiva que fortalece a narrativa evolutiva.",
 			"bonus_score": 5.0,
 			"tags": [
 				"estratégia",
@@ -380,14 +380,14 @@
 			}
 		},
 		{
-			"id": "SPECIAL_EVENTO_GARGALO",
+			"id": "TE023",
 			"title": "Evento de Gargalo Populacional",
-			"description": "Permite descartar recursos narrativos já posicionados, simulando uma redução brusca de possibilidades.",
+			"description": "Um evento de gargalo reduz possibilidades narrativas do adversário ao remover uma carta verdadeira já posicionada.",
 			"category": "SPECIAL",
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "OPPONENT_DISCARD_RANDOM",
-			"effect_description": "Cria uma redução brusca de recursos de todos na mesa.",
+			"effect_description": "Remove uma carta verdadeira aleatória do board adversário, se houver.",
 			"tags": [
 				"gargalo",
 				"redução",
@@ -396,17 +396,18 @@
 			"feedback": {
 				"why_true": "Eventos de gargalo reais reduzem drasticamente populações, alterando a dinâmica evolutiva.",
 				"tip": "Use este efeito quando quiser desestabilizar narrativas muito bem construídas do oponente."
-			}
+			},
+			"bonus_score": 0.0
 		},
 		{
-			"id": "SPECIAL_SALTOS_ADAPTATIVOS",
+			"id": "TE024",
 			"title": "Saltos Adaptativos",
 			"description": "Permite ao jogador somar o efeito de duas cartas CONSEQUENCE diferentes em um único turno.",
 			"category": "SPECIAL",
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "FLAT_SCORE_BONUS",
-			"effect_description": "Amplifica o impacto das consequências jogadas.",
+			"effect_description": "Adiciona +5 pontos ao resultado final, representando mudanças adaptativas que reforçam as consequências da narrativa.",
 			"bonus_score": 5.0,
 			"tags": [
 				"adaptação",
@@ -421,98 +422,98 @@
 	],
 	"edges": [
 		{
-			"from": "CAUSE_VARIACAO_GENETICA",
-			"to": "PROCESS_MUTACAO_RECOMBINACAO",
+			"from": "TE002",
+			"to": "TE007",
 			"compatibility": 1.0,
 			"feedback": "A variação genética tem como base mutação e recombinação do DNA."
 		},
 		{
-			"from": "CAUSE_PRESSAO_AMBIENTAL",
-			"to": "PROCESS_SELECAO_NATURAL",
+			"from": "TE001",
+			"to": "TE008",
 			"compatibility": 1.0,
 			"feedback": "Pressões ambientais direcionam quais variantes serão favorecidas pela seleção natural."
 		},
 		{
-			"from": "CAUSE_RECURSOS_LIMITADOS",
-			"to": "PROCESS_SELECAO_NATURAL",
+			"from": "TE003",
+			"to": "TE008",
 			"compatibility": 0.9,
 			"feedback": "A disputa por recursos limitados intensifica a seleção natural."
 		},
 		{
-			"from": "PROCESS_MUTACAO_RECOMBINACAO",
-			"to": "CONSEQ_ADAPTACOES",
+			"from": "TE007",
+			"to": "TE015",
 			"compatibility": 0.8,
 			"feedback": "Sem novas variantes, adaptações complexas dificilmente surgiriam."
 		},
 		{
-			"from": "PROCESS_SELECAO_NATURAL",
-			"to": "CONSEQ_ADAPTACOES",
+			"from": "TE008",
+			"to": "TE015",
 			"compatibility": 1.0,
 			"feedback": "Seleção natural é o principal mecanismo que gera adaptações ao ambiente."
 		},
 		{
-			"from": "PROCESS_SELECAO_NATURAL",
-			"to": "CONSEQ_BIODIVERSIDADE",
+			"from": "TE008",
+			"to": "TE016",
 			"compatibility": 0.7,
 			"feedback": "Seleção em diferentes ambientes contribui para a diversificação de formas de vida."
 		},
 		{
-			"from": "PROCESS_DERIVA_GENETICA",
-			"to": "CONSEQ_BIODIVERSIDADE",
+			"from": "TE009",
+			"to": "TE016",
 			"compatibility": 0.6,
 			"feedback": "Deriva genética também pode diferenciar populações e contribuir para a diversidade."
 		},
 		{
-			"from": "PROCESS_FLUXO_GENICO",
-			"to": "CONSEQ_SIMILARIDADE_GENETICA",
+			"from": "TE010",
+			"to": "TE020",
 			"compatibility": 0.9,
 			"feedback": "Fluxo gênico tende a manter populações geneticamente semelhantes."
 		},
 		{
-			"from": "PROCESS_ESPECIACAO",
-			"to": "CONSEQ_BIODIVERSIDADE",
+			"from": "TE011",
+			"to": "TE016",
 			"compatibility": 1.0,
 			"feedback": "Especiação gera novas espécies, aumentando diretamente a biodiversidade."
 		},
 		{
-			"from": "PROCESS_ESPECIACAO",
-			"to": "CONSEQ_EXTINCOES",
+			"from": "TE011",
+			"to": "TE017",
 			"compatibility": 0.5,
 			"feedback": "O surgimento de novas espécies pode estar associado ao declínio ou substituição de outras linhagens."
 		},
 		{
-			"from": "CAUSE_DESIGN_FIXO_PERFEITO",
-			"to": "PROCESS_SELECAO_NATURAL",
+			"from": "TE005",
+			"to": "TE008",
 			"compatibility": 0.0,
 			"feedback": "A ideia de espécies fixas e perfeitas contradiz a noção de mudança gradual por seleção natural."
 		},
 		{
-			"from": "CAUSE_MUTACOES_SEMPRE_MAUS",
-			"to": "PROCESS_MUTACAO_RECOMBINACAO",
+			"from": "TE006",
+			"to": "TE007",
 			"compatibility": 0.2,
 			"feedback": "Embora mutações possam ser prejudiciais, muitas são neutras ou benéficas; a conexão é fraca e distorcida."
 		},
 		{
-			"from": "PROCESS_USO_DESUSO",
-			"to": "CONSEQ_ADAPTACOES",
+			"from": "TE012",
+			"to": "TE015",
 			"compatibility": 0.3,
 			"feedback": "O uso e desuso tenta explicar adaptações, mas por um mecanismo incorreto."
 		},
 		{
-			"from": "PROCESS_EVOLUCAO_INDIVIDUO",
-			"to": "CONSEQ_PERFEITA_ADAPTACAO",
+			"from": "TE013",
+			"to": "TE019",
 			"compatibility": 0.8,
 			"feedback": "A falsa ideia de indivíduos que “evoluem” durante a vida reforça a crença em adaptação perfeita."
 		},
 		{
-			"from": "CONSEQ_PROGRESSO_INEVITAVEL",
-			"to": "CONSEQ_BIODIVERSIDADE",
+			"from": "TE018",
+			"to": "TE016",
 			"compatibility": 0.4,
 			"feedback": "A associação entre evolução e progresso é comum, mas a biodiversidade inclui organismos simples e complexos."
 		},
 		{
-			"from": "CONSEQ_REGISTRO_FOSSIL_LINEAR",
-			"to": "CONSEQ_EXTINCOES",
+			"from": "TE021",
+			"to": "TE017",
 			"compatibility": 0.6,
 			"feedback": "O registro fóssil mostra tanto extinções quanto aparentes sequências de formas, apesar de suas lacunas."
 		}
@@ -522,11 +523,11 @@
 			"id": "ORDER_VARIACAO_SELECAO",
 			"type": "ORDER",
 			"nodes_a": [
-				"CAUSE_VARIACAO_GENETICA",
-				"PROCESS_MUTACAO_RECOMBINACAO"
+				"TE002",
+				"TE007"
 			],
 			"nodes_b": [
-				"PROCESS_SELECAO_NATURAL"
+				"TE008"
 			],
 			"penalty": 20,
 			"feedback_if_violate": "Não faz sentido aplicar seleção natural sem antes considerar a existência de variação genética sobre a qual ela atua."
@@ -535,12 +536,12 @@
 			"id": "MUTEX_FIXISMO_VS_ADAPTACAO",
 			"type": "MUTUAL_EXCLUSION",
 			"nodes_a": [
-				"CAUSE_DESIGN_FIXO_PERFEITO",
-				"CONSEQ_PERFEITA_ADAPTACAO"
+				"TE005",
+				"TE019"
 			],
 			"nodes_b": [
-				"PROCESS_SELECAO_NATURAL",
-				"CONSEQ_ADAPTACOES"
+				"TE008",
+				"TE015"
 			],
 			"penalty": 15,
 			"feedback_if_violate": "Misturar fixismo e adaptação gradual cria uma narrativa incoerente: ou as espécies são imutáveis, ou mudam ao longo do tempo por seleção."
@@ -549,9 +550,9 @@
 			"id": "COVERAGE_PROCESSOS_ESTRUTURAIS",
 			"type": "COVERAGE",
 			"nodes_a": [
-				"PROCESS_SELECAO_NATURAL",
-				"PROCESS_DERIVA_GENETICA",
-				"PROCESS_FLUXO_GENICO"
+				"TE008",
+				"TE009",
+				"TE010"
 			],
 			"nodes_b": [],
 			"penalty": 10,
@@ -562,10 +563,10 @@
 		{
 			"id": "M_NUCLEO_DARWIN",
 			"nodes": [
-				"CAUSE_PRESSAO_AMBIENTAL",
-				"CAUSE_RECURSOS_LIMITADOS",
-				"PROCESS_SELECAO_NATURAL",
-				"CONSEQ_ADAPTACOES"
+				"TE001",
+				"TE003",
+				"TE008",
+				"TE015"
 			],
 			"score": 1.0,
 			"feedback": "Excelente: você reconstruiu o núcleo da ideia darwinista, conectando pressão ambiental, competição, seleção natural e adaptações."
@@ -573,10 +574,10 @@
 		{
 			"id": "M_ORIGEM_DA_BIODIVERSIDADE",
 			"nodes": [
-				"CAUSE_VARIACAO_GENETICA",
-				"PROCESS_MUTACAO_RECOMBINACAO",
-				"PROCESS_ESPECIACAO",
-				"CONSEQ_BIODIVERSIDADE"
+				"TE002",
+				"TE007",
+				"TE011",
+				"TE016"
 			],
 			"score": 1.0,
 			"feedback": "Ótima narrativa: da variação genética à especiação, você explicou de forma coerente a origem da biodiversidade."
@@ -584,9 +585,9 @@
 		{
 			"id": "M_EVIDENCIAS_EVOLUCAO",
 			"nodes": [
-				"CONSEQ_SIMILARIDADE_GENETICA",
-				"CONSEQ_REGISTRO_FOSSIL_LINEAR",
-				"CONSEQ_EXTINCOES"
+				"TE020",
+				"TE021",
+				"TE017"
 			],
 			"score": 1.0,
 			"feedback": "Muito bem: você combinou evidências moleculares, fósseis e eventos de extinção para sustentar a teoria da evolução."
