@@ -3,6 +3,59 @@ extends Node
 const THEME_CONFIG_PATH := "res://data/theme_config.json"
 const DEFAULT_THEME := "default"
 
+const SECTION_TEXTURES := "textures"
+const SECTION_FONTS := "fonts"
+const SECTION_COLORS := "colors"
+const SECTION_VALUES := "values"
+
+const BUTTON_STATE_NORMAL := "normal"
+const BUTTON_STATE_HOVER := "hover"
+const BUTTON_STATE_PRESSED := "pressed"
+
+const TEXTURE_MENU_BACKGROUND := "menu_background"
+const TEXTURE_BOARD_BACKGROUND := "board_background"
+const TEXTURE_GAME_OVER_BACKGROUND := "game_over_background"
+const TEXTURE_CARD_FRONT := "card_front"
+const TEXTURE_CARD_BACK := "card_back"
+const TEXTURE_CARD_BACK_HOVER := "card_back_hover"
+const TEXTURE_CARD_SLOT := "card_slot"
+const TEXTURE_MENU_BOOK := "menu_book"
+const TEXTURE_AREA_ICON := "area_icon"
+const TEXTURE_DECK_BUTTON := "deck_button_bg"
+const TEXTURE_DECK_BUTTON_HOVER := "deck_button_bg_hover"
+const TEXTURE_DECK_BUTTON_PRESSED := "deck_button_bg_pressed"
+
+const FONT_TITLE := "title"
+const FONT_BODY := "body"
+const FONT_BODY_BOLD := "body_bold"
+const FONT_CARD_BOLD := "card_bold"
+
+const COLOR_TITLE := "title"
+const COLOR_BODY := "body"
+const COLOR_BUTTON_BG := "button_bg"
+const COLOR_BUTTON_BG_HOVER := "button_bg_hover"
+const COLOR_BUTTON_BG_PRESSED := "button_bg_pressed"
+const COLOR_BUTTON_TEXT := "button_text"
+const COLOR_PANEL_BG := "panel_bg"
+const COLOR_PANEL_BORDER := "panel_border"
+const COLOR_OVERLAY := "overlay"
+const COLOR_SCORE_PRIMARY := "score_primary"
+const COLOR_SCORE_SECONDARY := "score_secondary"
+const COLOR_SCORE_OPPONENT := "score_opponent"
+const COLOR_TEACHER_HEADER := "teacher_header"
+const COLOR_CARD_TITLE := "card_title"
+const COLOR_CARD_BODY := "card_body"
+const COLOR_CARD_CATEGORY := "card_category"
+const COLOR_CARD_SHADER_BORDER := "card_shader_border_color"
+const COLOR_CARD_SHADER_BACKGROUND := "card_shader_background_color"
+const COLOR_DECK_COUNT := "deck_count"
+
+const VALUE_CARD_SHADER_BORDER_WIDTH := "card_shader_border_width"
+const VALUE_BUTTON_FONT_SIZE := "button_font_size"
+const VALUE_MENU_BUTTON_FONT_SIZE := "menu_button_font_size"
+const VALUE_GAME_OVER_BODY_FONT_SIZE := "game_over_body_font_size"
+const VALUE_GAME_OVER_FEEDBACK_FONT_SIZE := "game_over_feedback_font_size"
+
 var active_theme: String = DEFAULT_THEME
 var _themes: Dictionary = {}
 
@@ -47,7 +100,7 @@ func load_theme_config() -> void:
 
 
 func get_value(key: String, fallback: Variant = null) -> Variant:
-	return get_section_value("values", key, fallback)
+	return get_section_value(SECTION_VALUES, key, fallback)
 
 
 func get_section_value(section: String, key: String, fallback: Variant = null) -> Variant:
@@ -63,7 +116,7 @@ func get_section_value(section: String, key: String, fallback: Variant = null) -
 
 
 func get_texture(key: String) -> Texture2D:
-	var path_value: Variant = get_section_value("textures", key, "")
+	var path_value: Variant = get_section_value(SECTION_TEXTURES, key, "")
 	var path: String = str(path_value)
 	if path.is_empty():
 		return null
@@ -77,7 +130,7 @@ func get_texture(key: String) -> Texture2D:
 
 
 func get_font(key: String) -> Font:
-	var path_value: Variant = get_section_value("fonts", key, "")
+	var path_value: Variant = get_section_value(SECTION_FONTS, key, "")
 	var path: String = str(path_value)
 	if path.is_empty():
 		return null
@@ -91,7 +144,7 @@ func get_font(key: String) -> Font:
 
 
 func get_color(key: String, fallback: Color = Color.WHITE) -> Color:
-	var value: Variant = get_section_value("colors", key, "")
+	var value: Variant = get_section_value(SECTION_COLORS, key, "")
 	if value is Color:
 		return value
 
@@ -110,8 +163,8 @@ func get_color(key: String, fallback: Color = Color.WHITE) -> Color:
 
 
 func make_panel_style(
-	bg_key: String = "panel_bg",
-	border_key: String = "panel_border",
+	bg_key: String = COLOR_PANEL_BG,
+	border_key: String = COLOR_PANEL_BORDER,
 	radius: int = 6,
 	border_width: int = 1,
 	margin: int = 0
@@ -128,16 +181,16 @@ func make_panel_style(
 	return style
 
 
-func make_button_style(state: String = "normal") -> StyleBoxFlat:
+func make_button_style(state: String = BUTTON_STATE_NORMAL) -> StyleBoxFlat:
 	var style: StyleBoxFlat = StyleBoxFlat.new()
-	var bg_key: String = "button_bg"
-	if state == "hover":
-		bg_key = "button_bg_hover"
-	elif state == "pressed":
-		bg_key = "button_bg_pressed"
+	var bg_key: String = COLOR_BUTTON_BG
+	if state == BUTTON_STATE_HOVER:
+		bg_key = COLOR_BUTTON_BG_HOVER
+	elif state == BUTTON_STATE_PRESSED:
+		bg_key = COLOR_BUTTON_BG_PRESSED
 
 	style.bg_color = get_color(bg_key, Color(0.9, 0.8, 0.45, 1.0))
-	style.border_color = get_color("panel_border", Color(0.4, 0.25, 0.05, 1.0))
+	style.border_color = get_color(COLOR_PANEL_BORDER, Color(0.4, 0.25, 0.05, 1.0))
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(6)
 	style.content_margin_left = 24.0
@@ -187,17 +240,17 @@ func apply_textured_button(
 		if configured_pressed_style != null:
 			pressed_style = configured_pressed_style
 
-	var body_font: Font = get_font("body")
+	var body_font: Font = get_font(FONT_BODY)
 	if body_font != null:
 		button.add_theme_font_override("font", body_font)
-	button.add_theme_font_size_override("font_size", int(get_value("button_font_size", 20)))
-	button.add_theme_color_override("font_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_hover_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_pressed_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_focus_color", get_color("button_text", Color.BLACK))
-	button.add_theme_stylebox_override("normal", normal_style)
-	button.add_theme_stylebox_override("hover", hover_style)
-	button.add_theme_stylebox_override("pressed", pressed_style)
+	button.add_theme_font_size_override("font_size", int(get_value(VALUE_BUTTON_FONT_SIZE, 20)))
+	button.add_theme_color_override("font_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_hover_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_pressed_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_focus_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_stylebox_override(BUTTON_STATE_NORMAL, normal_style)
+	button.add_theme_stylebox_override(BUTTON_STATE_HOVER, hover_style)
+	button.add_theme_stylebox_override(BUTTON_STATE_PRESSED, pressed_style)
 	return true
 
 
@@ -218,39 +271,39 @@ func apply_button(button: Button) -> void:
 	if button == null:
 		return
 
-	_apply_button_typography(button, "button_font_size", 20)
+	_apply_button_typography(button, VALUE_BUTTON_FONT_SIZE, 20)
 	_apply_button_colors(button)
-	button.add_theme_stylebox_override("normal", make_button_style("normal"))
-	button.add_theme_stylebox_override("hover", make_button_style("hover"))
-	button.add_theme_stylebox_override("pressed", make_button_style("pressed"))
+	button.add_theme_stylebox_override(BUTTON_STATE_NORMAL, make_button_style(BUTTON_STATE_NORMAL))
+	button.add_theme_stylebox_override(BUTTON_STATE_HOVER, make_button_style(BUTTON_STATE_HOVER))
+	button.add_theme_stylebox_override(BUTTON_STATE_PRESSED, make_button_style(BUTTON_STATE_PRESSED))
 
 
 func apply_menu_button(button: Button) -> void:
 	if button == null:
 		return
 
-	_apply_button_typography(button, "menu_button_font_size", 50)
+	_apply_button_typography(button, VALUE_MENU_BUTTON_FONT_SIZE, 50)
 	_apply_button_colors(button)
-	button.add_theme_stylebox_override("normal", make_button_style("normal"))
-	button.add_theme_stylebox_override("hover", make_button_style("hover"))
-	button.add_theme_stylebox_override("pressed", make_button_style("pressed"))
+	button.add_theme_stylebox_override(BUTTON_STATE_NORMAL, make_button_style(BUTTON_STATE_NORMAL))
+	button.add_theme_stylebox_override(BUTTON_STATE_HOVER, make_button_style(BUTTON_STATE_HOVER))
+	button.add_theme_stylebox_override(BUTTON_STATE_PRESSED, make_button_style(BUTTON_STATE_PRESSED))
 
 
 func _apply_button_typography(button: Button, font_size_key: String, fallback_size: int) -> void:
-	var body_font: Font = get_font("body")
+	var body_font: Font = get_font(FONT_BODY)
 	if body_font != null:
 		button.add_theme_font_override("font", body_font)
 	button.add_theme_font_size_override("font_size", int(get_value(font_size_key, fallback_size)))
 
 
 func _apply_button_colors(button: Button) -> void:
-	button.add_theme_color_override("font_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_hover_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_pressed_color", get_color("button_text", Color.BLACK))
-	button.add_theme_color_override("font_focus_color", get_color("button_text", Color.BLACK))
+	button.add_theme_color_override("font_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_hover_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_pressed_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
+	button.add_theme_color_override("font_focus_color", get_color(COLOR_BUTTON_TEXT, Color.BLACK))
 
 
-func apply_label(label: Label, color_key: String = "body", font_key: String = "body") -> void:
+func apply_label(label: Label, color_key: String = COLOR_BODY, font_key: String = FONT_BODY) -> void:
 	if label == null:
 		return
 
@@ -282,32 +335,39 @@ func _get_section_value(theme_name: String, section: String, key: String) -> Var
 
 func _load_builtin_fallback() -> void:
 	active_theme = DEFAULT_THEME
-	_themes = {
-		DEFAULT_THEME: {
-			"textures": {
-				"menu_background": "res://themes/default/images/bg_main_menu.png",
-				"board_background": "res://themes/default/images/bg_board.png",
-				"game_over_background": "res://themes/default/images/bg_game_over.png",
-				"card_front": "res://themes/default/images/card_front.png",
-				"card_back": "res://themes/default/images/card_back.png",
-				"card_back_hover": "res://themes/default/images/card_back.png",
-				"card_slot": "res://themes/default/images/card_slot.png",
-				"menu_book": "res://themes/default/images/menu_book.png",
-				"area_icon": "res://themes/default/images/area_icon.svg"
-			},
-			"fonts": {
-				"title": "res://themes/default/fonts/CinzelDecorative-Bold.ttf",
-				"body": "res://themes/default/fonts/EBGaramond-VariableFont_wght.ttf"
-			},
-			"colors": {
-				"title": "#F5E8B5",
-				"body": "#EEE6CC",
-				"button_bg": "#F6E8B4",
-				"button_bg_hover": "#E9CE6F",
-				"button_text": "#052129",
-				"panel_bg": "#0B0D0BEA",
-				"panel_border": "#BDA35CB8",
-				"overlay": "#00000075"
-			}
-		}
-	}
+	var textures: Dictionary = {}
+	textures[TEXTURE_MENU_BACKGROUND] = "res://themes/default/images/bg_main_menu.png"
+	textures[TEXTURE_BOARD_BACKGROUND] = "res://themes/default/images/bg_board.png"
+	textures[TEXTURE_GAME_OVER_BACKGROUND] = "res://themes/default/images/bg_game_over.png"
+	textures[TEXTURE_CARD_FRONT] = "res://themes/default/images/card_front.png"
+	textures[TEXTURE_CARD_BACK] = "res://themes/default/images/card_back.png"
+	textures[TEXTURE_CARD_BACK_HOVER] = "res://themes/default/images/card_back.png"
+	textures[TEXTURE_CARD_SLOT] = "res://themes/default/images/card_slot.png"
+	textures[TEXTURE_MENU_BOOK] = "res://themes/default/images/menu_book.png"
+	textures[TEXTURE_AREA_ICON] = "res://themes/default/images/area_icon.svg"
+
+	var fonts: Dictionary = {}
+	fonts[FONT_TITLE] = "res://themes/default/fonts/CinzelDecorative-Bold.ttf"
+	fonts[FONT_BODY] = "res://themes/default/fonts/EBGaramond-VariableFont_wght.ttf"
+
+	var colors: Dictionary = {}
+	colors[COLOR_TITLE] = "#F5E8B5"
+	colors[COLOR_BODY] = "#EEE6CC"
+	colors[COLOR_BUTTON_BG] = "#F6E8B4"
+	colors[COLOR_BUTTON_BG_HOVER] = "#E9CE6F"
+	colors[COLOR_BUTTON_TEXT] = "#052129"
+	colors[COLOR_PANEL_BG] = "#0B0D0BEA"
+	colors[COLOR_PANEL_BORDER] = "#BDA35CB8"
+	colors[COLOR_OVERLAY] = "#00000075"
+
+	var default_theme: Dictionary = {}
+	default_theme[SECTION_TEXTURES] = textures
+	default_theme[SECTION_FONTS] = fonts
+	default_theme[SECTION_COLORS] = colors
+
+	_themes = {}
+	_themes[DEFAULT_THEME] = default_theme
+
+
+func texture_card_front_for_category(category: String) -> String:
+	return "%s_%s" % [TEXTURE_CARD_FRONT, category.strip_edges().to_upper()]

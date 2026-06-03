@@ -33,12 +33,12 @@ func _ready() -> void:
 
 
 func _apply_theme() -> void:
-	_normal_deck_texture = ThemeManager.get_texture("card_back")
-	_attention_deck_texture = ThemeManager.get_texture("card_back_hover")
+	_normal_deck_texture = ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_BACK)
+	_attention_deck_texture = ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_BACK_HOVER)
 	if _normal_deck_texture != null:
 		_deck_sprite.texture = _normal_deck_texture
 	CardVisualMetrics.apply_sprite_size(_deck_sprite)
-	_count_deck_ref.modulate = ThemeManager.get_color("deck_count", _count_deck_ref.modulate)
+	_count_deck_ref.modulate = ThemeManager.get_color(ThemeManager.COLOR_DECK_COUNT, _count_deck_ref.modulate)
 
 
 func start_draw_attention() -> void:

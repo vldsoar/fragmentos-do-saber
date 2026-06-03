@@ -122,7 +122,7 @@ func _ready():
 
 
 func _apply_theme() -> void:
-	ThemeManager.apply_background_panel(board_background_panel, "board_background")
+	ThemeManager.apply_background_panel(board_background_panel, ThemeManager.TEXTURE_BOARD_BACKGROUND)
 	
 	
 func _configureState() -> void:

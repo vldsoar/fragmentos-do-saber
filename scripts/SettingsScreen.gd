@@ -24,16 +24,16 @@ func _ready() -> void:
 
 
 func _apply_theme() -> void:
-	ThemeManager.apply_background_panel(background_panel, "menu_background")
-	overlay.color = ThemeManager.get_color("overlay", Color(0, 0, 0, 0.5))
-	panel_container.add_theme_stylebox_override("panel", ThemeManager.make_panel_style("panel_bg", "panel_border", 6, 1, 0))
+	ThemeManager.apply_background_panel(background_panel, ThemeManager.TEXTURE_MENU_BACKGROUND)
+	overlay.color = ThemeManager.get_color(ThemeManager.COLOR_OVERLAY, Color(0, 0, 0, 0.5))
+	panel_container.add_theme_stylebox_override("panel", ThemeManager.make_panel_style(ThemeManager.COLOR_PANEL_BG, ThemeManager.COLOR_PANEL_BORDER, 6, 1, 0))
 
-	var body_font: Font = ThemeManager.get_font("body")
-	ThemeManager.apply_label(title_label, "title", "title")
+	var body_font: Font = ThemeManager.get_font(ThemeManager.FONT_BODY)
+	ThemeManager.apply_label(title_label, ThemeManager.COLOR_TITLE, ThemeManager.FONT_TITLE)
 
 	for button_value: Variant in [music_toggle, effects_toggle, teacher_mode_toggle, back_button]:
 		var button: Button = button_value as Button
-		button.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
+		button.add_theme_color_override("font_color", ThemeManager.get_color(ThemeManager.COLOR_BODY, Color(0.93, 0.9, 0.8, 1.0)))
 		if body_font != null:
 			button.add_theme_font_override("font", body_font)
 	ThemeManager.apply_button(back_button)

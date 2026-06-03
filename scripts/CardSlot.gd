@@ -24,7 +24,7 @@ func _apply_theme() -> void:
 	if slot_sprite == null:
 		return
 
-	var slot_texture: Texture2D = ThemeManager.get_texture("card_slot")
+	var slot_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_SLOT)
 	if slot_texture != null:
 		slot_sprite.texture = slot_texture
 	CardVisualMetrics.apply_sprite_size(slot_sprite)

@@ -8,7 +8,7 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(0, 300)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
-	add_theme_stylebox_override("panel", ThemeManager.make_panel_style("panel_bg", "panel_border", 6, 1, 18))
+	add_theme_stylebox_override("panel", ThemeManager.make_panel_style(ThemeManager.COLOR_PANEL_BG, ThemeManager.COLOR_PANEL_BORDER, 6, 1, 18))
 	_ensure_tabs()
 
 
@@ -277,7 +277,7 @@ func _add_header(parent: VBoxContainer, text: String) -> void:
 	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lbl.text = text
 	lbl.add_theme_font_size_override("font_size", 17)
-	ThemeManager.apply_label(lbl, "teacher_header", "body_bold")
+	ThemeManager.apply_label(lbl, ThemeManager.COLOR_TEACHER_HEADER, ThemeManager.FONT_BODY_BOLD)
 	parent.add_child(lbl)
 
 
@@ -288,7 +288,7 @@ func _add_text(parent: VBoxContainer, text: String) -> void:
 	var lbl: Label = Label.new()
 	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-	ThemeManager.apply_label(lbl, "body", "body")
+	ThemeManager.apply_label(lbl, ThemeManager.COLOR_BODY, ThemeManager.FONT_BODY)
 	lbl.text = text
 	parent.add_child(lbl)
 

@@ -43,17 +43,17 @@ func setup(deck_data: Dictionary, icon_tex: Texture2D = null) -> void:
 func _apply_theme() -> void:
 	var has_texture_style: bool = ThemeManager.apply_textured_button(
 		self,
-		"deck_button_bg",
-		"deck_button_bg_hover",
-		"deck_button_bg_pressed",
+		ThemeManager.TEXTURE_DECK_BUTTON,
+		ThemeManager.TEXTURE_DECK_BUTTON_HOVER,
+		ThemeManager.TEXTURE_DECK_BUTTON_PRESSED,
 		18.0
 	)
 	if not has_texture_style:
 		ThemeManager.apply_button(self)
 
 	if text_label:
-		text_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
-		var body_font: Font = ThemeManager.get_font("body")
+		text_label.add_theme_color_override("font_color", ThemeManager.get_color(ThemeManager.COLOR_BODY, Color(0.93, 0.9, 0.8, 1.0)))
+		var body_font: Font = ThemeManager.get_font(ThemeManager.FONT_BODY)
 		if body_font != null:
 			text_label.add_theme_font_override("font", body_font)
 

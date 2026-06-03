@@ -47,20 +47,20 @@ func _ready() -> void:
 
 
 func _apply_theme() -> void:
-	var game_over_texture: Texture2D = ThemeManager.get_texture("game_over_background")
+	var game_over_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_GAME_OVER_BACKGROUND)
 	if game_over_texture != null:
 		background_image.texture = game_over_texture
 
-	overlay_rect.color = ThemeManager.get_color("overlay", Color(0, 0, 0, 0.46))
-	panel_container.add_theme_stylebox_override("panel", ThemeManager.make_panel_style("panel_bg", "panel_border", 6, 1, 0))
+	overlay_rect.color = ThemeManager.get_color(ThemeManager.COLOR_OVERLAY, Color(0, 0, 0, 0.46))
+	panel_container.add_theme_stylebox_override("panel", ThemeManager.make_panel_style(ThemeManager.COLOR_PANEL_BG, ThemeManager.COLOR_PANEL_BORDER, 6, 1, 0))
 
-	ThemeManager.apply_label(title_label, "title", "title")
-	ThemeManager.apply_label(summary_label, "body", "body")
-	ThemeManager.apply_label(feedback_title_label, "teacher_header", "body_bold")
-	ThemeManager.apply_label(total_score_value, "score_primary", "body_bold")
-	ThemeManager.apply_label(coherence_value, "score_secondary", "body_bold")
-	ThemeManager.apply_label(opponent_score_value, "score_opponent", "body_bold")
-	ThemeManager.apply_label(opponent_coherence_value, "score_opponent", "body")
+	ThemeManager.apply_label(title_label, ThemeManager.COLOR_TITLE, ThemeManager.FONT_TITLE)
+	ThemeManager.apply_label(summary_label, ThemeManager.COLOR_BODY, ThemeManager.FONT_BODY)
+	ThemeManager.apply_label(feedback_title_label, ThemeManager.COLOR_TEACHER_HEADER, ThemeManager.FONT_BODY_BOLD)
+	ThemeManager.apply_label(total_score_value, ThemeManager.COLOR_SCORE_PRIMARY, ThemeManager.FONT_BODY_BOLD)
+	ThemeManager.apply_label(coherence_value, ThemeManager.COLOR_SCORE_SECONDARY, ThemeManager.FONT_BODY_BOLD)
+	ThemeManager.apply_label(opponent_score_value, ThemeManager.COLOR_SCORE_OPPONENT, ThemeManager.FONT_BODY_BOLD)
+	ThemeManager.apply_label(opponent_coherence_value, ThemeManager.COLOR_SCORE_OPPONENT, ThemeManager.FONT_BODY)
 	for score_value: Variant in [
 		cards_score_value,
 		context_score_value,
@@ -68,7 +68,7 @@ func _apply_theme() -> void:
 		motifs_score_value,
 		bonus_score_value,
 	]:
-		ThemeManager.apply_label(score_value as Label, "score_primary", "body")
+		ThemeManager.apply_label(score_value as Label, ThemeManager.COLOR_SCORE_PRIMARY, ThemeManager.FONT_BODY)
 
 	for button_value: Variant in [review_timeline_button, play_again_button, exit_button]:
 		ThemeManager.apply_button(button_value as Button)
@@ -77,8 +77,8 @@ func _apply_theme() -> void:
 
 
 func _apply_font_size_overrides() -> void:
-	var body_size: int = int(ThemeManager.get_value("game_over_body_font_size", 22))
-	var feedback_size: int = int(ThemeManager.get_value("game_over_feedback_font_size", 20))
+	var body_size: int = int(ThemeManager.get_value(ThemeManager.VALUE_GAME_OVER_BODY_FONT_SIZE, 22))
+	var feedback_size: int = int(ThemeManager.get_value(ThemeManager.VALUE_GAME_OVER_FEEDBACK_FONT_SIZE, 20))
 	summary_label.add_theme_font_size_override("font_size", body_size)
 	feedback_title_label.add_theme_font_size_override("font_size", body_size)
 	opponent_coherence_value.add_theme_font_size_override("font_size", feedback_size)
@@ -161,8 +161,8 @@ func _populate_feedback(feedback_array: Array) -> void:
 			var lbl: Label = Label.new()
 			lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-			ThemeManager.apply_label(lbl, "body", "body")
-			lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value("game_over_feedback_font_size", 20)))
+			ThemeManager.apply_label(lbl, ThemeManager.COLOR_BODY, ThemeManager.FONT_BODY)
+			lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value(ThemeManager.VALUE_GAME_OVER_FEEDBACK_FONT_SIZE, 20)))
 			lbl.text = "- " + text
 			feedback_container.add_child(lbl)
 
@@ -173,8 +173,8 @@ func _populate_feedback(feedback_array: Array) -> void:
 		var lbl: Label = Label.new()
 		lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-		ThemeManager.apply_label(lbl, "body", "body")
-		lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value("game_over_feedback_font_size", 20)))
+		ThemeManager.apply_label(lbl, ThemeManager.COLOR_BODY, ThemeManager.FONT_BODY)
+		lbl.add_theme_font_size_override("font_size", int(ThemeManager.get_value(ThemeManager.VALUE_GAME_OVER_FEEDBACK_FONT_SIZE, 20)))
 		lbl.text = "Sua narrativa manteve coerência histórica nesta rodada. Excelente!"
 		feedback_container.add_child(lbl)
 

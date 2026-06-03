@@ -27,21 +27,21 @@ func _notification(what: int) -> void:
 
 
 func _apply_theme() -> void:
-	ThemeManager.apply_background_panel(background_panel, "menu_background")
+	ThemeManager.apply_background_panel(background_panel, ThemeManager.TEXTURE_MENU_BACKGROUND)
 
-	var book_texture: Texture2D = ThemeManager.get_texture("menu_book")
+	var book_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_MENU_BOOK)
 	if book_texture != null:
 		header_icon.texture = book_texture
 
-	var area_texture: Texture2D = ThemeManager.get_texture("area_icon")
+	var area_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_AREA_ICON)
 	if area_texture != null:
 		deck_icon = area_texture
 
-	var title_font: Font = ThemeManager.get_font("title")
-	var body_font: Font = ThemeManager.get_font("body")
-	title_label.add_theme_color_override("font_color", ThemeManager.get_color("title", Color(0.96, 0.91, 0.71, 1.0)))
-	subtitle_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
-	empty_state_label.add_theme_color_override("font_color", ThemeManager.get_color("body", Color(0.93, 0.9, 0.8, 1.0)))
+	var title_font: Font = ThemeManager.get_font(ThemeManager.FONT_TITLE)
+	var body_font: Font = ThemeManager.get_font(ThemeManager.FONT_BODY)
+	title_label.add_theme_color_override("font_color", ThemeManager.get_color(ThemeManager.COLOR_TITLE, Color(0.96, 0.91, 0.71, 1.0)))
+	subtitle_label.add_theme_color_override("font_color", ThemeManager.get_color(ThemeManager.COLOR_BODY, Color(0.93, 0.9, 0.8, 1.0)))
+	empty_state_label.add_theme_color_override("font_color", ThemeManager.get_color(ThemeManager.COLOR_BODY, Color(0.93, 0.9, 0.8, 1.0)))
 	if title_font != null:
 		title_label.add_theme_font_override("font", title_font)
 	if body_font != null:

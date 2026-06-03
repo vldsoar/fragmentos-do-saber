@@ -64,11 +64,11 @@ func _apply_theme() -> void:
 		CardVisualMetrics.apply_sprite_size(card_image)
 		_apply_card_shader_theme(card_image)
 
-	var body_font: Font = ThemeManager.get_font("body")
-	var bold_font: Font = ThemeManager.get_font("card_bold")
-	_apply_rich_text_theme("Title", "card_title", body_font, bold_font)
-	_apply_rich_text_theme("Description", "card_body", body_font, null)
-	_apply_rich_text_theme("Category", "card_category", body_font, null)
+	var body_font: Font = ThemeManager.get_font(ThemeManager.FONT_BODY)
+	var bold_font: Font = ThemeManager.get_font(ThemeManager.FONT_CARD_BOLD)
+	_apply_rich_text_theme("Title", ThemeManager.COLOR_CARD_TITLE, body_font, bold_font)
+	_apply_rich_text_theme("Description", ThemeManager.COLOR_CARD_BODY, body_font, null)
+	_apply_rich_text_theme("Category", ThemeManager.COLOR_CARD_CATEGORY, body_font, null)
 
 
 func _apply_card_shader_theme(card_image: Sprite2D) -> void:
@@ -79,9 +79,9 @@ func _apply_card_shader_theme(card_image: Sprite2D) -> void:
 	if shader_material == null:
 		return
 
-	var border_color: Color = ThemeManager.get_color("card_shader_border_color", Color(0.101960786, 0.101960786, 0.101960786, 0.0))
-	var background_color: Color = ThemeManager.get_color("card_shader_background_color", Color(0.490196, 0.223529, 0.00392157, 1.0))
-	var border_width: float = float(ThemeManager.get_value("card_shader_border_width", 8.0))
+	var border_color: Color = ThemeManager.get_color(ThemeManager.COLOR_CARD_SHADER_BORDER, Color(0.101960786, 0.101960786, 0.101960786, 0.0))
+	var background_color: Color = ThemeManager.get_color(ThemeManager.COLOR_CARD_SHADER_BACKGROUND, Color(0.490196, 0.223529, 0.00392157, 1.0))
+	var border_width: float = float(ThemeManager.get_value(ThemeManager.VALUE_CARD_SHADER_BORDER_WIDTH, 8.0))
 	shader_material.set_shader_parameter("border_color", border_color)
 	shader_material.set_shader_parameter("background_color", background_color)
 	shader_material.set_shader_parameter("border", border_width)
@@ -89,12 +89,12 @@ func _apply_card_shader_theme(card_image: Sprite2D) -> void:
 
 func _get_card_front_texture() -> Texture2D:
 	if _data != null:
-		var category_key: String = "card_front_%s" % _data.category.strip_edges().to_upper()
+		var category_key: String = ThemeManager.texture_card_front_for_category(_data.category)
 		var category_texture: Texture2D = ThemeManager.get_texture(category_key)
 		if category_texture != null:
 			return category_texture
 
-	return ThemeManager.get_texture("card_front")
+	return ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_FRONT)
 
 
 func _apply_rich_text_theme(node_name: String, color_key: String, normal_font: Font, bold_font: Font) -> void:
@@ -175,7 +175,7 @@ func flip_to_back() -> void:
 	
 	# Mostrar verso (criar se não existir)
 	if not has_node("CardBackSprite"):
-		var card_back_texture: Texture2D = ThemeManager.get_texture("card_back")
+		var card_back_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_CARD_BACK)
 		if card_back_texture == null:
 			card_back_texture = preload("res://themes/default/images/card_back.png")
 		var back = Sprite2D.new()
