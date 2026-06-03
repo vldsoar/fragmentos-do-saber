@@ -25,6 +25,7 @@ GameSession="*res://scripts/GameSession.gd"
 SettingsManager="*res://scripts/SettingsManager.gd"
 ThemeManager="*res://scripts/ThemeManager.gd"
 UISoundManager="*res://scripts/UISoundManager.gd"
+MusicManager="*res://scripts/MusicManager.gd"
 
 [display]
 

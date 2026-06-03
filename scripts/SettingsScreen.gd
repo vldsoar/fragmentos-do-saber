@@ -42,6 +42,10 @@ func _apply_theme() -> void:
 func _on_music_toggled(enabled: bool) -> void:
 	UISoundManager.play_button_click()
 	SettingsManager.set_music_enabled(enabled)
+	if enabled:
+		MusicManager.play_menu_music()
+	else:
+		MusicManager.stop()
 
 
 func _on_effects_toggled(enabled: bool) -> void:

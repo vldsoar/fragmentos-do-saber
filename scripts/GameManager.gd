@@ -86,6 +86,7 @@ var selected_hand_card: CardScn = null
 #const _STATES_FOR
 
 func _ready():
+	MusicManager.stop()
 	_apply_theme()
 	# configure states
 	_configureState()

@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://b8oxer4h01id5" path="res://assets/fonts/EBGaramond-VariableFont_wght.ttf" id="4_r1yn4"]
 [ext_resource type="StyleBox" uid="uid://dtp616hoj1yvx" path="res://styles/MenuGameBtn.tres" id="5_csh7c"]
 [ext_resource type="StyleBox" uid="uid://dgu1dhvi1jd8n" path="res://styles/MenuGameBtnHv.tres" id="6_myj3e"]
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1enuy"]
 texture = ExtResource("1_x26sx")
 

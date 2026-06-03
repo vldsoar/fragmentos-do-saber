@@ -16,6 +16,7 @@ const DECKS_FILE_PATH := "res://data/decks.json"
 
 func _ready() -> void:
 	_apply_theme()
+	MusicManager.play_menu_music()
 	_configure_deck_grid_alignment()
 	_update_grid_columns()
 	_load_decks_from_file()

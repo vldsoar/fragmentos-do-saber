@@ -10,6 +10,7 @@ class_name MenuGame
 
 func _ready() -> void:
 	_apply_theme()
+	MusicManager.play_menu_music()
 	for _button in get_tree().get_nodes_in_group("button"):
 		_button.pressed.connect(_on_button_pressed.bind(_button))
 		if _button is Button:
@@ -18,15 +19,15 @@ func _ready() -> void:
 
 
 func _apply_theme() -> void:
-	ThemeManager.apply_background_panel(background_panel, "menu_background")
+	ThemeManager.apply_background_panel(background_panel, ThemeManager.TEXTURE_MENU_BACKGROUND)
 
-	var book_texture: Texture2D = ThemeManager.get_texture("menu_book")
+	var book_texture: Texture2D = ThemeManager.get_texture(ThemeManager.TEXTURE_MENU_BOOK)
 	if book_texture != null:
 		book_sprite.texture = book_texture
 
 	for title_value: Variant in [title_fragmentos, title_do, title_saber]:
 		var title_label: Label = title_value as Label
-		ThemeManager.apply_label(title_label, "title", "title")
+		ThemeManager.apply_label(title_label, ThemeManager.COLOR_TITLE, ThemeManager.FONT_TITLE)
 
 func _on_button_pressed(btn: Button) -> void:
 	UISoundManager.play_button_click()
