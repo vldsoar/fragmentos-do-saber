@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnl50fn7quwep"
-path="res://.godot/imported/rf_icon.png-b7167baf08a390dc14291ecb01fe87f8.ctex"
+uid="uid://b1ei4506ujwbn"
+path="res://.godot/imported/tec_poo_icon.png-158bbda26c296e57922414d594896fc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/clean_theme/images/decks/rf_icon.png"
-dest_files=["res://.godot/imported/rf_icon.png-b7167baf08a390dc14291ecb01fe87f8.ctex"]
+source_file="res://themes/clean_theme/images/decks/tec_poo_icon.png"
+dest_files=["res://.godot/imported/tec_poo_icon.png-158bbda26c296e57922414d594896fc7.ctex"]
 
 [params]
 

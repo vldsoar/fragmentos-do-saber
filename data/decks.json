@@ -3,16 +3,24 @@
 		"area": "História",
 		"theme": "Revolução Francesa",
 		"path": "res://data/deck_rf.json",
-		"icon": "res://themes/clean_theme/images/decks/rf_icon.png"
+		"icon": "res://themes/clean_theme/images/decks/hist_rf_icon.png"
 	},
 	{
 		"area": "Tecnologia",
 		"theme": "Programação Orientada a Objetos",
-		"path": "res://data/deck_poo.json"
+		"path": "res://data/deck_poo.json",
+		"icon": "res://themes/clean_theme/images/decks/tec_poo_icon.png"
 	},
 	{
 		"area": "Biologia",
 		"theme": "Teoria da Evolução",
-		"path": "res://data/deck_te.json"
+		"path": "res://data/deck_te.json",
+		"icon": "res://themes/clean_theme/images/decks/bio_te_icon.png"
+	},
+	{
+		"area": "Literatura",
+		"theme": "Moderna",
+		"path": "res://data/deck_te.json",
+		"icon": "res://themes/clean_theme/images/decks/lit_modern_icon.png"
 	}
 ]
