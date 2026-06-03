@@ -3,8 +3,8 @@ extends Node2D
 
 signal hand_size_changed(size: int)
 
-const MAX_CARDS := 5
-const TEMPORARY_DRAW_LIMIT := 6
+const MAX_CARDS := 3
+const TEMPORARY_DRAW_LIMIT := 4
 const HAND_Y_POSITION := 950
 const HAND_CARD_WIDTH := 160
 const HAND_CARD_SCALE := Vector2.ONE

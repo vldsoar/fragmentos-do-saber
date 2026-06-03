@@ -15,6 +15,7 @@ extends Node2D
 @export var game_over_screen_path: String = "../HUD/GameOverScreen"
 @export var hud_path: String = "../HUD"
 @export var opponent_deck_path: String = "../OpponentDeck"
+@export var opponent_hand_path: String = "../OpponentHand"
 @export var opponent_timeline_path: String = "../OpponentTimeline"
 @export var opponent_discard_slot_path: String = "../OpponentCardSlotDiscard"
 @export var opponent_effect_slot_path: String = "../OpponentCardSlotEffect"
@@ -43,6 +44,7 @@ extends Node2D
 
 # Opponent components
 @onready var opponent_deck: Deck = get_node(opponent_deck_path) as Deck
+@onready var opponent_hand: OpponentHand = get_node(opponent_hand_path) as OpponentHand
 @onready var opponent_timeline: OpponentTimeline = get_node(opponent_timeline_path) as OpponentTimeline
 @onready var opponent_discard_slot: CardSlotScn = get_node(opponent_discard_slot_path) as CardSlotScn
 @onready var opponent_effect_slot: CardSlotScn = get_node(opponent_effect_slot_path) as CardSlotScn
@@ -61,8 +63,11 @@ const REVEAL_CARD_Z_INDEX := 1000
 const REPLACEMENT_PREVIEW_POS := Vector2(1510, 520)
 const REPLACEMENT_PREVIEW_SCALE := Vector2(1.15, 1.15)
 const REPLACEMENT_PREVIEW_Z_INDEX := 20
+const STARTING_HAND_SIZE := 3
+const STARTING_HAND_DRAW_DELAY := 0.28
 
 enum GameState {
+	STARTING_HANDS,
 	WAITING_INPUT,
 	MUST_DRAW,
 	RESOLVE_ACTIONS,
@@ -120,7 +125,7 @@ func _ready():
 	
 	# Obter OpponentAI se existir na cena
 	opponent_ai.turn_completed.connect(_on_opponent_turn_completed)
-	call_deferred("_begin_player_turn")
+	call_deferred("_start_match_setup")
 	#_update_knowledge_clock(current_state)
 
 
@@ -130,8 +135,9 @@ func _apply_theme() -> void:
 	
 func _configureState() -> void:
 	fsm.configure(
-		GameState.WAITING_INPUT,
+		GameState.STARTING_HANDS,
 		{
+			GameState.STARTING_HANDS: [GameState.WAITING_INPUT],
 			GameState.WAITING_INPUT: [GameState.MUST_DRAW],
 			GameState.MUST_DRAW: [GameState.RESOLVE_ACTIONS],
 			GameState.RESOLVE_ACTIONS: [GameState.RESOLVING_TURN, GameState.WAITING_INPUT],
@@ -142,6 +148,26 @@ func _configureState() -> void:
 	)
 	fsm.state_changed.connect(_on_game_state_changed)
 	current_state = fsm.current
+
+
+func _start_match_setup() -> void:
+	if current_state != GameState.STARTING_HANDS:
+		return
+	await _deal_starting_hands()
+	fsm.transition_to(GameState.WAITING_INPUT)
+
+
+func _deal_starting_hands() -> void:
+	for _index: int in range(STARTING_HAND_SIZE):
+		var player_card: CardScn = deck.draw_card(false, true)
+		if player_card != null:
+			player_hand.add_card(player_card)
+
+		var opponent_card: CardScn = opponent_deck.draw_card(false, false)
+		if opponent_card != null:
+			opponent_hand.add_card(opponent_card)
+
+		await get_tree().create_timer(STARTING_HAND_DRAW_DELAY).timeout
 
 func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
@@ -482,6 +508,7 @@ func _update_knowledge_clock(state: int) -> void:
 
 func _calculate_state_progress(state: int) -> float:
 	var ordered_states: Array[int] = [
+		GameState.STARTING_HANDS,
 		GameState.WAITING_INPUT,
 		GameState.MUST_DRAW,
 		GameState.RESOLVE_ACTIONS,

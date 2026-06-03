@@ -88,11 +88,18 @@ func _load_deck_from_json() -> void:
 	cards.clear()
 	cards = DeckRepository.build_card_resources(parsed)
 
-func draw_card() -> CardScn:
-	if not silent_mode and card_reveal_panel_ref.has_card():
-		return
+func draw_card(emit_drawn_signal: bool = true, play_sound: bool = true) -> CardScn:
+	if emit_drawn_signal and not silent_mode and card_reveal_panel_ref.has_card():
+		return null
 
 	stop_draw_attention()
+	if cards.is_empty():
+		push_warning("Deck empty.")
+		stop_draw_attention()
+		$Area2D/CollisionShape2D.disabled = true
+		$Sprite2D.visible = false
+		_count_deck_ref.visible = false
+		return null
 	
 	var card_data: CardResource = cards.pop_front()
 
@@ -104,7 +111,7 @@ func draw_card() -> CardScn:
 		_count_deck_ref.visible = false
 	
 	if not card_data:
-		return
+		return null
 	
 	_count_deck_ref.text = str(cards.size())
 	var card_scn: CardScn = _spawn_card(card_data, Vector2(0, 0))
@@ -114,10 +121,10 @@ func draw_card() -> CardScn:
 	if not is_opponent:
 		card_manager.connect_card_signals(card_scn)
 	card_scn.name = card_scn.data.id
-	if not silent_mode:
+	if play_sound and not silent_mode:
 		UISoundManager.play_take_card()
 
-	if not silent_mode:
+	if emit_drawn_signal and not silent_mode:
 		emit_signal("card_drawn", card_scn)
 
 	return card_scn

@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://decx0hbmnavlt" path="res://scenes/GameOverScreen.tscn" id="20_1nqs0"]
 [ext_resource type="Script" uid="uid://dy0i77a1gtw6v" path="res://scripts/PlayerHand.gd" id="21_playerhand"]
 [ext_resource type="Script" uid="uid://b3h2m4xxhmxvf" path="res://scripts/BoardSlotGrid.gd" id="22_boardgrid"]
+[ext_resource type="Script" path="res://scripts/OpponentHand.gd" id="23_opponenthand"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q8u5g"]
 texture = ExtResource("1_2ofn6")
@@ -142,6 +143,9 @@ attenuation = 1.62451
 position = Vector2(1820, 130)
 silent_mode = true
 is_opponent = true
+
+[node name="OpponentHand" type="Node2D" parent="." unique_id=1582998505]
+script = ExtResource("23_opponenthand")
 
 [node name="OpponentTimeline" type="Node2D" parent="." unique_id=1351449138]
 script = ExtResource("11_yxlcp")

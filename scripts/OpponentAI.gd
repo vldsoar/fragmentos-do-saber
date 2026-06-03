@@ -6,12 +6,14 @@ enum OpponentDecision { CONNECT, DISCARD, APPLY_EFFECT }
 signal turn_completed
 
 @export var opponent_deck_path: String = "../OpponentDeck"
+@export var opponent_hand_path: String = "../OpponentHand"
 @export var opponent_timeline_path: String = "../OpponentTimeline"
 @export var opponent_discard_slot_path: String = "../OpponentCardSlotDiscard"
 @export var opponent_effect_slot_path: String = "../OpponentCardSlotEffect"
 @export var game_manager_path: String = "../GameManager"
 
 @onready var opponent_deck: Deck = get_node(opponent_deck_path) as Deck
+@onready var opponent_hand: OpponentHand = get_node(opponent_hand_path) as OpponentHand
 @onready var opponent_timeline: OpponentTimeline = get_node(opponent_timeline_path) as OpponentTimeline
 @onready var opponent_discard_slot: CardSlotScn = get_node(opponent_discard_slot_path) as CardSlotScn
 @onready var opponent_effect_slot: CardSlotScn = get_node(opponent_effect_slot_path) as CardSlotScn
@@ -28,22 +30,27 @@ func _ready() -> void:
 	_deck_data = opponent_deck.get_deck_data()
 
 func play_turn() -> void:
-	# 1. Comprar carta silenciosamente
-	var card = _draw_card_silent()
-	if not card:
-		push_warning("OpponentAI: Deck vazio, nao e possivel comprar carta")
+	_draw_card_to_hand()
+	if opponent_hand.is_empty():
+		push_warning("OpponentAI: mao e deck vazios, nao e possivel jogar")
 		turn_completed.emit()
 		return
-	
-	_current_card = card
 	
 	# Pequeno delay para simular "pensamento" da IA
 	await get_tree().create_timer(0.5).timeout
 	
-	# 2. Tomar decisão
-	var plan = _make_decision(card)
+	var selected: Dictionary = _choose_card_from_hand()
+	var card: CardScn = selected.get("card", null) as CardScn
+	var plan: Dictionary = selected.get("plan", {}) as Dictionary
+	if card == null:
+		_discard_lowest_value_card_from_hand()
+		await get_tree().create_timer(0.3).timeout
+		turn_completed.emit()
+		return
+
+	_current_card = card
+	opponent_hand.remove_card(card)
 	
-	# 3. Executar decisão
 	Globals.debug_log("AI Decision: %s" % plan)
 	_execute_decision(card, plan)
 	
@@ -56,6 +63,64 @@ func play_turn() -> void:
 func _draw_card_silent() -> CardScn:
 	# Acessa diretamente o array de cards do deck (é público)
 	return opponent_deck.draw_card()
+
+
+func _draw_card_to_hand() -> void:
+	if not opponent_hand.can_receive_drawn_card():
+		return
+	var card: CardScn = opponent_deck.draw_card(false, false)
+	if card == null:
+		return
+	opponent_hand.add_card(card)
+
+
+func _choose_card_from_hand() -> Dictionary:
+	var best_card: CardScn = null
+	var best_plan: Dictionary = {}
+	var best_rank: float = -INF
+
+	for card: CardScn in opponent_hand.get_cards():
+		var plan: Dictionary = _make_decision(card)
+		var rank: float = _rank_plan(card, plan)
+		if rank > best_rank:
+			best_rank = rank
+			best_card = card
+			best_plan = plan
+
+	return {
+		"card": best_card,
+		"plan": best_plan,
+		"rank": best_rank,
+	}
+
+
+func _rank_plan(card: CardScn, plan: Dictionary) -> float:
+	var decision: String = str(plan.get("decision", OpponentDecisionEngine.DECISION_DISCARD))
+	match decision:
+		OpponentDecisionEngine.DECISION_APPLY_EFFECT:
+			return 1000.0
+		OpponentDecisionEngine.DECISION_CONNECT:
+			return 500.0 + float(plan.get("score_delta", 0.0))
+		_:
+			if card != null and card.data != null:
+				return float(card.data.truth_value)
+	return 0.0
+
+
+func _discard_lowest_value_card_from_hand() -> void:
+	var selected_card: CardScn = null
+	var selected_value: float = INF
+	for card: CardScn in opponent_hand.get_cards():
+		var value: float = 0.0
+		if card != null and card.data != null:
+			value = float(card.data.truth_value)
+		if value < selected_value:
+			selected_value = value
+			selected_card = card
+	if selected_card == null:
+		return
+	opponent_hand.remove_card(selected_card)
+	_discard_card(selected_card)
 
 func _spawn_card(card_res: CardResource, _position: Vector2) -> CardScn:
 	var card_instance: CardScn = preload("res://scenes/Card.tscn").instantiate()
