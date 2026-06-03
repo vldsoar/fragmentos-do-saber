@@ -1,0 +1,670 @@
+{
+	"theme": "Modernismo Brasileiro",
+	"max_score_hint": 100.0,
+	"cards": [
+		{
+			"id": "MB001",
+			"title": "Crise Do Academicismo",
+			"description": "O Modernismo brasileiro surgiu em reação ao predomínio de modelos literários rígidos e acadêmicos.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"academicismo",
+				"ruptura"
+			],
+			"feedback": {
+				"why_true": "A crítica ao formalismo parnasiano e ao gosto acadêmico foi um ponto de partida importante para os modernistas.",
+				"tip": "Use esta carta antes de cartas sobre ruptura estética e Semana de 1922."
+			}
+		},
+		{
+			"id": "MB002",
+			"title": "Vanguardas Europeias",
+			"description": "Futurismo, Cubismo, Dadaísmo e outras vanguardas influenciaram a experimentação modernista.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"vanguardas",
+				"experimentacao"
+			],
+			"feedback": {
+				"why_true": "As vanguardas ajudaram os modernistas a questionar formas tradicionais e buscar novas linguagens.",
+				"tip": "Conecta bem com verso livre, linguagem coloquial e antropofagia cultural."
+			}
+		},
+		{
+			"id": "MB003",
+			"title": "Urbanização Brasileira",
+			"description": "A modernização urbana e industrial alterou temas, ritmos e imagens da literatura brasileira.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"urbanizacao",
+				"modernidade"
+			],
+			"feedback": {
+				"why_true": "O crescimento urbano e a experiência da modernidade influenciaram obras e debates modernistas.",
+				"tip": "Combine com a Semana de Arte Moderna e a renovação estética."
+			}
+		},
+		{
+			"id": "MB004",
+			"title": "Busca Por Identidade Nacional",
+			"description": "Modernistas procuraram representar o Brasil de modo crítico, múltiplo e menos dependente de modelos importados.",
+			"category": "CAUSE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"identidade",
+				"brasilidade"
+			],
+			"feedback": {
+				"why_true": "A construção de uma arte brasileira moderna foi uma das preocupações centrais do movimento.",
+				"tip": "Esta carta prepara bem antropofagia, Pau-Brasil e valorização da cultura brasileira."
+			}
+		},
+		{
+			"id": "MB005",
+			"title": "Semana Isolada",
+			"description": "A Semana de 1922 foi um evento isolado, sem relação com debates culturais anteriores.",
+			"category": "CAUSE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"semana",
+				"erro"
+			],
+			"feedback": {
+				"why_false": "A Semana de 1922 dialogou com debates anteriores, revistas, artistas, vanguardas e transformações sociais.",
+				"tip": "Evite tratar marcos históricos como acontecimentos sem contexto."
+			}
+		},
+		{
+			"id": "MB006",
+			"title": "Ruptura Total",
+			"description": "O Modernismo rompeu completamente com toda a tradição literária anterior.",
+			"category": "CAUSE",
+			"truth_value": 0.5,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"ruptura",
+				"tradicao"
+			],
+			"feedback": {
+				"why_partial": "Houve forte ruptura estética, mas muitos modernistas também releram tradições brasileiras e europeias.",
+				"tip": "Prefira pensar em transformação crítica da tradição, não simples apagamento."
+			}
+		},
+		{
+			"id": "MB007",
+			"title": "Semana De Arte Moderna",
+			"description": "Em 1922, artistas e escritores apresentaram propostas de renovação estética no Theatro Municipal de São Paulo.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"1922",
+				"semana"
+			],
+			"feedback": {
+				"why_true": "A Semana de 1922 tornou-se marco simbólico do Modernismo brasileiro.",
+				"tip": "Use depois das causas culturais e antes das propostas estéticas."
+			}
+		},
+		{
+			"id": "MB008",
+			"title": "Manifesto Pau-Brasil",
+			"description": "Oswald de Andrade propôs uma poesia moderna, crítica e ligada a imagens brasileiras.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"oswald",
+				"manifesto"
+			],
+			"feedback": {
+				"why_true": "O Manifesto Pau-Brasil defende uma arte moderna que valoriza materiais culturais brasileiros.",
+				"tip": "Conecta bem com identidade nacional e valorização da cultura brasileira."
+			}
+		},
+		{
+			"id": "MB009",
+			"title": "Antropofagia Cultural",
+			"description": "A antropofagia propôs absorver influências externas e transformá-las em criação brasileira própria.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"antropofagia",
+				"oswald"
+			],
+			"feedback": {
+				"why_true": "A antropofagia é uma metáfora crítica para assimilar e recriar influências culturais.",
+				"tip": "Ela combina influência estrangeira com busca por identidade nacional."
+			}
+		},
+		{
+			"id": "MB010",
+			"title": "Linguagem Coloquial",
+			"description": "O Modernismo valorizou formas de expressão mais próximas da fala cotidiana brasileira.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"linguagem",
+				"oralidade"
+			],
+			"feedback": {
+				"why_true": "A aproximação com a fala cotidiana foi uma marca da renovação formal modernista.",
+				"tip": "Conecte com verso livre e liberdade formal."
+			}
+		},
+		{
+			"id": "MB011",
+			"title": "Verso Livre",
+			"description": "Poetas modernistas exploraram versos sem métrica fixa, ampliando possibilidades de ritmo e forma.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"poesia",
+				"forma"
+			],
+			"feedback": {
+				"why_true": "O verso livre foi uma das formas de contestar padrões rígidos de composição poética.",
+				"tip": "Funciona bem depois de cartas sobre vanguardas e linguagem coloquial."
+			}
+		},
+		{
+			"id": "MB012",
+			"title": "Primeira Geração",
+			"description": "A primeira fase modernista enfatizou ruptura, experimentação e crítica ao conservadorismo artístico.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"primeira fase",
+				"ruptura"
+			],
+			"feedback": {
+				"why_true": "A primeira geração, associada aos anos 1920, foi marcada por espírito de experimentação e combate estético.",
+				"tip": "Ela organiza cartas como Semana, manifestos e experimentação formal."
+			}
+		},
+		{
+			"id": "MB013",
+			"title": "Romance De 30",
+			"description": "A prosa da segunda geração modernista aprofundou temas sociais, regionais e históricos do Brasil.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"romance de 30",
+				"regionalismo"
+			],
+			"feedback": {
+				"why_true": "Autores como Graciliano Ramos, Rachel de Queiroz e Jorge Amado exploraram conflitos sociais e regionais.",
+				"tip": "Use depois da fase de ruptura para mostrar amadurecimento social do movimento."
+			}
+		},
+		{
+			"id": "MB014",
+			"title": "Poesia De 30",
+			"description": "A segunda geração também consolidou uma poesia mais reflexiva, social e existencial.",
+			"category": "PROCESS",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"poesia de 30",
+				"segunda fase"
+			],
+			"feedback": {
+				"why_true": "Poetas como Drummond, Murilo Mendes e Cecília Meireles ampliaram os caminhos da poesia modernista.",
+				"tip": "Conecte com consequências ligadas à liberdade formal e ao aprofundamento temático."
+			}
+		},
+		{
+			"id": "MB015",
+			"title": "Sem Regionalismo",
+			"description": "O Modernismo brasileiro evitou temas regionais para se concentrar apenas em experiências urbanas paulistas.",
+			"category": "PROCESS",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"regionalismo",
+				"erro"
+			],
+			"feedback": {
+				"why_false": "O regionalismo foi central em parte da prosa modernista, especialmente no romance de 30.",
+				"tip": "Lembre que o Modernismo teve diferentes fases, regiões e projetos estéticos."
+			}
+		},
+		{
+			"id": "MB016",
+			"title": "Renovação Estética",
+			"description": "O Modernismo ampliou formas literárias, temas e procedimentos expressivos na literatura brasileira.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"renovacao",
+				"estetica"
+			],
+			"feedback": {
+				"why_true": "O movimento abriu espaço para novas formas de escrita e experimentação artística.",
+				"tip": "É uma consequência forte de Semana, manifestos e ruptura formal."
+			}
+		},
+		{
+			"id": "MB017",
+			"title": "Cultura Brasileira Valorizada",
+			"description": "O movimento estimulou novas representações da cultura popular, da língua e das contradições brasileiras.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"cultura brasileira",
+				"identidade"
+			],
+			"feedback": {
+				"why_true": "A valorização crítica do Brasil foi uma consequência importante dos projetos modernistas.",
+				"tip": "Conecta bem com Pau-Brasil e antropofagia."
+			}
+		},
+		{
+			"id": "MB018",
+			"title": "Temas Sociais Ampliados",
+			"description": "A literatura modernista deu mais espaço a desigualdades, conflitos regionais e tensões sociais.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"sociedade",
+				"romance"
+			],
+			"feedback": {
+				"why_true": "Especialmente na segunda geração, a literatura passou a explorar com força questões sociais e regionais.",
+				"tip": "Use como consequência do romance de 30."
+			}
+		},
+		{
+			"id": "MB019",
+			"title": "Liberdade Formal",
+			"description": "A experimentação modernista consolidou maior liberdade no uso de ritmo, sintaxe, imagens e formas.",
+			"category": "CONSEQUENCE",
+			"truth_value": 1.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"forma",
+				"liberdade"
+			],
+			"feedback": {
+				"why_true": "A liberdade formal foi um legado decisivo para a poesia e a prosa posteriores.",
+				"tip": "Ela combina bem com verso livre e linguagem coloquial."
+			}
+		},
+		{
+			"id": "MB020",
+			"title": "Métrica Abolida",
+			"description": "Depois do Modernismo, toda poesia brasileira abandonou definitivamente a métrica e a rima.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.0,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"poesia",
+				"erro"
+			],
+			"feedback": {
+				"why_false": "O Modernismo ampliou possibilidades formais, mas não proibiu nem eliminou definitivamente métrica e rima.",
+				"tip": "Liberdade formal significa possibilidade de escolha, não imposição de uma forma única."
+			}
+		},
+		{
+			"id": "MB021",
+			"title": "Tradição Reinterpretada",
+			"description": "O Modernismo apenas destruiu a tradição literária anterior, sem dialogar com ela.",
+			"category": "CONSEQUENCE",
+			"truth_value": 0.5,
+			"rarity": "COMMON",
+			"effect": "",
+			"effect_description": "",
+			"tags": [
+				"tradicao",
+				"releitura"
+			],
+			"feedback": {
+				"why_partial": "O Modernismo combateu modelos rígidos, mas também releu tradições, mitos, falares e repertórios culturais.",
+				"tip": "Pense o movimento como crítica e reinvenção, não como destruição pura."
+			}
+		},
+		{
+			"id": "MB022",
+			"title": "Revisão Crítica",
+			"description": "Uma revisão crítica permite reorganizar a leitura do movimento durante a partida.",
+			"category": "SPECIAL",
+			"truth_value": 1.0,
+			"rarity": "SPECIAL",
+			"effect": "REPLACE_BOARD_CARD",
+			"effect_description": "Permite trocar uma carta comum da mão por uma carta do próprio board. A carta removida vai para o descarte.",
+			"bonus_score": 0.0,
+			"tags": [
+				"especial",
+				"revisao"
+			],
+			"feedback": {
+				"why_true": "Esta carta representa uma intervenção estratégica, não um conceito avaliado.",
+				"tip": "Use quando uma carta da mão explicar melhor a sequência modernista do board."
+			}
+		},
+		{
+			"id": "MB023",
+			"title": "Antologia Comentada",
+			"description": "Uma antologia comentada fortalece a interpretação da narrativa literária.",
+			"category": "SPECIAL",
+			"truth_value": 1.0,
+			"rarity": "SPECIAL",
+			"effect": "FLAT_SCORE_BONUS",
+			"effect_description": "Adiciona +5 pontos ao resultado final.",
+			"bonus_score": 5.0,
+			"tags": [
+				"especial",
+				"bonus"
+			],
+			"feedback": {
+				"why_true": "Esta carta representa uma intervenção estratégica, não um conceito avaliado.",
+				"tip": "Use para reforçar uma timeline que já esteja coerente."
+			}
+		},
+		{
+			"id": "MB024",
+			"title": "Leitura Comparada",
+			"description": "Uma leitura comparada identifica fragilidades na interpretação adversária.",
+			"category": "SPECIAL",
+			"truth_value": 1.0,
+			"rarity": "SPECIAL",
+			"effect": "OPPONENT_DISCARD_RANDOM",
+			"effect_description": "Remove uma carta verdadeira aleatória do board adversário, se houver.",
+			"bonus_score": 0.0,
+			"tags": [
+				"especial",
+				"comparacao"
+			],
+			"feedback": {
+				"why_true": "Esta carta representa uma intervenção estratégica, não um conceito avaliado.",
+				"tip": "Use quando o oponente tiver uma sequência forte no board."
+			}
+		}
+	],
+	"edges": [
+		{
+			"from": "MB001",
+			"to": "MB007",
+			"compatibility": 1.0,
+			"feedback": "A crítica ao academicismo prepara o marco de ruptura da Semana de 1922."
+		},
+		{
+			"from": "MB002",
+			"to": "MB011",
+			"compatibility": 0.9,
+			"feedback": "As vanguardas influenciam a experimentação formal e o verso livre."
+		},
+		{
+			"from": "MB002",
+			"to": "MB009",
+			"compatibility": 1.0,
+			"feedback": "A antropofagia transforma influências externas em criação brasileira."
+		},
+		{
+			"from": "MB003",
+			"to": "MB007",
+			"compatibility": 0.8,
+			"feedback": "A modernização urbana ajuda a contextualizar o ambiente da Semana."
+		},
+		{
+			"from": "MB004",
+			"to": "MB008",
+			"compatibility": 0.9,
+			"feedback": "A busca por identidade nacional se articula ao projeto Pau-Brasil."
+		},
+		{
+			"from": "MB004",
+			"to": "MB009",
+			"compatibility": 0.9,
+			"feedback": "A antropofagia responde à questão de como produzir arte brasileira moderna."
+		},
+		{
+			"from": "MB006",
+			"to": "MB021",
+			"compatibility": 0.7,
+			"feedback": "A ideia de ruptura pode ser refinada pela noção de tradição reinterpretada."
+		},
+		{
+			"from": "MB007",
+			"to": "MB012",
+			"compatibility": 1.0,
+			"feedback": "A Semana é marco simbólico da primeira geração modernista."
+		},
+		{
+			"from": "MB012",
+			"to": "MB008",
+			"compatibility": 0.8,
+			"feedback": "Os manifestos integram o ciclo experimental da primeira geração."
+		},
+		{
+			"from": "MB008",
+			"to": "MB009",
+			"compatibility": 0.8,
+			"feedback": "Pau-Brasil e Antropofagia são projetos relacionados em Oswald de Andrade."
+		},
+		{
+			"from": "MB010",
+			"to": "MB011",
+			"compatibility": 0.8,
+			"feedback": "A linguagem coloquial combina com a libertação de ritmos e formas."
+		},
+		{
+			"from": "MB011",
+			"to": "MB019",
+			"compatibility": 1.0,
+			"feedback": "O verso livre contribui diretamente para a liberdade formal."
+		},
+		{
+			"from": "MB008",
+			"to": "MB017",
+			"compatibility": 0.9,
+			"feedback": "O projeto Pau-Brasil reforça a valorização crítica da cultura brasileira."
+		},
+		{
+			"from": "MB009",
+			"to": "MB017",
+			"compatibility": 1.0,
+			"feedback": "A antropofagia cultural é uma chave para valorizar e recriar a cultura brasileira."
+		},
+		{
+			"from": "MB012",
+			"to": "MB016",
+			"compatibility": 0.9,
+			"feedback": "A primeira geração abriu caminho para a renovação estética."
+		},
+		{
+			"from": "MB013",
+			"to": "MB018",
+			"compatibility": 1.0,
+			"feedback": "O romance de 30 aprofunda temas sociais e regionais."
+		},
+		{
+			"from": "MB014",
+			"to": "MB019",
+			"compatibility": 0.7,
+			"feedback": "A poesia de 30 consolida caminhos expressivos abertos pelo Modernismo."
+		},
+		{
+			"from": "MB016",
+			"to": "MB019",
+			"compatibility": 0.8,
+			"feedback": "A renovação estética tem como legado a ampliação da liberdade formal."
+		},
+		{
+			"from": "MB005",
+			"to": "MB007",
+			"compatibility": 0.0,
+			"feedback": "Tratar a Semana como isolada enfraquece a compreensão de seu contexto histórico."
+		},
+		{
+			"from": "MB015",
+			"to": "MB013",
+			"compatibility": 0.0,
+			"feedback": "Negar o regionalismo contradiz a importância do romance de 30."
+		},
+		{
+			"from": "MB020",
+			"to": "MB011",
+			"compatibility": 0.1,
+			"feedback": "O verso livre não significa eliminação definitiva de métrica e rima."
+		},
+		{
+			"from": "MB021",
+			"to": "MB017",
+			"compatibility": 0.6,
+			"feedback": "A releitura da tradição pode contribuir para novas representações da cultura brasileira."
+		}
+	],
+	"constraints": [
+		{
+			"id": "C_ORDER_SEMANA_RENOVACAO",
+			"type": "ORDER",
+			"required_before": [
+				"MB007"
+			],
+			"required_after": [
+				"MB016"
+			],
+			"penalty": 15,
+			"feedback_if_violate": "A renovação estética fica mais coerente quando aparece depois do marco de ruptura da Semana de 1922."
+		},
+		{
+			"id": "C_ORDER_ROMANCE_SOCIAL",
+			"type": "ORDER",
+			"required_before": [
+				"MB013"
+			],
+			"required_after": [
+				"MB018"
+			],
+			"penalty": 15,
+			"feedback_if_violate": "Os temas sociais ampliados são melhor compreendidos como consequência do romance de 30."
+		},
+		{
+			"id": "C_CONTRADICAO_SEMANA_ISOLADA",
+			"type": "MUTUAL_EXCLUSION",
+			"nodes_a": [
+				"MB005"
+			],
+			"nodes_b": [
+				"MB001",
+				"MB002",
+				"MB003",
+				"MB004"
+			],
+			"penalty": 20,
+			"feedback_if_violate": "Dizer que a Semana foi isolada contradiz as causas culturais e sociais que prepararam o movimento."
+		},
+		{
+			"id": "C_CONTRADICAO_REGIONALISMO",
+			"type": "MUTUAL_EXCLUSION",
+			"nodes_a": [
+				"MB015"
+			],
+			"nodes_b": [
+				"MB013",
+				"MB018"
+			],
+			"penalty": 20,
+			"feedback_if_violate": "Negar o regionalismo contradiz a importância da prosa social e regional do romance de 30."
+		}
+	],
+	"motifs": [
+		{
+			"id": "M_RUPTURA_ESTETICA",
+			"nodes": [
+				"MB001",
+				"MB007",
+				"MB016"
+			],
+			"score": 1.0,
+			"feedback": "Boa sequência: crise do academicismo, Semana de 1922 e renovação estética formam um arco modernista central."
+		},
+		{
+			"id": "M_IDENTIDADE_ANTROPOFAGIA",
+			"nodes": [
+				"MB004",
+				"MB009",
+				"MB017"
+			],
+			"score": 1.0,
+			"feedback": "Excelente arco: identidade nacional, antropofagia e valorização da cultura brasileira aparecem de modo coerente."
+		},
+		{
+			"id": "M_FORMA_MODERNA",
+			"nodes": [
+				"MB010",
+				"MB011",
+				"MB019"
+			],
+			"score": 1.0,
+			"feedback": "A sequência mostra bem como linguagem coloquial e verso livre fortalecem a liberdade formal."
+		},
+		{
+			"id": "M_SOCIAL_1930",
+			"nodes": [
+				"MB013",
+				"MB018"
+			],
+			"score": 0.5,
+			"feedback": "Bom arco: o romance de 30 ajuda a explicar a ampliação dos temas sociais."
+		}
+	]
+}

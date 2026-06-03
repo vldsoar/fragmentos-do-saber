@@ -19,8 +19,8 @@
 	},
 	{
 		"area": "Literatura",
-		"theme": "Moderna",
-		"path": "res://data/deck_te.json",
+		"theme": "Modernismo Brasileiro",
+		"path": "res://data/deck_lit_modern.json",
 		"icon": "res://themes/clean_theme/images/decks/lit_modern_icon.png"
 	}
 ]
