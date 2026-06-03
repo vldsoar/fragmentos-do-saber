@@ -4,31 +4,40 @@ extends RefCounted
 var player_timeline: PlayerTimeline
 var discard_slot: CardSlotScn
 var effect_slot: CardSlotScn
+var player_hand: PlayerHand
 
 
 func configure(
 	player_timeline_ref: PlayerTimeline,
 	discard_slot_ref: CardSlotScn,
-	effect_slot_ref: CardSlotScn
+	effect_slot_ref: CardSlotScn,
+	player_hand_ref: PlayerHand = null
 ) -> void:
 	player_timeline = player_timeline_ref
 	discard_slot = discard_slot_ref
 	effect_slot = effect_slot_ref
+	player_hand = player_hand_ref
 
 
 func connect_card_to_timeline(card: CardScn) -> void:
 	_prepare_card_for_board(card)
+	if player_hand != null:
+		player_hand.remove_card(card)
 	player_timeline.add_card_to_hand(card)
 
 
 func discard_card(card: CardScn) -> void:
 	_prepare_card_for_board(card)
+	if player_hand != null:
+		player_hand.remove_card(card)
 	_tween_card_scale(card)
 	discard_slot.occupy_with(card, true, 0.3)
 
 
 func move_effect_card(card: CardScn) -> void:
 	_prepare_card_for_board(card)
+	if player_hand != null:
+		player_hand.remove_card(card)
 	var tween: Tween = card.get_tree().create_tween()
 	tween.tween_property(card, "rotation_degrees", -30, 0.1)
 	tween.tween_property(card, "rotation_degrees", 30, 0.1)

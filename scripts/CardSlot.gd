@@ -38,6 +38,8 @@ func occupy_with(card: CardScn, animate: bool = false, duration: float = 0.3) ->
 	card.flip_to_front()
 	# Disable collision of the card when entering the slot
 	card.disable_collision()
+	card.scale = Vector2.ONE
+	card.set_meta("base_scale", Vector2.ONE)
 
 	if slot_mode == SlotMode.SINGLE:
 		# Original behavior: only one card in the slot

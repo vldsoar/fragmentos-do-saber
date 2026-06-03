@@ -71,7 +71,8 @@ func _make_decision(card: CardScn) -> Dictionary:
 		card,
 		opponent_timeline.get_card_names(),
 		card_effect_processor.get_applied_effect_ids(),
-		min_score_gain_to_connect
+		min_score_gain_to_connect,
+		opponent_timeline.get_capacity()
 	)
 
 	if card.is_special() and not _is_special_effect_useful(card):
@@ -84,18 +85,30 @@ func _execute_decision(card: CardScn, plan: Dictionary) -> void:
 	var decision: String = str(plan.get("decision", OpponentDecisionEngine.DECISION_DISCARD))
 	match decision:
 		OpponentDecisionEngine.DECISION_CONNECT:
-			_connect_card(card, int(plan.get("insert_index", -1)))
+			_connect_card(
+				card,
+				int(plan.get("insert_index", -1)),
+				int(plan.get("replace_index", -1))
+			)
 		OpponentDecisionEngine.DECISION_DISCARD:
 			_discard_card(card)
 		OpponentDecisionEngine.DECISION_APPLY_EFFECT:
 			_apply_effect_card(card)
 
-func _connect_card(card: CardScn, insert_index: int = -1) -> void:
+func _connect_card(card: CardScn, insert_index: int = -1, replace_index: int = -1) -> void:
 	# Adiciona à timeline sem animação de centro
 	# A carta será virada automaticamente pela OpponentTimeline ao adicionar
-	card.scale = Vector2(1, 1)
+	card.scale = opponent_timeline.card_scale
 	card.z_index = 1
-	if insert_index >= 0 and opponent_timeline.has_method("insert_card_at"):
+	if replace_index >= 0:
+		var replaced_card: CardScn = opponent_timeline.replace_card_at(replace_index, card)
+		if replaced_card != null:
+			_discard_card(replaced_card)
+	elif not opponent_timeline.is_full():
+		# Mantem o preenchimento visual padronizado: linha superior primeiro,
+		# depois linha inferior, assim como o board do jogador.
+		opponent_timeline.add_card_to_hand(card)
+	elif insert_index >= 0 and opponent_timeline.has_method("insert_card_at"):
 		opponent_timeline.insert_card_at(card, insert_index)
 	else:
 		opponent_timeline.add_card_to_hand(card)

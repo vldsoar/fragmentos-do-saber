@@ -3,6 +3,7 @@ extends Node2D
 
 # GameRoot.gd (ou GameManager.gd)
 @export var card_reveal_panel_path: String = "../HUD/CardRevealPanel"
+@export var player_hand_path: String = "../PlayerHand"
 @export var player_timeline_path: String = "../PlayerTimeline"
 @export var card_manager_path: String = "../CardManager"
 @export var discard_slot_path: String = "../CardSlotDiscard"
@@ -21,6 +22,7 @@ extends Node2D
 @export var board_background_path: String = "../Panel"
 
 @onready var card_reveal_panel: CardRevealPanel = get_node(card_reveal_panel_path) as CardRevealPanel
+@onready var player_hand: PlayerHand = get_node(player_hand_path) as PlayerHand
 @onready var player_timeline: PlayerTimeline = get_node(player_timeline_path) as PlayerTimeline
 @onready var card_manager: CardManager = get_node(card_manager_path) as CardManager
 @onready var discard_slot: CardSlotScn = get_node(discard_slot_path) as CardSlotScn
@@ -50,9 +52,10 @@ extends Node2D
 
 @export var feedback_popup_scene: PackedScene
 
-const CENTER_POS = Vector2(960, 440)  # ajuste pro seu viewport
+const CENTER_POS := Vector2(960, 440)
 const TURN_BANNER_TEXT: String = "Sua vez"
 const FINAL_TURN_BANNER_TEXT: String = "Ultima rodada"
+const REVEAL_CARD_Z_INDEX := 1000
 
 enum GameState {
 	WAITING_INPUT,
@@ -70,6 +73,9 @@ var current_turn: int = 1
 var max_turns: int = Globals.DEFAULT_TURNS
 var turn_banner: Control = null
 var turn_banner_tween: Tween = null
+var card_action_used_this_turn: bool = false
+var pending_replacement_card: CardScn = null
+var selected_hand_card: CardScn = null
 		
 #const _STATES_FOR
 
@@ -86,6 +92,7 @@ func _ready():
 	card_reveal_panel.connect("connect_selected", _on_connect_selected)
 	card_reveal_panel.connect("discard_selected", _on_discard_selected)
 	card_reveal_panel.connect("apply_effect_selected", _on_apply_effect_selected)
+	card_reveal_panel.connect("keep_selected", _on_keep_selected)
 	
 	# setup End Game
 	game_over_screen.visible = false
@@ -94,7 +101,7 @@ func _ready():
 	
 	# Engines
 	_cardEffectProcessor = CardEffectProcessor.new()
-	_cardActionController.configure(player_timeline, discard_slot, effect_slot)
+	_cardActionController.configure(player_timeline, discard_slot, effect_slot, player_hand)
 	max_turns = _turnController.calculate_max_turns(deck.cards.size())
 	Globals.debug_log("Max turns for this match: %d from %d deck cards" % [max_turns, deck.cards.size()])
 	SettingsManager.apply_audio_settings()
@@ -132,6 +139,9 @@ func _configureState() -> void:
 func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
 	if old_state == GameState.END_ROUND_SCORING and new_state == GameState.WAITING_INPUT:
+		card_action_used_this_turn = false
+		pending_replacement_card = null
+		_return_selected_hand_card()
 		_update_knowledge_clock(new_state)
 		await _show_player_turn_banners()
 		deck.start_draw_attention()
@@ -173,6 +183,8 @@ func _on_opponent_turn_completed() -> void:
 func can_drag_card(card: CardScn) -> bool:
 	if card.is_revealed:
 		return false
+	if player_hand.has(card):
+		return false
 	# só pode arrastar cartas da timeline na fase de ações depois do draw
 	var states_for_dragged: Array[int] = [GameState.RESOLVE_ACTIONS, GameState.WAITING_INPUT]
 	if not states_for_dragged.has(current_state):
@@ -180,6 +192,45 @@ func can_drag_card(card: CardScn) -> bool:
 
 	# TODO: impedir arrastar carta revelada, carta especial em uso etc.
 	return true
+
+
+func try_handle_card_click(card: CardScn) -> bool:
+	if card == null:
+		return false
+
+	if pending_replacement_card != null:
+		if player_timeline.has(card):
+			_replace_board_card(card)
+			return true
+		if player_hand.has(card):
+			pending_replacement_card = null
+			_return_selected_hand_card()
+			_request_hand_card_action(card)
+			return true
+		return false
+
+	if player_hand.has(card):
+		_request_hand_card_action(card)
+		return true
+
+	return false
+
+
+func _request_hand_card_action(card: CardScn) -> void:
+	if current_state != GameState.RESOLVE_ACTIONS:
+		return
+	if card_action_used_this_turn:
+		return
+
+	if selected_hand_card != null and selected_hand_card != card:
+		_return_selected_hand_card()
+
+	selected_hand_card = card
+	card.set_as_revealed()
+	card.enable_collision()
+	card.z_index = REVEAL_CARD_Z_INDEX
+	card_manager.animate_to_center(card, CENTER_POS)
+	card_reveal_panel.show_for(card)
 
 func request_play_special(card: CardScn) -> bool:
 	if not _can_play_special(card):
@@ -231,8 +282,7 @@ func _player_has_true_common_card() -> bool:
 
 
 func _can_play_special(card: CardScn) -> bool:
-	var allowed_states: Array[int] = [GameState.RESOLVE_ACTIONS, GameState.MUST_DRAW]
-	return allowed_states.has(current_state) and card.is_special()
+	return current_state == GameState.RESOLVE_ACTIONS and card.is_special() and not card_action_used_this_turn
 
 func handle_card_drop(ctx: DropContext) -> void:
 	var card: CardScn = ctx.card
@@ -289,40 +339,49 @@ func handle_card_drop(ctx: DropContext) -> void:
 func _on_card_drawn(card: CardScn) -> void:
 	if current_state != GameState.MUST_DRAW:
 		return
-	# Marca a carta como revelada - ela não responderá a interações
-	card.set_as_revealed()
-
-	# Reparent: garante que a carta fique acima de tudo visualmente
-	#add_child(card)
-	card.z_index = 100
-
-	# Anima pra posição central e aplica scale de destaque
-	card_manager.animate_to_center(card, CENTER_POS)
-
-	# Agora abre o painel de decisão por cima (UI)
-	card_reveal_panel.show_for(card)
-	#fsm.transition_to(GameState.RESOLVE_ACTIONS)
+	player_hand.add_card(card)
+	fsm.transition_to(GameState.RESOLVE_ACTIONS)
 
 # Listen buttons panels
 func _on_connect_selected(card: CardScn) -> void:
+	if not _can_use_hand_card(card):
+		return
+	if player_timeline.is_full():
+		pending_replacement_card = card
+		return
+
 	_cardActionController.connect_card_to_timeline(card)
-	fsm.transition_to(GameState.RESOLVE_ACTIONS)
+	selected_hand_card = null
+	card_action_used_this_turn = true
 
 func _on_discard_selected(card: CardScn) -> void:
+	if not _can_use_hand_card(card):
+		return
+
 	_cardActionController.discard_card(card)
-	fsm.transition_to(GameState.RESOLVE_ACTIONS)
+	selected_hand_card = null
+	card_action_used_this_turn = true
 
 func _on_apply_effect_selected(card: CardScn) -> void:
+	if not _can_use_hand_card(card):
+		return
+
 	Globals.debug_log("apply_effect_selected...")
 	if not request_play_special(card):
 		return
 	
 	Globals.debug_log("requested play applied")
 	_cardActionController.move_effect_card(card)
+	selected_hand_card = null
 	
 	_show_feedback(card, func():
-		fsm.transition_to(GameState.RESOLVE_ACTIONS)
+		card_action_used_this_turn = true
 	) # ou o valor real do efeito
+
+
+func _on_keep_selected(_card: CardScn) -> void:
+	pending_replacement_card = null
+	_return_selected_hand_card()
 
 
 func _on_deck_clicked() -> void:
@@ -331,6 +390,11 @@ func _on_deck_clicked() -> void:
 		return
 
 	deck.stop_draw_attention()
+	if not player_hand.can_receive_drawn_card():
+		push_warning("Mao cheia; jogue, descarte ou aplique uma carta antes de comprar.")
+		fsm.transition_to(GameState.RESOLVE_ACTIONS)
+		return
+
 	# Transiciona pra fase de carta comprada
 	#current_state = GameState.MUST_DRAW
 	fsm.transition_to(GameState.MUST_DRAW)
@@ -344,6 +408,10 @@ func _on_audio_stream_player_2d_finished() -> void:
 func _on_button_end_turn_requested() -> void:
 	if current_state != GameState.RESOLVE_ACTIONS:
 		return
+	if not can_end_player_turn():
+		return
+	pending_replacement_card = null
+	_return_selected_hand_card()
 #	Opponent
 	fsm.transition_to(GameState.RESOLVING_TURN)
 	#await get_tree().create_timer(2.0).timeout
@@ -394,6 +462,56 @@ func _handle_game_over() -> void:
 
 	Globals.debug_log("Game over! Result winner: %s" % result_winner.total_score)
 	game_over_screen.show_result(result, did_win, result_opponent, teacher_context)
+
+
+func _can_use_hand_card(card: CardScn) -> bool:
+	return current_state == GameState.RESOLVE_ACTIONS \
+		and not card_action_used_this_turn \
+		and card != null \
+		and player_hand.has(card)
+
+
+func can_end_player_turn() -> bool:
+	return current_state == GameState.RESOLVE_ACTIONS \
+		and not is_card_reveal_active() \
+		and not player_hand.is_over_limit()
+
+
+func is_card_reveal_active() -> bool:
+	return card_reveal_panel != null and card_reveal_panel.has_card()
+
+
+func _replace_board_card(target_card: CardScn) -> void:
+	if pending_replacement_card == null:
+		return
+	if not player_timeline.has(target_card):
+		return
+
+	var replacement_card: CardScn = pending_replacement_card
+	var target_index: int = player_timeline.find_index_of(target_card)
+	if target_index < 0:
+		return
+
+	player_hand.remove_card(replacement_card)
+	var replaced_card: CardScn = player_timeline.replace_card_at(target_index, replacement_card)
+	if replaced_card != null:
+		player_hand.add_card(replaced_card)
+
+	selected_hand_card = null
+	pending_replacement_card = null
+	card_action_used_this_turn = true
+
+
+func _return_selected_hand_card() -> void:
+	if selected_hand_card == null:
+		return
+	if player_hand.has(selected_hand_card):
+		selected_hand_card.disable_as_revealed()
+		selected_hand_card.z_index = 1
+		selected_hand_card.scale = Vector2.ONE
+		selected_hand_card.set_meta("base_scale", Vector2.ONE)
+		player_hand.update_positions()
+	selected_hand_card = null
 
 func _show_feedback(card: CardScn, callable: Callable) -> void:
 	if feedback_popup_scene == null:

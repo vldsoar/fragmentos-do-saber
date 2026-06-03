@@ -41,6 +41,8 @@ func update_dragged_card_position() -> void:
 ## Starts dragging a card by setting it as the dragged card
 ## and resetting its scale to normal size
 func start_drag(card: CardScn) -> void:
+	if game_manager.try_handle_card_click(card):
+		return
 	if not game_manager.can_drag_card(card):
 		return  # Não permite arrastar cartas reveladas
 	
@@ -77,7 +79,7 @@ func finish_drag() -> void:
 func _cleanup_after_drop() -> void:
 	# Move card to its final position and reset properties
 	if card_being_dragged:
-		card_being_dragged.scale = Vector2.ONE
+		card_being_dragged.scale = _get_card_base_scale(card_being_dragged)
 		card_being_dragged.z_index = Z_INDEX_DEFAULT
 		
 		# If card is in timeline, set it to the correct position (without animation since it was just dragged)
@@ -108,7 +110,7 @@ func _on_left_mouse_button_released() -> void:
 ## Applies visual highlight only if not already hovering another card
 func _on_card_hovered_card(card: CardScn) -> void:
 	Globals.debug_log("hover")
-	if card.is_revealed or card_being_dragged:
+	if _should_ignore_hover(card):
 		return
 	if !is_hovering_card:
 		is_hovering_card = true
@@ -121,13 +123,13 @@ If over another card, applies highlight to it; otherwise clears hover state
 """
 func _on_card_hovered_off_card(card: CardScn) -> void:
 	
-	if card_being_dragged:
+	if _should_ignore_hover(card):
 		return
 
 	highlight_card(card, false)
 	# Check if mouse is over another card after leaving the current one
 	var new_card_hovered: CardScn = get_card_under_mouse()
-	if new_card_hovered:
+	if new_card_hovered and not _should_ignore_hover(new_card_hovered):
 		highlight_card(new_card_hovered, true)
 	else:
 		is_hovering_card = false
@@ -136,6 +138,9 @@ func _on_card_hovered_off_card(card: CardScn) -> void:
 ## When highlighted: increases scale to 1.1x and elevates z_index to 2
 ## When not highlighted: returns scale to 1.0x and z_index to 1
 func highlight_card(card: CardScn, hovered: bool) -> void:
+	if _should_ignore_hover(card):
+		return
+
 	# mate o tween anterior da PRÓPRIA carta
 	if card.has_meta("hover_tween"):
 		var old: Tween = card.get_meta("hover_tween") as Tween
@@ -147,12 +152,13 @@ func highlight_card(card: CardScn, hovered: bool) -> void:
 
 	if hovered:
 		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(card, "scale", Vector2(1.1, 1.1), 0.18)
+		var hovered_scale: Vector2 = _get_card_base_scale(card) * 1.1
+		tween.tween_property(card, "scale", hovered_scale, 0.18)
 		tween.parallel().tween_property(card, "modulate", Color(1.08,1.08,1.08,1), 0.18)
 		card.z_index = Z_INDEX_HOVER
 	else:
 		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(card, "scale", Vector2.ONE, 0.14)
+		tween.tween_property(card, "scale", _get_card_base_scale(card), 0.14)
 		tween.parallel().tween_property(card, "modulate", Color(1,1,1,1), 0.14)
 		# Só volta pro default se não estiver sendo arrastada
 		if card != card_being_dragged:
@@ -236,3 +242,15 @@ func animate_to_center(card: CardScn, center_pos: Vector2) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(card, "position", center_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(card, "scale", Vector2(2.5, 2.5), 0.3)
+
+
+func _get_card_base_scale(card: CardScn) -> Vector2:
+	if card != null and card.has_meta("base_scale"):
+		var value: Variant = card.get_meta("base_scale")
+		if value is Vector2:
+			return value
+	return Vector2.ONE
+
+
+func _should_ignore_hover(card: CardScn) -> bool:
+	return card == null or card.is_revealed or card_being_dragged != null

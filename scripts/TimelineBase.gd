@@ -4,6 +4,12 @@ extends Node2D
 @export var card_width: int = 160
 @export var hand_y_position: int = 950
 @export var hide_card_faces: bool = false
+@export var max_cards: int = 0
+@export var card_scale: Vector2 = Vector2.ONE
+@export var use_grid_layout: bool = false
+@export var grid_columns: int = 4
+@export var grid_origin: Vector2 = Vector2.ZERO
+@export var grid_spacing: Vector2 = Vector2(150.0, 175.0)
 
 var player_timeline: Array[CardScn] = []
 var center_screen_x: int = 0
@@ -52,6 +58,10 @@ func add_card_to_hand(card: CardScn) -> void:
 		anime_card_to_position(card, card.start_position)
 		return
 
+	if is_full():
+		push_warning("%s is full; card not added: %s" % [name, card.name])
+		return
+
 	player_timeline.append(card)
 	_prepare_card_for_timeline(card)
 	update_hand_position()
@@ -60,6 +70,10 @@ func add_card_to_hand(card: CardScn) -> void:
 func insert_card_at(card: CardScn, target_index: int) -> void:
 	if card in player_timeline:
 		reorder_card(card, target_index)
+		return
+
+	if is_full():
+		push_warning("%s is full; card not inserted: %s" % [name, card.name])
 		return
 
 	var safe_index: int = clampi(target_index, 0, player_timeline.size())
@@ -73,9 +87,10 @@ func update_hand_position() -> void:
 		return
 
 	for index: int in range(player_timeline.size()):
-		var new_position: Vector2 = Vector2(calculate_card_position(index), hand_y_position)
+		var new_position: Vector2 = calculate_card_position_for_index(index)
 		var card: CardScn = player_timeline[index]
 		card.start_position = new_position
+		_set_card_base_scale(card)
 
 		if card != card_being_dragged:
 			anime_card_to_position(card, new_position)
@@ -85,6 +100,17 @@ func calculate_card_position(index: int) -> int:
 	var total_width: float = float((player_timeline.size() - 1) * card_width)
 	var x_offset: float = center_screen_x + (index * card_width) - (total_width / 2.0)
 	return int(x_offset)
+
+
+func calculate_card_position_for_index(index: int) -> Vector2:
+	if use_grid_layout:
+		var col: int = index % grid_columns
+		var row: int = floori(float(index) / float(grid_columns))
+		return Vector2(
+			grid_origin.x + float(col) * grid_spacing.x,
+			grid_origin.y + float(row) * grid_spacing.y
+		)
+	return Vector2(calculate_card_position(index), hand_y_position)
 
 
 func anime_card_to_position(card: CardScn, target_position: Vector2) -> void:
@@ -98,12 +124,37 @@ func remove_card(card: CardScn) -> void:
 		update_hand_position()
 
 
+func is_full() -> bool:
+	return max_cards > 0 and player_timeline.size() >= max_cards
+
+
+func get_capacity() -> int:
+	if max_cards > 0:
+		return max_cards
+	return player_timeline.size()
+
+
+func replace_card_at(index: int, card: CardScn) -> CardScn:
+	if index < 0 or index >= player_timeline.size():
+		push_warning("Replace failed: index out of range")
+		return null
+
+	var replaced_card: CardScn = player_timeline[index]
+	player_timeline[index] = card
+	_prepare_card_for_timeline(card)
+	update_hand_position()
+	return replaced_card
+
+
 func clear_timeline() -> void:
 	player_timeline.clear()
 	card_being_dragged = null
 
 
 func get_target_position_for_reorder() -> int:
+	if use_grid_layout:
+		return _get_grid_target_position()
+
 	var mouse_x: float = get_global_mouse_position().x
 	var center_x: float = float(_get_center_screen_x())
 	var relative_x: float = mouse_x - center_x
@@ -119,6 +170,22 @@ func get_target_position_for_reorder() -> int:
 
 	var index: int = int((relative_x + total_width / 2.0 + half_card_width) / card_width)
 	return clampi(index, 0, card_count)
+
+
+func _get_grid_target_position() -> int:
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	var best_index: int = 0
+	var best_distance: float = INF
+	var count: int = player_timeline.size()
+
+	for index: int in range(count):
+		var candidate_pos: Vector2 = calculate_card_position_for_index(index)
+		var distance: float = mouse_pos.distance_squared_to(candidate_pos)
+		if distance < best_distance:
+			best_distance = distance
+			best_index = index
+
+	return clampi(best_index, 0, maxi(count - 1, 0))
 
 
 func reorder_card(card: CardScn, target_index: int) -> void:
@@ -159,3 +226,13 @@ func _swap_cards(card1: CardScn, card2: CardScn) -> void:
 func _prepare_card_for_timeline(card: CardScn) -> void:
 	if hide_card_faces:
 		card.flip_to_back()
+	else:
+		card.flip_to_front()
+	_set_card_base_scale(card)
+
+
+func _set_card_base_scale(card: CardScn) -> void:
+	if card == null:
+		return
+	card.scale = card_scale
+	card.set_meta("base_scale", card_scale)

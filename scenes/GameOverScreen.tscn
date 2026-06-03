@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://decx0hbmnavlt"]
+[gd_scene format=3 uid="uid://decx0hbmnavlt"]
 
 [ext_resource type="Script" uid="uid://bsg0w4sbhdtmh" path="res://scripts/GameOverScreen.gd" id="1_wojlb"]
 [ext_resource type="Texture2D" uid="uid://hwjiekwwoe6x" path="res://assets/images/bg_game_over.png" id="2_bg"]
@@ -14,22 +14,6 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.82, 0.66, 0.32, 0.82)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
-content_margin_left = 28.0
-content_margin_top = 12.0
-content_margin_right = 28.0
-content_margin_bottom = 12.0
-bg_color = Color(0.22, 0.17, 0.095, 0.98)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 0.82, 0.42, 0.95)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -51,7 +35,23 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="GameOverScreen" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.22, 0.17, 0.095, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.82, 0.42, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="GameOverScreen" type="Control" unique_id=1535658041]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wojlb")
 
-[node name="BackgroundImage" type="TextureRect" parent="."]
+[node name="BackgroundImage" type="TextureRect" parent="." unique_id=620304398]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -70,7 +70,7 @@ texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=720105535]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.46)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1326723583]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,20 +86,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1941364367]
 custom_minimum_size = Vector2(760, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1083008217]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 28
 
-[node name="RootVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+[node name="RootVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=695150671]
 custom_minimum_size = Vector2(680, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -107,195 +107,195 @@ size_flags_vertical = 4
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1215507240]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Missão concluída!"
 horizontal_alignment = 1
 
-[node name="SummaryLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="SummaryLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1220152702]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "Veja como sua linha do tempo se saiu nesta partida."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="MainScoreBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="MainScoreBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1616291844]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="TotalScoreVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox"]
+[node name="TotalScoreVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox" unique_id=1217004993]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="TotalScoreLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox"]
+[node name="TotalScoreLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox" unique_id=2005558404]
 layout_mode = 2
 text = "Sua pontuação"
 horizontal_alignment = 1
 
-[node name="TotalScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox"]
+[node name="TotalScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/TotalScoreVBox" unique_id=1303965759]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.89, 0.43, 1)
 text = "0"
 horizontal_alignment = 1
 
-[node name="CoherenceVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox"]
+[node name="CoherenceVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox" unique_id=2144914839]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="CoherenceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox"]
+[node name="CoherenceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox" unique_id=1179630298]
 layout_mode = 2
 text = "Coerência"
 horizontal_alignment = 1
 
-[node name="CoherenceValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox"]
+[node name="CoherenceValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/CoherenceVBox" unique_id=1560492708]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.9, 1, 1)
 text = "0.0 / 1.0"
 horizontal_alignment = 1
 
-[node name="OpponentScoreVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox"]
+[node name="OpponentScoreVBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox" unique_id=1938171622]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="OpponentScoreLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox"]
+[node name="OpponentScoreLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox" unique_id=1291203217]
 layout_mode = 2
 text = "Oponente"
 horizontal_alignment = 1
 
-[node name="OpponentScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox"]
+[node name="OpponentScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox" unique_id=34110561]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.72, 0.55, 1)
 text = "0"
 horizontal_alignment = 1
 
-[node name="OpponentCoherenceValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox"]
+[node name="OpponentCoherenceValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/MainScoreBox/OpponentScoreVBox" unique_id=1152613578]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.9, 1, 1)
 text = "0.0 / 100"
 horizontal_alignment = 1
 
-[node name="BreakdownTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="BreakdownTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=769554561]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Detalhamento da pontuação"
 horizontal_alignment = 1
 
-[node name="BreakdownGrid" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="BreakdownGrid" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1488065133]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="CardsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="CardsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=997859207]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cartas"
 
-[node name="CardsScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="CardsScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=537658343]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 horizontal_alignment = 2
 
-[node name="ContextLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="ContextLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=116203550]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Contexto"
 
-[node name="ContextScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="ContextScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1218881734]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 horizontal_alignment = 2
 
-[node name="GlobalLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="GlobalLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1914056948]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Coerência global"
 
-[node name="GlobalScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="GlobalScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1045229033]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 horizontal_alignment = 2
 
-[node name="MotifsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="MotifsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1906353084]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Motivos / padrões"
 
-[node name="MotifsScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="MotifsScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1368391869]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 horizontal_alignment = 2
 
-[node name="BonusLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="BonusLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=1132118031]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bônus"
 
-[node name="BonusScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid"]
+[node name="BonusScoreValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/BreakdownGrid" unique_id=37200]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 horizontal_alignment = 2
 
-[node name="FeedbackTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="FeedbackTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1286579613]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "O que pode melhorar:"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1909521244]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="FeedbackContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ScrollContainer"]
-custom_minimum_size = Vector2(0, 0)
+[node name="FeedbackContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ScrollContainer" unique_id=127492745]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="ButtonsBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox"]
+[node name="ButtonsBox" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox" unique_id=1144686548]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="ReviewTimelineButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
+[node name="ReviewTimelineButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox" unique_id=216894052]
 visible = false
 layout_mode = 2
 text = "Rever linha do tempo"
 
-[node name="PlayAgainButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
+[node name="PlayAgainButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox" unique_id=1701798518]
 custom_minimum_size = Vector2(190, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.93, 0.82, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 text = "Jogar novamente"
 
-[node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox"]
+[node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/RootVBox/ButtonsBox" unique_id=1557108309]
 custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.93, 0.82, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 text = "Sair"

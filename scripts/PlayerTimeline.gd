@@ -1,12 +1,19 @@
 class_name PlayerTimeline
 extends TimelineBase
 
-const CARD_WIDTH = 160
-const HAND_Y_POSITION = 950
+const BOARD_CAPACITY := 8
+const BOARD_CARD_SCALE := Vector2(0.68, 0.68)
+const BOARD_COLUMNS := 4
+const BOARD_ORIGIN := Vector2(735, 570)
+const BOARD_SPACING := Vector2(150, 175)
 
 
 func _ready() -> void:
-	card_width = CARD_WIDTH
-	hand_y_position = HAND_Y_POSITION
+	max_cards = BOARD_CAPACITY
+	card_scale = BOARD_CARD_SCALE
+	use_grid_layout = true
+	grid_columns = BOARD_COLUMNS
+	grid_origin = BOARD_ORIGIN
+	grid_spacing = BOARD_SPACING
 	hide_card_faces = false
 	super._ready()

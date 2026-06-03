@@ -362,7 +362,7 @@
 		{
 			"id": "SPECIAL_IMPULSO_SELECAO",
 			"title": "Impulso de Seleção",
-			"description": "Permite ao jogador escolher uma carta PROCESS de sua mão e jogá-la imediatamente, ignorando restrições temporais.",
+			"description": "Permite ao jogador escolher uma carta PROCESS disponível e jogá-la imediatamente, ignorando restrições temporais.",
 			"category": "SPECIAL",
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
@@ -382,7 +382,7 @@
 		{
 			"id": "SPECIAL_EVENTO_GARGALO",
 			"title": "Evento de Gargalo Populacional",
-			"description": "Permite que todos os jogadores descartem metade das cartas na mão, arredondando para baixo.",
+			"description": "Permite descartar recursos narrativos já posicionados, simulando uma redução brusca de possibilidades.",
 			"category": "SPECIAL",
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",

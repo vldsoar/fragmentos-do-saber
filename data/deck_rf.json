@@ -398,7 +398,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "OPPONENT_DISCARD_RANDOM",
-			"effect_description": "O oponente descarta automaticamente uma carta aleatória da mão.",
+			"effect_description": "O oponente descarta automaticamente uma carta verdadeira da timeline.",
 			"tags": [
 				"propaganda",
 				"manipulação"
@@ -406,7 +406,7 @@
 			"bonus_score": 0.0,
 			"feedback": {
 				"why_false": "Carta especial representa um recurso estratégico, não um evento histórico real.",
-				"tip": "Use quando o oponente tiver muitas cartas na mão, aumentando as chances de causar prejuízo real."
+				"tip": "Use quando o oponente tiver cartas fortes na timeline, aumentando as chances de causar prejuízo real."
 			}
 		},
 		{
@@ -455,7 +455,7 @@
 			"truth_value": 0.0,
 			"rarity": "SPECIAL",
 			"effect": "OPPONENT_DISCARD_RANDOM",
-			"effect_description": "O oponente descarta automaticamente uma carta aleatória da mão.",
+			"effect_description": "O oponente descarta automaticamente uma carta verdadeira da timeline.",
 			"tags": [
 				"propaganda",
 				"manipulação"
@@ -463,7 +463,7 @@
 			"bonus_score": 0.0,
 			"feedback": {
 				"why_false": "Carta especial representa um recurso estratégico, não um evento histórico real.",
-				"tip": "Use quando o oponente tiver muitas cartas na mão, aumentando as chances de causar prejuízo real."
+				"tip": "Use quando o oponente tiver cartas fortes na timeline, aumentando as chances de causar prejuízo real."
 			}
 		}
 	],

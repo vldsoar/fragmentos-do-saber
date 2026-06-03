@@ -94,7 +94,7 @@ func draw_card() -> CardScn:
 
 	stop_draw_attention()
 	
-	var card_data = cards.pop_front()
+	var card_data: CardResource = cards.pop_front()
 
 	if cards.is_empty():
 		push_warning("Deck empty.")
@@ -107,7 +107,7 @@ func draw_card() -> CardScn:
 		return
 	
 	_count_deck_ref.text = str(cards.size())
-	var card_scn = _spawn_card(card_data, Vector2(0, 0))
+	var card_scn: CardScn = _spawn_card(card_data, Vector2(0, 0))
 	card_scn.flip_to_back()
 	var card_manager: CardManager = get_node(card_manager_path) as CardManager
 	card_manager.add_child(card_scn)

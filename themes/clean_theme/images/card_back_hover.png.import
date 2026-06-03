@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dncasgdpkepic"
-path="res://.godot/imported/card_back_hover.png-8a3fa33c6228d9860e97e3e1a61b5463.ctex"
+path="res://.godot/imported/card_back_hover.png-5e9e46dec051af81a0d8c1dfaaf30452.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/new_theme/images/card_back_hover.png"
-dest_files=["res://.godot/imported/card_back_hover.png-8a3fa33c6228d9860e97e3e1a61b5463.ctex"]
+source_file="res://themes/clean_theme/images/card_back_hover.png"
+dest_files=["res://.godot/imported/card_back_hover.png-5e9e46dec051af81a0d8c1dfaaf30452.ctex"]
 
 [params]
 

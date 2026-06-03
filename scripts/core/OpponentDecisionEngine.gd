@@ -13,7 +13,8 @@ func choose_action(
 	card: CardScn,
 	timeline_ids: Array,
 	effect_card_ids: Array,
-	min_score_gain_to_connect: float = 0.0
+	min_score_gain_to_connect: float = 0.0,
+	max_timeline_cards: int = 0
 ) -> Dictionary:
 	var plan: Dictionary = _default_plan()
 
@@ -31,19 +32,32 @@ func choose_action(
 	var current_score: float = _score_timeline(deck_data, timeline_ids, effect_card_ids)
 	var best_score: float = -INF
 	var best_index: int = timeline_ids.size()
+	var best_replace_index: int = -1
 
-	for index in range(timeline_ids.size() + 1):
-		var candidate_timeline: Array = timeline_ids.duplicate()
-		candidate_timeline.insert(index, card.data.id)
-		var candidate_score: float = _score_timeline(deck_data, candidate_timeline, effect_card_ids)
+	if max_timeline_cards > 0 and timeline_ids.size() >= max_timeline_cards:
+		for index in range(timeline_ids.size()):
+			var candidate_timeline: Array = timeline_ids.duplicate()
+			candidate_timeline[index] = card.data.id
+			var candidate_score: float = _score_timeline(deck_data, candidate_timeline, effect_card_ids)
 
-		if candidate_score > best_score:
-			best_score = candidate_score
-			best_index = index
+			if candidate_score > best_score:
+				best_score = candidate_score
+				best_index = index
+				best_replace_index = index
+	else:
+		for index in range(timeline_ids.size() + 1):
+			var candidate_timeline: Array = timeline_ids.duplicate()
+			candidate_timeline.insert(index, card.data.id)
+			var candidate_score: float = _score_timeline(deck_data, candidate_timeline, effect_card_ids)
+
+			if candidate_score > best_score:
+				best_score = candidate_score
+				best_index = index
 
 	var score_delta: float = best_score - current_score
 	plan["score_delta"] = score_delta
 	plan["insert_index"] = best_index
+	plan["replace_index"] = best_replace_index
 	plan["projected_score"] = best_score
 
 	if score_delta > min_score_gain_to_connect:
@@ -76,6 +90,7 @@ func _default_plan() -> Dictionary:
 	return {
 		"decision": DECISION_DISCARD,
 		"insert_index": -1,
+		"replace_index": -1,
 		"score_delta": 0.0,
 		"projected_score": 0.0,
 		"reason": "default"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bes87le5etcgd"
-path="res://.godot/imported/ka_button.png-cd4849a29b68f716ef5a7d5fae2c319e.ctex"
+uid="uid://cf20kqcj0betp"
+path="res://.godot/imported/bg_board.png-4c8c6c36e7f4a392b07ba41dc0d3eaa7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/new_theme/images/ka_button.png"
-dest_files=["res://.godot/imported/ka_button.png-cd4849a29b68f716ef5a7d5fae2c319e.ctex"]
+source_file="res://themes/clean_theme/images/bg_board.png"
+dest_files=["res://.godot/imported/bg_board.png-4c8c6c36e7f4a392b07ba41dc0d3eaa7.ctex"]
 
 [params]
 

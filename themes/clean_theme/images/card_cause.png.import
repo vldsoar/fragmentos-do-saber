@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deqhunmfutgcb"
-path="res://.godot/imported/card_process.png-2e49ee1847c4eacdfc07da31612b6222.ctex"
+uid="uid://cty3xkvakhbxg"
+path="res://.godot/imported/card_cause.png-2d7a5fa4342c61b18a103676a7e688d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/new_theme/images/card_process.png"
-dest_files=["res://.godot/imported/card_process.png-2e49ee1847c4eacdfc07da31612b6222.ctex"]
+source_file="res://themes/clean_theme/images/card_cause.png"
+dest_files=["res://.godot/imported/card_cause.png-2d7a5fa4342c61b18a103676a7e688d7.ctex"]
 
 [params]
 

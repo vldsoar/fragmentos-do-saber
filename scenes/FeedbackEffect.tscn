@@ -5,6 +5,8 @@
 [sub_resource type="FontVariation" id="FontVariation_u86ew"]
 
 [node name="FeedbackEffect" type="Control"]
+z_index = 3000
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

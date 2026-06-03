@@ -13,6 +13,8 @@ var _on_finished: Callable = Callable()  # callback opcional
 
 
 func _ready() -> void:
+	z_index = 3000
+	z_as_relative = false
 	visible = false
 	ok_button.pressed.connect(_on_ok_button_pressed)
 	
