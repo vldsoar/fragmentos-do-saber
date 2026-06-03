@@ -113,7 +113,7 @@ func _ready():
 	
 	# Obter OpponentAI se existir na cena
 	opponent_ai.turn_completed.connect(_on_opponent_turn_completed)
-	deck.start_draw_attention()
+	call_deferred("_begin_player_turn")
 	#_update_knowledge_clock(current_state)
 
 
@@ -138,13 +138,8 @@ func _configureState() -> void:
 
 func _on_game_state_changed(old_state: GameState, new_state: GameState) -> void:
 	Globals.debug_log("STATE CHANGED: %s -> %s" % [GameState.find_key(old_state), GameState.find_key(new_state)])
-	if old_state == GameState.END_ROUND_SCORING and new_state == GameState.WAITING_INPUT:
-		card_action_used_this_turn = false
-		pending_replacement_card = null
-		_return_selected_hand_card()
-		_update_knowledge_clock(new_state)
-		await _show_player_turn_banners()
-		deck.start_draw_attention()
+	if new_state == GameState.WAITING_INPUT:
+		await _begin_player_turn()
 		return
 
 	if new_state != GameState.WAITING_INPUT:
@@ -531,6 +526,21 @@ func _show_feedback(card: CardScn, callable: Callable) -> void:
 	else:
 		# Modal: OK chama callable
 		popup.show_modal(card.data.effect_description, "OK", on_finished)
+
+
+func _begin_player_turn() -> void:
+	if current_state != GameState.WAITING_INPUT:
+		return
+
+	card_action_used_this_turn = false
+	pending_replacement_card = null
+	_return_selected_hand_card()
+	_update_knowledge_clock(current_state)
+	await _show_player_turn_banners()
+
+	if current_state == GameState.WAITING_INPUT:
+		deck.start_draw_attention()
+
 
 func _show_player_turn_banners() -> void:
 	await _show_turn_banner(TURN_BANNER_TEXT)

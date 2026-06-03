@@ -17,3 +17,13 @@ func _ready() -> void:
 	grid_spacing = BOARD_SPACING
 	hide_card_faces = true
 	super._ready()
+
+
+func calculate_card_position_for_index(index: int) -> Vector2:
+	var visual_index: int = (BOARD_CAPACITY - 1) - index
+	var col: int = visual_index % BOARD_COLUMNS
+	var row: int = floori(float(visual_index) / float(BOARD_COLUMNS))
+	return Vector2(
+		BOARD_ORIGIN.x + float(col) * BOARD_SPACING.x,
+		BOARD_ORIGIN.y + float(row) * BOARD_SPACING.y
+	)
