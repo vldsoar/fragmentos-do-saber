@@ -93,5 +93,5 @@ fragmentos-do-saber/
 
 ## Documentação extra
 
-- [Manual do jogador](Manual_Jogador_Fragmentos_do_Saber.md) — regras e tela final
-- [Manual do desenvolvedor](Manual_Desenvolvedor_Fragmentos_do_Saber.md) — novos decks e manutenção
+- [Manual do jogador](./docs/Manual_Desenvolvedor_Fragmentos_do_Saber.md) — regras e tela final
+- [Manual do desenvolvedor](./docs/Manual_Desenvolvedor_Fragmentos_do_Saber.md) — novos decks e manutenção
